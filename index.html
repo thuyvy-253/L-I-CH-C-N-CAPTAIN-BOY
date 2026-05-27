@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=1200">
   <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -305,7 +305,7 @@ z-index:-1;
 }
 .flying-wish{
   filter:drop-shadow(0 0 18px rgba(255,255,255,.35));
-}n
+}
 .flying-wish::before,
 .flying-wish::after{
   content:"";
@@ -473,30 +473,15 @@ z-index:-1;
 
 @media(max-width:768px){
 
-  .wish-grid{
-    grid-template-columns:1fr;
-    gap:26px;
+  body{
+    min-width:1200px;
   }
 
-  .wish-card{
-    height:300px;
-
-    padding-top:68px;
-    padding-left:140px;
-    padding-right:70px;
-    padding-bottom:50px;
+  .container{
+    width:1180px;
   }
 
-  .wish-card strong{
-    font-size:18px;
-  }
-
-  .wish-card p{
-    font-size:18px;
-    max-width:220px;
-  }
 }
-
   /* ===== BUTTON ===== */
 
    .floating-btn{
@@ -837,10 +822,10 @@ z-index:-1;
     <!-- WALL -->
     <section class="wall">
 
-      <div class="section-head"><center>
-        <h2><center>WALL OF LOVE</center></h2>
-        <p><center>Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦</center></p>
-      </div>
+<div class="section-head">
+  <h2>WALL OF LOVE</h2>
+  <p>Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦</p>
+</div>
 
       <div class="wish-grid" id="wishGrid"></div>
 
@@ -1197,5 +1182,83 @@ Math.random() * 85 + "%";
     setInterval(fetchWishes,30000);
 
   </script>
+<!-- NHẠC NỀN -->
+<audio id="bgMusic" loop>
+  <source src="./music.mp3" type="audio/mpeg">
+</audio>
 
-</body> 
+<!-- NÚT NHẠC -->
+<button id="musicBtn">🔊</button>
+
+<style>
+#musicBtn{
+  position:fixed;
+  left:24px;
+  bottom:24px;
+  z-index:9999;
+
+  width:58px;
+  height:58px;
+
+  border:none;
+  border-radius:50%;
+
+  background:linear-gradient(135deg,#8b5cf6,#c084fc);
+
+  color:#fff;
+  font-size:24px;
+  cursor:pointer;
+
+  box-shadow:0 10px 30px rgba(124,58,237,.4);
+
+  transition:.3s;
+}
+
+#musicBtn:hover{
+  transform:scale(1.08);
+}
+</style>
+
+<script>
+
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+music.volume = 0.5;
+
+/* autoplay sau click đầu tiên */
+document.addEventListener("click", () => {
+
+  if(music.paused){
+
+    music.play().catch(err=>{
+      console.log(err);
+    });
+
+  }
+
+}, { once:true });
+
+/* nút bật tắt */
+
+musicBtn.addEventListener("click", (e)=>{
+
+  e.stopPropagation();
+
+  if(music.paused){
+
+    music.play();
+    musicBtn.innerHTML = "🔊";
+
+  }else{
+
+    music.pause();
+    musicBtn.innerHTML = "🔇";
+
+  }
+
+});
+
+</script>
+</body>
+</html>
