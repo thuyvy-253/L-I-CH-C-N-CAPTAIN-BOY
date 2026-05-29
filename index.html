@@ -2,9 +2,9 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CAPTAIN BOY • WISHING WALL</title>
+<title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,6 +14,7 @@
 :root{
   --primary:#8b5cf6;
   --primary2:#c084fc;
+  --bg:#050510;
 }
 
 *{
@@ -28,12 +29,15 @@ html{
 
 body{
   font-family:'Inter',sans-serif;
-  background:#060510;
-  color:#fff;
+  background:var(--bg);
+  color:white;
   overflow-x:hidden;
+  min-height:100vh;
 }
 
-/* BACKGROUND */
+/* =========================
+BACKGROUND
+========================= */
 
 .bg{
   position:fixed;
@@ -41,7 +45,7 @@ body{
   z-index:-5;
 
   background:
-    linear-gradient(rgba(6,5,16,.55),rgba(6,5,16,.8)),
+    linear-gradient(rgba(6,5,16,.45),rgba(6,5,16,.78)),
     url("./nền.png");
 
   background-size:cover;
@@ -49,20 +53,136 @@ body{
   background-repeat:no-repeat;
 }
 
-.noise{
+/* =========================
+STARS
+========================= */
+
+.stars{
   position:fixed;
   inset:0;
   z-index:-4;
-  opacity:.04;
-
-  background-image:
-    linear-gradient(rgba(255,255,255,.4) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.4) 1px, transparent 1px);
-
-  background-size:3px 3px;
+  overflow:hidden;
 }
 
-/* CONTAINER */
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+  0%,100%{
+    opacity:.2;
+    transform:scale(.8);
+  }
+  50%{
+    opacity:1;
+    transform:scale(1.4);
+  }
+}
+
+/* =========================
+METEOR
+========================= */
+
+.meteor{
+  position:fixed;
+  width:2px;
+  height:140px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,1),
+      rgba(255,255,255,0)
+    );
+
+  transform:rotate(45deg);
+
+  z-index:-3;
+
+  opacity:.8;
+
+  filter:drop-shadow(0 0 10px white);
+
+  pointer-events:none;
+
+  animation:meteor linear forwards;
+}
+
+@keyframes meteor{
+
+  from{
+    transform:
+      translate(0,0)
+      rotate(45deg);
+
+    opacity:1;
+  }
+
+  to{
+    transform:
+      translate(-900px,900px)
+      rotate(45deg);
+
+    opacity:0;
+  }
+
+}
+
+/* =========================
+GALAXY PARTICLES
+========================= */
+
+.particle{
+  position:fixed;
+
+  width:4px;
+  height:4px;
+
+  border-radius:50%;
+
+  background:white;
+
+  opacity:.8;
+
+  pointer-events:none;
+
+  z-index:-2;
+
+  animation:floatUp linear forwards;
+}
+
+@keyframes floatUp{
+
+  from{
+    transform:
+      translateY(0)
+      scale(.5);
+
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  to{
+    transform:
+      translateY(-120vh)
+      scale(1.8);
+
+    opacity:0;
+  }
+
+}
+
+/* =========================
+CONTAINER
+========================= */
 
 .container{
   width:min(1180px,92%);
@@ -70,7 +190,9 @@ body{
   padding-bottom:120px;
 }
 
-/* HERO */
+/* =========================
+HERO
+========================= */
 
 .hero{
   min-height:100vh;
@@ -82,33 +204,54 @@ body{
   text-align:center;
 }
 
+.hero-inner{
+  width:100%;
+}
+
 .hero h1{
-  font-size:120px;
+  font-size:clamp(80px,10vw,150px);
+
   font-weight:900;
+
   line-height:.9;
 
-  margin-bottom:20px;
+  margin-bottom:18px;
 
-  background:linear-gradient(to bottom,#fff,#d8b4fe);
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff,
+      #d8b4fe
+    );
 
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 
-  text-shadow:0 0 30px rgba(168,85,247,.45);
+  text-shadow:
+    0 0 30px rgba(168,85,247,.4);
 }
 
 .hero h2{
-  font-size:70px;
-  color:#f5d0fe;
+  font-size:clamp(40px,5vw,78px);
+
   font-weight:900;
-  margin-bottom:20px;
+
+  color:#f5d0fe;
+
+  margin-bottom:18px;
+
+  text-shadow:
+    0 0 20px rgba(192,132,252,.35);
 }
 
 .hero p{
-  font-size:28px;
+  font-size:clamp(18px,2vw,28px);
+  color:white;
 }
 
-/* SECTION */
+/* =========================
+SECTION HEAD
+========================= */
 
 .section-head{
   text-align:center;
@@ -116,70 +259,116 @@ body{
 }
 
 .section-head h2{
-  font-size:42px;
+  font-size:clamp(26px,3vw,44px);
   margin-bottom:10px;
 }
 
 .section-head p{
   color:rgba(255,255,255,.7);
+  font-size:15px;
 }
 
-/* FLYING SECTION */
+/* =========================
+FLY SECTION
+========================= */
 
 .wish-cuucocanh{
   position:relative;
+
+  width:100%;
   height:420px;
 
   overflow:hidden;
 
-  border-radius:34px;
+  border-radius:36px;
+
+  border:1px solid rgba(255,255,255,.08);
 
   background:
     linear-gradient(
-      rgba(20,15,45,.85),
-      rgba(10,8,25,.95)
+      rgba(20,15,45,.7),
+      rgba(10,8,25,.92)
     );
 
-  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);
 }
 
-/* FLYING CARD */
+/* =========================
+FLYING WISH
+========================= */
 
 .flying-wish{
   position:absolute;
 
-  bottom:-140px;
+  bottom:-120px;
 
   min-width:180px;
-  max-width:320px;
+  max-width:300px;
 
   padding:18px 24px;
 
   border-radius:999px;
 
   background:
-    radial-gradient(circle at top,
-    #fff,
-    #f3e8ff 70%);
+    radial-gradient(circle at top,#fff,#f3e8ff 70%);
 
   color:#2d1b45;
 
-  animation:flyUp linear forwards;
-
   box-shadow:
     0 10px 30px rgba(168,85,247,.35);
+
+  animation-name:flyUp;
+  animation-timing-function:linear;
+  animation-fill-mode:forwards;
+}
+
+.flying-wish::before{
+  content:"";
+  position:absolute;
+
+  width:46px;
+  height:46px;
+
+  border-radius:50%;
+
+  background:#f3e8ff;
+
+  top:-18px;
+  left:18px;
+
+  z-index:-1;
+}
+
+.flying-wish::after{
+  content:"";
+  position:absolute;
+
+  width:30px;
+  height:30px;
+
+  border-radius:50%;
+
+  background:#f3e8ff;
+
+  top:-10px;
+  right:20px;
+
+  z-index:-1;
 }
 
 .flying-wish strong{
   display:block;
+
   color:#7c3aed;
+
   margin-bottom:6px;
+
   font-size:14px;
 }
 
 .flying-wish span{
   font-size:14px;
-  line-height:1.4;
+  line-height:1.5;
 }
 
 @keyframes flyUp{
@@ -198,7 +387,7 @@ body{
 
   100%{
     transform:
-      translateY(-850px)
+      translateY(-780px)
       translateX(40px)
       scale(1.1);
 
@@ -207,7 +396,9 @@ body{
 
 }
 
-/* WALL */
+/* =========================
+WALL
+========================= */
 
 .wall{
   margin-top:90px;
@@ -217,14 +408,16 @@ body{
   display:grid;
 
   grid-template-columns:
-    repeat(auto-fit,minmax(420px,520px));
+    repeat(auto-fit,minmax(320px,520px));
 
   justify-content:center;
 
-  gap:36px;
+  gap:34px;
 }
 
-/* SHEEP CARD */
+/* =========================
+SHEEP CARD
+========================= */
 
 .wish-card{
   position:relative;
@@ -234,23 +427,29 @@ body{
 
   height:340px;
 
+  margin:auto;
+
   background-image:url("./sheep.png");
+
   background-repeat:no-repeat;
   background-size:100% 100%;
   background-position:center;
 
-  padding-top:70px;
-  padding-left:170px;
+  padding-top:72px;
+  padding-left:165px;
   padding-right:95px;
   padding-bottom:60px;
 
   overflow:hidden;
 
-  transition:.3s;
+  transition:.35s ease;
+
+  display:flex;
+  flex-direction:column;
 }
 
 .wish-card:hover{
-  transform:translateY(-6px);
+  transform:translateY(-5px);
 }
 
 .wish-card strong{
@@ -261,37 +460,49 @@ body{
   font-size:22px;
   font-weight:900;
 
-  margin-bottom:12px;
+  line-height:1.2;
+
+  margin-bottom:14px;
 
   text-align:center;
 }
 
 .wish-card p{
-  color:#2d1b45;
+  color:#222;
 
-  font-size:21px;
-  font-weight:800;
+  font-size:22px;
+  font-weight:700;
 
   line-height:1.45;
 
   white-space:pre-wrap;
   word-break:break-word;
+
+  max-width:250px;
+
+  overflow-y:auto;
 }
 
-/* BUTTON */
+/* =========================
+BUTTON
+========================= */
 
 .floating-btn{
   position:fixed;
 
-  right:24px;
-  bottom:24px;
+  right:22px;
+  bottom:22px;
 
-  z-index:999;
+  z-index:100;
 
   border:none;
   cursor:pointer;
 
-  padding:16px 26px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:16px 24px;
 
   border-radius:999px;
 
@@ -302,7 +513,7 @@ body{
       #c084fc
     );
 
-  color:#fff;
+  color:white;
 
   font-size:15px;
   font-weight:800;
@@ -310,14 +521,24 @@ body{
   font-family:'Inter',sans-serif;
 
   box-shadow:
-    0 10px 30px rgba(124,58,237,.4);
+    0 12px 35px rgba(124,58,237,.42);
+
+  transition:.3s;
 }
 
-/* MODAL */
+.floating-btn:hover{
+  transform:translateY(-4px);
+}
+
+/* =========================
+MODAL
+========================= */
 
 .modal{
   position:fixed;
   inset:0;
+
+  z-index:999;
 
   background:rgba(0,0,0,.7);
 
@@ -328,7 +549,7 @@ body{
 
   padding:20px;
 
-  z-index:9999;
+  backdrop-filter:blur(8px);
 }
 
 .modal.active{
@@ -338,7 +559,7 @@ body{
 .modal-box{
   width:min(520px,100%);
 
-  background:rgba(16,13,35,.96);
+  background:rgba(17,13,35,.96);
 
   border-radius:30px;
 
@@ -350,15 +571,16 @@ body{
 .close{
   position:absolute;
 
+  right:20px;
   top:14px;
-  right:18px;
 
-  background:none;
   border:none;
+  background:none;
 
-  color:#fff;
+  color:white;
 
   font-size:34px;
+
   cursor:pointer;
 }
 
@@ -369,7 +591,7 @@ body{
 
 .sub{
   color:rgba(255,255,255,.7);
-  margin-bottom:26px;
+  margin-bottom:28px;
 }
 
 .input-group{
@@ -394,7 +616,7 @@ body{
 
   background:rgba(255,255,255,.06);
 
-  color:#fff;
+  color:white;
 
   font-size:15px;
 
@@ -411,7 +633,7 @@ body{
 
   padding:18px;
 
-  border-radius:18px;
+  border-radius:20px;
 
   background:
     linear-gradient(
@@ -420,7 +642,7 @@ body{
       #c084fc
     );
 
-  color:#fff;
+  color:white;
 
   font-size:16px;
   font-weight:800;
@@ -428,13 +650,17 @@ body{
   font-family:'Inter',sans-serif;
 }
 
-/* MUSIC */
+/* =========================
+MUSIC
+========================= */
 
 #musicBtn{
   position:fixed;
 
-  left:24px;
-  bottom:24px;
+  left:22px;
+  bottom:22px;
+
+  z-index:999;
 
   width:58px;
   height:58px;
@@ -449,16 +675,16 @@ body{
       #c084fc
     );
 
-  color:#fff;
+  color:white;
 
   font-size:22px;
 
   cursor:pointer;
-
-  z-index:999;
 }
 
-/* FOOTER */
+/* =========================
+FOOTER
+========================= */
 
 .footer{
   margin-top:90px;
@@ -467,24 +693,27 @@ body{
 
   color:rgba(255,255,255,.5);
 
-  font-size:13px;
+  font-size:14px;
 }
 
-/* MOBILE */
+/* =========================
+MOBILE
+========================= */
 
 @media(max-width:768px){
 
-  .container{
-    width:94%;
-  }
-
   .hero{
-    min-height:auto;
-    padding:120px 0 80px;
+    min-height:100vh;
+    padding-top:0;
+    padding-bottom:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
 
   .hero h1{
-    font-size:56px;
+    font-size:58px;
   }
 
   .hero h2{
@@ -504,7 +733,7 @@ body{
   }
 
   .wish-cuucocanh{
-    height:280px;
+    height:300px;
     border-radius:24px;
   }
 
@@ -515,22 +744,24 @@ body{
 
   .wish-card{
     max-width:100%;
+
     height:240px;
 
     padding-top:50px;
-    padding-left:110px;
-    padding-right:45px;
+    padding-left:112px;
+    padding-right:46px;
     padding-bottom:40px;
   }
 
   .wish-card strong{
     font-size:15px;
-    margin-bottom:10px;
+    margin-bottom:8px;
   }
 
   .wish-card p{
-    font-size:14px;
+    font-size:15px;
     line-height:1.35;
+    max-width:160px;
   }
 
   .floating-btn{
@@ -539,25 +770,17 @@ body{
 
     padding:14px 18px;
 
-    font-size:13px;
+    font-size:12px;
   }
 
   #musicBtn{
-    width:48px;
-    height:48px;
+    width:50px;
+    height:50px;
 
     left:14px;
     bottom:14px;
 
     font-size:18px;
-  }
-
-  .modal-box{
-    padding:26px;
-  }
-
-  .modal-box h3{
-    font-size:26px;
   }
 
 }
@@ -568,19 +791,22 @@ body{
 <body>
 
 <div class="bg"></div>
-<div class="noise"></div>
+
+<div class="stars" id="stars"></div>
 
 <div class="container">
 
 <section class="hero">
 
-<div>
+<div class="hero-inner">
 
 <h1>CAPTAIN BOY</h1>
 
 <h2>WISHING WALL</h2>
 
-<p>✦ CAPTAIN BOY - TINH HÀ SAY HI ✦</p>
+<p>
+✦ CAPTAIN BOY - TINH HÀ SAY HI ✦
+</p>
 
 </div>
 
@@ -590,9 +816,13 @@ body{
 
 <div class="section-head">
 
-<h2>CỪU CÓ CÁNH WITH LOVE CAPTAIN BOY</h2>
+<h2>
+CỪU CÓ CÁNH WITH LOVE CAPTAIN BOY
+</h2>
 
-<p>Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦</p>
+<p>
+Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
+</p>
 
 </div>
 
@@ -606,7 +836,9 @@ body{
 
 <h2>WALL OF LOVE</h2>
 
-<p>Lời yêu thương từ Cừu Có CÁNH dành cho CAPTAIN BOY ✦</p>
+<p>
+Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
+</p>
 
 </div>
 
@@ -641,6 +873,7 @@ Lời nhắn sẽ được hiển thị sau khi admin duyệt
 <form id="wishForm">
 
 <div class="input-group">
+
 <label>Tên của bạn</label>
 
 <input
@@ -648,9 +881,11 @@ type="text"
 id="userName"
 maxlength="30"
 required>
+
 </div>
 
 <div class="input-group">
+
 <label>Lời chúc</label>
 
 <textarea
@@ -658,9 +893,10 @@ id="userMsg"
 rows="5"
 maxlength="180"
 required></textarea>
+
 </div>
 
-<button class="submit-btn" id="submitBtn">
+<button class="submit-btn" id="submitBtn" type="submit">
 GỬI NGAY ✨
 </button>
 
@@ -678,6 +914,10 @@ GỬI NGAY ✨
 
 <script>
 
+/* =========================
+CONFIG
+========================= */
+
 const CONFIG = {
 
 googleScriptUrl:
@@ -686,6 +926,11 @@ googleScriptUrl:
 };
 
 let listApproved = [];
+let flyInterval = null;
+
+/* =========================
+MODAL
+========================= */
 
 function toggleModal(show){
 
@@ -695,7 +940,9 @@ document
 
 }
 
-/* FETCH */
+/* =========================
+FETCH
+========================= */
 
 async function fetchWishes(){
 
@@ -725,7 +972,9 @@ console.log(err);
 
 }
 
-/* WALL */
+/* =========================
+RENDER
+========================= */
 
 function renderWall(){
 
@@ -766,9 +1015,9 @@ ${escapeHtml(item.message)}
 
 }
 
-/* FLY */
-
-let flyInterval;
+/* =========================
+FLYING
+========================= */
 
 function startFlying(){
 
@@ -777,7 +1026,9 @@ document.getElementById("wishCuucocanh");
 
 box.innerHTML = "";
 
+if(flyInterval){
 clearInterval(flyInterval);
+}
 
 function createWish(){
 
@@ -813,7 +1064,7 @@ el.remove();
 }
 
 for(let i=0;i<6;i++){
-setTimeout(createWish,i*900);
+setTimeout(createWish,i*1000);
 }
 
 flyInterval =
@@ -821,7 +1072,9 @@ setInterval(createWish,2200);
 
 }
 
-/* SUBMIT */
+/* =========================
+SUBMIT
+========================= */
 
 document
 .getElementById("wishForm")
@@ -909,7 +1162,9 @@ btn.innerText = "GỬI NGAY ✨";
 
 });
 
-/* ESCAPE */
+/* =========================
+ESCAPE HTML
+========================= */
 
 function escapeHtml(text){
 
@@ -922,13 +1177,115 @@ return div.innerHTML;
 
 }
 
-/* MUSIC */
+/* =========================
+STARS
+========================= */
+
+const starsBox =
+document.getElementById("stars");
+
+for(let i=0;i<120;i++){
+
+const star =
+document.createElement("div");
+
+star.className = "star";
+
+star.style.left =
+Math.random()*100 + "%";
+
+star.style.top =
+Math.random()*100 + "%";
+
+star.style.animationDelay =
+Math.random()*5 + "s";
+
+star.style.opacity =
+Math.random();
+
+starsBox.appendChild(star);
+
+}
+
+/* =========================
+PARTICLES
+========================= */
+
+function createParticle(){
+
+const p =
+document.createElement("div");
+
+p.className = "particle";
+
+p.style.left =
+Math.random()*100 + "vw";
+
+p.style.bottom = "-20px";
+
+const size =
+Math.random()*4 + 2;
+
+p.style.width =
+size + "px";
+
+p.style.height =
+size + "px";
+
+p.style.animationDuration =
+(7 + Math.random()*8) + "s";
+
+document.body.appendChild(p);
+
+setTimeout(()=>{
+p.remove();
+},16000);
+
+}
+
+setInterval(createParticle,220);
+
+/* =========================
+METEOR
+========================= */
+
+function createMeteor(){
+
+const meteor =
+document.createElement("div");
+
+meteor.className = "meteor";
+
+meteor.style.top =
+Math.random()*40 + "vh";
+
+meteor.style.left =
+(75 + Math.random()*20) + "vw";
+
+meteor.style.animationDuration =
+(1 + Math.random()*1.2) + "s";
+
+document.body.appendChild(meteor);
+
+setTimeout(()=>{
+meteor.remove();
+},3000);
+
+}
+
+setInterval(createMeteor,2500);
+
+/* =========================
+MUSIC
+========================= */
 
 const music =
 document.getElementById("bgMusic");
 
 const musicBtn =
 document.getElementById("musicBtn");
+
+music.volume = 0.5;
 
 document.addEventListener("click",()=>{
 
@@ -958,7 +1315,9 @@ musicBtn.innerHTML = "🔇";
 
 });
 
-/* INIT */
+/* =========================
+INIT
+========================= */
 
 fetchWishes();
 
