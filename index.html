@@ -1,37 +1,20 @@
-```html
 <!doctype html>
 <html lang="vi">
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
-
-  --primary:#7c3aed;
+  --primary:#8b5cf6;
   --primary2:#c084fc;
-
-  --bg:#060510;
-
-  --card:rgba(18,15,35,.78);
-
-  --line:rgba(255,255,255,.08);
-
-  --text:#f5f3ff;
-
-  --muted:rgba(255,255,255,.72);
-
-  --shadow:
-  0 10px 40px rgba(124,58,237,.28);
-
+  --bg:#05010f;
 }
 
 *{
@@ -45,135 +28,253 @@ html{
 }
 
 body{
-
   font-family:'Inter',sans-serif;
-
-  background:#060510;
-
-  color:white;
-
+  background:#05010f;
+  color:#fff;
   overflow-x:hidden;
-
   min-height:100vh;
-
 }
 
-/* BACKGROUND */
+/* =========================
+BACKGROUND
+========================= */
 
 .bg{
-
   position:fixed;
   inset:0;
-
-  z-index:-3;
+  z-index:-50;
 
   background:
-  radial-gradient(circle at top,
-  rgba(124,58,237,.22),
-  transparent 35%),
-
-  radial-gradient(circle at bottom,
-  rgba(167,139,250,.12),
-  transparent 35%),
-
-  url("./nền.png");
+    linear-gradient(
+      rgba(5,1,15,.4),
+      rgba(5,1,15,.8)
+    ),
+    url("./nền.png");
 
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
 
+  animation:bgMove 35s ease-in-out infinite;
 }
 
-.noise{
+@keyframes bgMove{
+  0%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.05);
+  }
+  100%{
+    transform:scale(1);
+  }
+}
 
+/* =========================
+GALAXY
+========================= */
+
+#galaxy{
   position:fixed;
   inset:0;
+  width:100%;
+  height:100%;
+  z-index:-40;
+}
 
-  z-index:-2;
+/* =========================
+PURPLE GLOW
+========================= */
+
+.glow{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(120px);
+  opacity:.22;
+  z-index:-35;
+  animation:glowMove 14s ease-in-out infinite;
+}
+
+.glow.one{
+  width:420px;
+  height:420px;
+  background:#7c3aed;
+  top:-120px;
+  left:-120px;
+}
+
+.glow.two{
+  width:360px;
+  height:360px;
+  background:#c084fc;
+  bottom:-120px;
+  right:-120px;
+  animation-delay:3s;
+}
+
+@keyframes glowMove{
+  0%,100%{
+    transform:translateY(0px) scale(1);
+  }
+  50%{
+    transform:translateY(50px) scale(1.15);
+  }
+}
+
+/* =========================
+NOISE
+========================= */
+
+.noise{
+  position:fixed;
+  inset:0;
+  z-index:-20;
 
   opacity:.04;
 
   background-image:
-  linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px);
 
   background-size:3px 3px;
+}
+
+/* =========================
+METEOR
+========================= */
+
+.meteor{
+  position:fixed;
+
+  width:3px;
+  height:180px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,1),
+      rgba(255,255,255,0)
+    );
+
+  border-radius:999px;
+
+  transform:rotate(45deg);
+
+  filter:
+    drop-shadow(0 0 12px white)
+    drop-shadow(0 0 30px #c084fc);
+
+  pointer-events:none;
+
+  z-index:-10;
+
+  animation:meteor linear forwards;
+}
+
+@keyframes meteor{
+
+  from{
+    transform:
+      translate(0,0)
+      rotate(45deg);
+
+    opacity:1;
+  }
+
+  to{
+    transform:
+      translate(-1200px,1200px)
+      rotate(45deg);
+
+    opacity:0;
+  }
 
 }
 
-.glow{
+/* =========================
+PARTICLES
+========================= */
 
+.particle{
   position:fixed;
-
-  width:500px;
-  height:500px;
 
   border-radius:50%;
 
-  filter:blur(120px);
+  background:white;
 
-  opacity:.18;
+  opacity:.8;
 
-  z-index:-1;
+  pointer-events:none;
 
-  animation:floatGlow 12s ease-in-out infinite;
+  z-index:-5;
 
+  animation:floatUp linear forwards;
 }
 
-.glow.one{
-  top:-120px;
-  left:-120px;
-  background:#7c3aed;
-}
+@keyframes floatUp{
 
-.glow.two{
-  bottom:-150px;
-  right:-120px;
-  background:#a78bfa;
-}
+  from{
+    transform:
+      translateY(0)
+      scale(.5);
 
-@keyframes floatGlow{
-
-  0%,100%{
-    transform:translateY(0) scale(1);
+    opacity:0;
   }
 
-  50%{
-    transform:translateY(30px) scale(1.08);
+  10%{
+    opacity:1;
+  }
+
+  to{
+    transform:
+      translateY(-120vh)
+      scale(1.8);
+
+    opacity:0;
   }
 
 }
+
+/* =========================
+LAYOUT
+========================= */
 
 .container{
-
-  width:min(1180px,92%);
-
+  width:min(1200px,92%);
   margin:auto;
-
   padding-bottom:120px;
-
 }
 
-/* HERO */
+/* =========================
+HERO
+========================= */
 
 .hero{
 
-  min-height:100vh;
+  height:100vh;
+
+  min-height:100svh;
 
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   text-align:center;
 
-  padding:80px 0;
+  overflow:hidden;
 
+  padding:0;
+}
+
+.hero-inner{
+  width:100%;
+  overflow:hidden;
 }
 
 .hero h1{
-
-  font-size:clamp(58px,10vw,140px);
+  font-size:clamp(78px,10vw,170px);
 
   font-weight:900;
 
@@ -181,24 +282,24 @@ body{
 
   letter-spacing:2px;
 
-  margin-bottom:20px;
-
-  word-break:keep-all;
+  margin-bottom:18px;
 
   background:
-  linear-gradient(to bottom,#fff,#d8b4fe);
+    linear-gradient(
+      to bottom,
+      #fff,
+      #d8b4fe
+    );
 
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 
   text-shadow:
-  0 0 30px rgba(124,58,237,.35);
-
+    0 0 40px rgba(192,132,252,.45);
 }
 
-.big-title{
-
-  font-size:clamp(34px,6vw,80px);
+.hero h2{
+  font-size:clamp(42px,5vw,92px);
 
   font-weight:900;
 
@@ -207,190 +308,166 @@ body{
   margin-bottom:18px;
 
   text-shadow:
-  0 0 30px rgba(168,85,247,.45);
-
+    0 0 30px rgba(192,132,252,.4);
 }
 
-.sub-title{
+.hero p{
+  font-size:clamp(18px,2vw,30px);
 
-  font-size:clamp(15px,2vw,28px);
+  color:#fff;
 
-  color:white;
-
+  letter-spacing:1px;
 }
 
-/* SECTION */
+/* =========================
+SECTION
+========================= */
 
 .section-head{
-
   text-align:center;
-
-  margin-bottom:28px;
-
+  margin-bottom:30px;
 }
 
 .section-head h2{
-
-  font-size:clamp(28px,5vw,52px);
-
+  font-size:clamp(28px,3vw,48px);
   font-weight:900;
-
-  margin-bottom:10px;
-
+  margin-bottom:12px;
 }
 
 .section-head p{
-
-  color:var(--muted);
-
-  font-size:clamp(14px,2vw,18px);
-
+  color:rgba(255,255,255,.72);
+  font-size:16px;
 }
 
-/* FLYING WISH */
+/* =========================
+FLYING AREA
+========================= */
 
 .wish-cuucocanh{
-
   position:relative;
 
   width:100%;
-
-  height:420px;
+  height:430px;
 
   overflow:hidden;
 
   border-radius:36px;
 
-  border:1px solid var(--line);
-
   background:
-  linear-gradient(
-  to bottom,
-  rgba(25,20,55,.85),
-  rgba(10,8,25,.95));
+    linear-gradient(
+      rgba(20,14,45,.72),
+      rgba(8,5,18,.9)
+    );
 
-  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.08);
 
-  box-shadow:var(--shadow);
+  backdrop-filter:blur(10px);
 
+  box-shadow:
+    0 15px 40px rgba(124,58,237,.2);
 }
 
-.loading{
-
-  position:absolute;
-  inset:0;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  color:rgba(255,255,255,.4);
-
-  font-weight:700;
-
-}
+/* =========================
+FLYING WISH
+========================= */
 
 .flying-wish{
-
   position:absolute;
 
-  bottom:-120px;
+  bottom:-140px;
 
-  min-width:160px;
-  max-width:260px;
+  min-width:190px;
+  max-width:300px;
 
   padding:18px 24px;
 
   border-radius:999px;
 
   background:
-  radial-gradient(circle at 30% 30%,
-  #fff 0%,
-  #f3e8ff 45%,
-  #e9d5ff 100%);
+    radial-gradient(circle at top,
+    #fff,
+    #f3e8ff 70%);
 
-  border:3px solid rgba(255,255,255,.7);
+  border:2px solid rgba(255,255,255,.8);
+
+  color:#2d1b45;
 
   box-shadow:
-  0 10px 30px rgba(168,85,247,.25),
-  inset 0 2px 10px rgba(255,255,255,.8);
+    0 10px 35px rgba(168,85,247,.35);
 
   animation-name:flyUp;
   animation-timing-function:linear;
   animation-fill-mode:forwards;
 
+  overflow:hidden;
 }
 
-.flying-wish::before,
-.flying-wish::after{
-
+.flying-wish::before{
   content:"";
 
   position:absolute;
 
-  background:#f3e8ff;
+  width:45px;
+  height:45px;
 
   border-radius:50%;
 
-  z-index:-1;
+  background:#f3e8ff;
 
-}
-
-.flying-wish::before{
-
-  width:52px;
-  height:52px;
-
+  top:-18px;
   left:20px;
-  top:-22px;
 
+  z-index:-1;
 }
 
 .flying-wish::after{
+  content:"";
 
-  width:34px;
-  height:34px;
+  position:absolute;
 
-  right:24px;
-  top:-14px;
+  width:28px;
+  height:28px;
 
+  border-radius:50%;
+
+  background:#f3e8ff;
+
+  top:-10px;
+  right:20px;
+
+  z-index:-1;
 }
 
 .flying-wish strong{
-
   display:block;
 
   color:#7c3aed;
 
-  font-size:14px;
-
   margin-bottom:6px;
 
+  font-size:14px;
+  font-weight:900;
 }
 
 .flying-wish span{
-
-  color:#3b0764;
-
-  font-size:13px;
-
-  line-height:1.4;
+  font-size:14px;
+  line-height:1.45;
 
   display:-webkit-box;
-
-  -webkit-line-clamp:4;
-
+  -webkit-line-clamp:3;
   -webkit-box-orient:vertical;
 
   overflow:hidden;
-
+  word-break:break-word;
 }
 
 @keyframes flyUp{
 
   0%{
-    transform:translateY(0) scale(.7);
+    transform:
+      translateY(0)
+      scale(.7);
+
     opacity:0;
   }
 
@@ -400,120 +477,115 @@ body{
 
   50%{
     transform:
-    translateY(-320px)
-    translateX(-20px)
-    scale(1);
+      translateY(-350px)
+      translateX(-20px)
+      scale(1);
   }
 
   100%{
     transform:
-    translateY(-760px)
-    translateX(40px)
-    scale(1.15);
+      translateY(-850px)
+      translateX(50px)
+      scale(1.12);
 
     opacity:0;
   }
 
 }
 
-/* WALL */
+/* =========================
+WALL
+========================= */
 
 .wall{
   margin-top:100px;
 }
 
 .wish-grid{
-
   display:grid;
 
   grid-template-columns:
-  repeat(auto-fit,minmax(320px,1fr));
+    repeat(auto-fit,minmax(420px,520px));
 
-  gap:26px;
+  justify-content:center;
 
+  gap:40px;
 }
 
-/* SHEEP CARD */
+/* =========================
+SHEEP CARD
+========================= */
 
 .wish-card{
-
   position:relative;
 
   width:100%;
+  max-width:520px;
 
   height:340px;
 
   background-image:url("./sheep.png");
 
-  background-size:100% 100%;
-
   background-repeat:no-repeat;
-
+  background-size:100% 100%;
   background-position:center;
 
-  padding-top:70px;
-  padding-left:150px;
-  padding-right:80px;
-  padding-bottom:50px;
-
-  transition:.35s;
-
-}
-
-.wish-card:hover{
-  transform:translateY(-8px) scale(1.02);
-}
-
-.wish-card strong{
-
-  display:block;
-
-  color:#ff3b3b;
-
-  font-size:clamp(16px,2vw,22px);
-
-  font-weight:900;
-
-  line-height:1.2;
-
-  margin-bottom:12px;
-
-  word-break:break-word;
-  overflow-wrap:break-word;
-
-}
-
-.wish-card p{
-
-  color:#222;
-
-  font-size:clamp(14px,1.8vw,21px);
-
-  font-weight:700;
-
-  line-height:1.45;
-
-  white-space:pre-wrap;
-
-  word-break:break-word;
-  overflow-wrap:break-word;
-
-  max-width:100%;
+  padding-top:72px;
+  padding-left:165px;
+  padding-right:90px;
+  padding-bottom:55px;
 
   overflow:hidden;
 
-  display:-webkit-box;
+  transition:.35s;
 
-  -webkit-line-clamp:7;
-
-  -webkit-box-orient:vertical;
-
+  display:flex;
+  flex-direction:column;
 }
 
-/* BUTTON */
+.wish-card:hover{
+  transform:translateY(-6px) scale(1.02);
+}
+
+.wish-card strong{
+  color:#ff4545;
+
+  font-size:22px;
+  font-weight:900;
+
+  margin-bottom:14px;
+
+  text-align:center;
+
+  width:100%;
+}
+
+.wish-card p{
+  color:#2d1b45;
+
+  font-size:20px;
+  font-weight:800;
+
+  line-height:1.42;
+
+  white-space:normal;
+  word-break:break-word;
+  overflow-wrap:break-word;
+
+  max-width:240px;
+
+  display:-webkit-box;
+  -webkit-line-clamp:6;
+  -webkit-box-orient:vertical;
+
+  overflow:hidden;
+}
+
+/* =========================
+BUTTONS
+========================= */
 
 .floating-btn{
-
   position:fixed;
 
   right:24px;
@@ -522,48 +594,71 @@ body{
   z-index:999;
 
   border:none;
-  outline:none;
   cursor:pointer;
 
-  display:flex;
-
-  align-items:center;
-  gap:12px;
-
-  padding:16px 24px;
+  padding:16px 28px;
 
   border-radius:999px;
 
   background:
-  linear-gradient(135deg,#8b5cf6,#c084fc);
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #c084fc
+    );
 
   color:white;
 
   font-size:15px;
-
   font-weight:800;
 
+  font-family:'Inter',sans-serif;
+
   box-shadow:
-  0 12px 35px rgba(124,58,237,.42);
+    0 12px 35px rgba(124,58,237,.42);
 
-  transition:.35s ease;
-
+  transition:.3s;
 }
 
-.floating-btn:hover{
-  transform:translateY(-4px) scale(1.02);
+#musicBtn{
+  position:fixed;
+
+  left:24px;
+  bottom:24px;
+
+  z-index:999;
+
+  width:58px;
+  height:58px;
+
+  border:none;
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #c084fc
+    );
+
+  color:white;
+
+  font-size:24px;
+
+  cursor:pointer;
 }
 
-/* MODAL */
+/* =========================
+MODAL
+========================= */
 
 .modal{
-
   position:fixed;
   inset:0;
 
   z-index:9999;
 
-  background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.72);
 
   display:none;
 
@@ -573,7 +668,6 @@ body{
   padding:20px;
 
   backdrop-filter:blur(8px);
-
 }
 
 .modal.active{
@@ -581,63 +675,45 @@ body{
 }
 
 .modal-box{
-
   width:min(520px,100%);
 
-  background:rgba(15,13,32,.92);
+  background:rgba(14,10,30,.95);
 
-  border:1px solid var(--line);
+  border-radius:30px;
 
-  border-radius:34px;
+  border:1px solid rgba(255,255,255,.08);
 
   padding:34px;
 
   position:relative;
-
 }
 
 .close{
-
   position:absolute;
 
-  right:20px;
-  top:16px;
+  top:14px;
+  right:18px;
 
-  background:none;
   border:none;
+  background:none;
 
   color:white;
 
-  font-size:30px;
+  font-size:34px;
 
   cursor:pointer;
-
 }
 
 .modal-box h3{
-
   font-size:34px;
+  margin-bottom:12px;
 
   font-weight:900;
-
-  margin-bottom:10px;
-
-  background:
-  linear-gradient(to right,#fff,#d8b4fe);
-
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-
 }
 
 .sub{
-
-  color:rgba(255,255,255,.72);
-
-  margin-bottom:26px;
-
-  font-size:14px;
-
+  color:rgba(255,255,255,.68);
+  margin-bottom:24px;
 }
 
 .input-group{
@@ -645,20 +721,13 @@ body{
 }
 
 .input-group label{
-
   display:block;
-
   margin-bottom:8px;
-
-  font-size:13px;
-
-  color:rgba(255,255,255,.75);
-
+  font-size:14px;
 }
 
 .input-group input,
 .input-group textarea{
-
   width:100%;
 
   border:none;
@@ -670,24 +739,20 @@ body{
 
   background:rgba(255,255,255,.05);
 
-  border:1px solid rgba(255,255,255,.06);
-
   color:white;
 
-  font-family:inherit;
-
+  font-family:'Inter',sans-serif;
   font-size:15px;
+}
 
+.input-group textarea{
   resize:none;
-
 }
 
 .submit-btn{
-
   width:100%;
 
   border:none;
-  outline:none;
   cursor:pointer;
 
   padding:18px;
@@ -695,20 +760,25 @@ body{
   border-radius:20px;
 
   background:
-  linear-gradient(135deg,#8b5cf6,#c084fc);
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #c084fc
+    );
 
   color:white;
 
   font-size:16px;
-
   font-weight:800;
 
+  font-family:'Inter',sans-serif;
 }
 
-/* FOOTER */
+/* =========================
+FOOTER
+========================= */
 
 .footer{
-
   margin-top:90px;
 
   text-align:center;
@@ -716,543 +786,156 @@ body{
   color:rgba(255,255,255,.45);
 
   font-size:13px;
-
 }
 
-/* MUSIC */
-
-#musicBtn{
-
-  position:fixed;
-
-  left:24px;
-  bottom:24px;
-
-  z-index:9999;
-
-  width:58px;
-  height:58px;
-
-  border:none;
-
-  border-radius:50%;
-
-  background:
-  linear-gradient(135deg,#8b5cf6,#c084fc);
-
-  color:white;
-
-  font-size:24px;
-
-  cursor:pointer;
-
-  box-shadow:
-  0 10px 30px rgba(124,58,237,.4);
-
-}
-
-/* MOBILE */
+/* =========================
+MOBILE
+========================= */
 
 @media(max-width:768px){
 
+  body{
+    overflow-x:hidden;
+  }
+
   .container{
-    width:94%;
+    width:100%;
+    padding-left:16px;
+    padding-right:16px;
   }
 
   .hero{
-    min-height:90vh;
-    padding:50px 0;
+    height:100svh;
+    min-height:100svh;
+  }
+
+  .hero-inner{
+    transform:translateY(-10px);
+  }
+
+  /* FIX CHỮ KHÔNG NHẢY */
+
+  .hero h1{
+
+    font-size:clamp(36px,9vw,52px);
+
+    line-height:1.05;
+
+    letter-spacing:0;
+
+    margin-bottom:10px;
+
+    white-space:nowrap;
+  }
+
+  .hero h2{
+
+    font-size:clamp(22px,5vw,32px);
+
+    line-height:1.1;
+
+    margin-bottom:12px;
+
+    white-space:nowrap;
+  }
+
+  .hero p{
+
+    font-size:12px;
+
+    letter-spacing:.5px;
+
+    white-space:nowrap;
+  }
+
+  .section-head h2{
+    font-size:22px;
+  }
+
+  .section-head p{
+    font-size:12px;
+  }
+
+  .wish-cuucocanh{
+    height:280px;
+    border-radius:24px;
   }
 
   .wish-grid{
     grid-template-columns:1fr;
+    gap:20px;
   }
+
+  /* FIX CARD KHÔNG TRÀN */
 
   .wish-card{
 
-    height:260px;
+    max-width:100%;
 
-    padding-top:52px;
-    padding-left:110px;
-    padding-right:55px;
-    padding-bottom:40px;
+    height:240px;
 
+    padding-top:50px;
+    padding-left:108px;
+    padding-right:48px;
+    padding-bottom:38px;
+
+    background-size:100% 100%;
+  }
+
+  .wish-card strong{
+
+    font-size:13px;
+
+    margin-bottom:8px;
   }
 
   .wish-card p{
-    -webkit-line-clamp:6;
+
+    font-size:12px;
+
+    line-height:1.38;
+
+    max-width:140px;
+
+    display:-webkit-box;
+    -webkit-line-clamp:7;
+    -webkit-box-orient:vertical;
+
+    overflow:hidden;
+
+    word-break:break-word;
   }
 
   .floating-btn{
 
-    padding:14px 18px;
+    right:14px;
+    bottom:14px;
 
-    font-size:13px;
+    padding:12px 16px;
 
+    font-size:11px;
+  }
+
+  #musicBtn{
+
+    width:46px;
+    height:46px;
+
+    left:14px;
+    bottom:14px;
+
+    font-size:18px;
+  }
+
+  .modal-box{
+    padding:24px;
+  }
+
+  .modal-box h3{
+    font-size:26px;
   }
 
 }
 
 </style>
 </head>
-
-<body>
-
-<div class="bg"></div>
-<div class="noise"></div>
-
-<div class="glow one"></div>
-<div class="glow two"></div>
-
-<div class="container">
-
-<section class="hero">
-
-<div>
-
-<h1>CAPTAIN BOY</h1>
-
-<div class="big-title">
-WISHING WALL
-</div>
-
-<p class="sub-title">
-✦ CAPTAIN BOY - TINH HÀ SAY HI ✦
-</p>
-
-</div>
-
-</section>
-
-<section>
-
-<div class="section-head">
-
-<h2>
-CỪU CÓ CÁNH WITH LOVE CAPTAIN BOY
-</h2>
-
-<p>
-Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
-</p>
-
-</div>
-
-<div class="wish-cuucocanh" id="wishCuucocanh">
-
-<div class="loading">
-Đang tải lời chúc...
-</div>
-
-</div>
-
-</section>
-
-<section class="wall">
-
-<div class="section-head">
-
-<h2>WALL OF LOVE</h2>
-
-<p>
-Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
-</p>
-
-</div>
-
-<div class="wish-grid" id="wishGrid"></div>
-
-</section>
-
-<div class="footer">
-PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
-</div>
-
-</div>
-
-<button class="floating-btn" onclick="toggleModal(true)">
-✨ GỬI LỜI CHÚC
-</button>
-
-<div class="modal" id="wishModal">
-
-<div class="modal-box">
-
-<button class="close" onclick="toggleModal(false)">
-×
-</button>
-
-<h3>Gửi lời đến CAPTAIN BOY</h3>
-
-<div class="sub">
-Lời nhắn sẽ được hiển thị sau khi admin duyệt
-</div>
-
-<form id="wishForm">
-
-<div class="input-group">
-
-<label>Tên của bạn</label>
-
-<input
-type="text"
-id="userName"
-maxlength="30"
-placeholder="Nhập tên..."
-required>
-
-</div>
-
-<div class="input-group">
-
-<label>Lời chúc</label>
-
-<textarea
-id="userMsg"
-rows="5"
-maxlength="180"
-placeholder="Nhập lời chúc..."
-required></textarea>
-
-</div>
-
-<button class="submit-btn" id="submitBtn" type="submit">
-GỬI NGAY ✨
-</button>
-
-</form>
-
-</div>
-
-</div>
-
-<audio id="bgMusic" loop>
-<source src="./music.mp3" type="audio/mpeg">
-</audio>
-
-<button id="musicBtn">🔊</button>
-
-<script>
-
-const CONFIG = {
-
-googleScriptUrl:
-"https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec"
-
-};
-
-let listApproved = [];
-
-let flyInterval = null;
-
-/* MODAL */
-
-function toggleModal(show){
-
-document
-.getElementById("wishModal")
-.classList.toggle("active",show);
-
-}
-
-/* FETCH */
-
-async function fetchWishes(){
-
-try{
-
-const response = await fetch(
-CONFIG.googleScriptUrl + "?action=list"
-);
-
-const data = await response.json();
-
-if(data.approved){
-
-listApproved = data.approved;
-
-renderWall();
-
-startFlying();
-
-}
-
-}catch(err){
-
-console.log(err);
-
-}
-
-}
-
-/* WALL */
-
-function renderWall(){
-
-const grid =
-document.getElementById("wishGrid");
-
-if(!listApproved.length){
-
-grid.innerHTML = `
-<div class="wish-card">
-
-<strong>
-From: CỪU CÓ CÁNH
-</strong>
-
-<p>
-Chưa có lời chúc nào ✨
-</p>
-
-</div>
-`;
-
-return;
-
-}
-
-grid.innerHTML = listApproved
-.slice()
-.reverse()
-.map(item => `
-
-<div class="wish-card">
-
-<strong>
-From: ${escapeHtml(item.name)}
-</strong>
-
-<p>
-${escapeHtml(item.message)}
-</p>
-
-</div>
-
-`).join("");
-
-}
-
-/* FLYING */
-
-function startFlying(){
-
-const area =
-document.getElementById("wishCuucocanh");
-
-area.innerHTML = "";
-
-if(!listApproved.length){
-
-area.innerHTML = `
-<div class="loading">
-Chưa có lời nhắn nào ✨
-</div>
-`;
-
-return;
-
-}
-
-if(flyInterval){
-clearInterval(flyInterval);
-}
-
-function createWish(){
-
-const wish =
-listApproved[
-Math.floor(Math.random() * listApproved.length)
-];
-
-const el =
-document.createElement("div");
-
-el.className = "flying-wish";
-
-el.style.left =
-Math.random() * 80 + "%";
-
-el.style.animationDuration =
-(7 + Math.random() * 4) + "s";
-
-el.innerHTML = `
-<strong>${escapeHtml(wish.name)}</strong>
-<span>${escapeHtml(wish.message)}</span>
-`;
-
-area.appendChild(el);
-
-setTimeout(()=>{
-el.remove();
-},12000);
-
-}
-
-for(let i=0;i<8;i++){
-setTimeout(createWish,i * 1000);
-}
-
-flyInterval = setInterval(createWish,2200);
-
-}
-
-/* FORM */
-
-document
-.getElementById("wishForm")
-.addEventListener("submit",async(e)=>{
-
-e.preventDefault();
-
-const btn =
-document.getElementById("submitBtn");
-
-const name =
-document.getElementById("userName")
-.value.trim();
-
-const message =
-document.getElementById("userMsg")
-.value.trim();
-
-if(!name || !message){
-
-alert("Vui lòng nhập đầy đủ ✨");
-
-return;
-
-}
-
-btn.disabled = true;
-
-btn.innerText = "ĐANG GỬI...";
-
-try{
-
-const response = await fetch(
-CONFIG.googleScriptUrl,
-{
-method:"POST",
-
-headers:{
-"Content-Type":"text/plain;charset=utf-8"
-},
-
-body:JSON.stringify({
-
-action:"submit",
-
-id:Date.now(),
-
-name,
-
-message,
-
-createdAt:new Date().toISOString()
-
-})
-
-}
-);
-
-const data = await response.json();
-
-if(data.ok){
-
-alert("Đã gửi thành công ✨");
-
-document
-.getElementById("wishForm")
-.reset();
-
-toggleModal(false);
-
-}else{
-
-alert("Gửi thất bại 😭");
-
-}
-
-}catch(err){
-
-console.log(err);
-
-alert("Lỗi kết nối Apps Script");
-
-}finally{
-
-btn.disabled = false;
-
-btn.innerText = "GỬI NGAY ✨";
-
-}
-
-});
-
-/* ESCAPE */
-
-function escapeHtml(text){
-
-const div =
-document.createElement("div");
-
-div.textContent = text;
-
-return div.innerHTML;
-
-}
-
-/* MUSIC */
-
-const music =
-document.getElementById("bgMusic");
-
-const musicBtn =
-document.getElementById("musicBtn");
-
-music.volume = 0.5;
-
-document.addEventListener("click",()=>{
-
-if(music.paused){
-
-music.play().catch(err=>{
-console.log(err);
-});
-
-}
-
-},{ once:true });
-
-musicBtn.addEventListener("click",(e)=>{
-
-e.stopPropagation();
-
-if(music.paused){
-
-music.play();
-
-musicBtn.innerHTML = "🔊";
-
-}else{
-
-music.pause();
-
-musicBtn.innerHTML = "🔇";
-
-}
-
-});
-
-/* INIT */
-
-fetchWishes();
-
-setInterval(fetchWishes,30000);
-
-</script>
-
-</body>
-</html>
-```
