@@ -2,7 +2,8 @@
 <html lang="vi">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Mở khóa Zoom hoàn toàn -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
     <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,9 +29,7 @@
             line-height: 1.4;
         }
 
-        input, textarea, button { font-family: 'Inter', sans-serif !important; }
-
-        /* --- BACKGROUND LAYER SYSTEM --- */
+        /* --- HỆ THỐNG NỀN BỒNG BỀNH --- */
         .universe-bg {
             position: fixed; inset: 0; z-index: -10;
             background: radial-gradient(circle at center, #1e1450 0%, #05030d 100%);
@@ -39,20 +38,18 @@
         .nebula {
             position: absolute; inset: 0;
             background: url("./nền.png") center/cover no-repeat;
-            opacity: 0.5; filter: blur(2px) saturate(1.5);
+            opacity: 0.4; filter: blur(2px) saturate(1.2);
         }
 
-        /* Đám mây bồng bềnh */
         .cloud {
-            position: absolute; background: rgba(255, 255, 255, 0.07);
-            filter: blur(30px); border-radius: 50%;
+            position: absolute; background: rgba(255, 255, 255, 0.05);
+            filter: blur(40px); border-radius: 50%;
             animation: floatCloud var(--d) infinite ease-in-out;
             pointer-events: none;
         }
-
         @keyframes floatCloud {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(50px, 30px) scale(1.1); }
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 20px); }
         }
 
         .star {
@@ -60,76 +57,71 @@
             box-shadow: 0 0 10px #fff;
             animation: twinkle var(--t) infinite ease-in-out;
         }
-
         @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO --- */
         .hero {
-            height: 80vh;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            text-align: center; padding: 20px;
+            padding: 60px 20px 20px;
+            text-align: center;
         }
 
         .hero h1 {
-            font-size: clamp(35px, 10vw, 100px);
-            font-weight: 900; line-height: 0.9;
+            font-size: clamp(30px, 8vw, 80px);
+            font-weight: 900;
             background: linear-gradient(to bottom, #fff, var(--primary-light));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .hero .sub-bottom {
-            font-size: clamp(9px, 3vw, 20px);
-            letter-spacing: 2px; font-weight: 700;
-            white-space: nowrap; margin-top: 15px;
+            font-size: clamp(9px, 3.5vw, 18px);
+            letter-spacing: 1px; font-weight: 700;
+            white-space: nowrap; margin-top: 10px;
+            display: block; width: 100%;
         }
 
-        /* --- PYRAMID FLYING BOX (DẠNG KIM TỰ THÁP) --- */
+        /* --- KHUNG KIM TỰ THÁP (FIX LỖI TO) --- */
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 10px; }
 
         .pyramid-wrapper {
-            position: relative; width: 100%; height: 400px;
-            margin: 40px 0; overflow: hidden;
-            background: rgba(255,255,255,0.02);
-            /* Tạo hình dạng kim tự tháp cho khung */
-            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+            position: relative; width: 100%; height: 300px;
+            margin: 20px 0; overflow: hidden;
+            background: rgba(255,255,255,0.03);
+            clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
             border-bottom: 2px solid var(--primary-light);
             backdrop-filter: blur(10px);
         }
 
-        .pyramid-title { text-align: center; margin-bottom: 10px; font-weight: 900; color: var(--primary-light); }
-
         .flying-wish {
             position: absolute; background: rgba(255, 255, 255, 0.95);
-            padding: 8px 12px; border-radius: 15px;
+            padding: 6px 12px; border-radius: 12px;
             color: #111; font-size: 10px; font-weight: 700;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-            /* Animation bay hội tụ về đỉnh kim tự tháp */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            max-width: 150px; /* Giới hạn chiều rộng để không che màn hình */
+            white-space: normal;
             animation: pyramidFly var(--duration) linear infinite;
         }
 
         @keyframes pyramidFly {
-            0% { bottom: -50px; left: var(--startX); transform: scale(1); opacity: 0; }
+            0% { bottom: -50px; left: var(--startX); transform: scale(0.8); opacity: 0; }
             10% { opacity: 1; }
-            100% { bottom: 420px; left: 50%; transform: scale(0.5); opacity: 0; }
+            100% { bottom: 350px; left: 50%; transform: scale(0.4); opacity: 0; }
         }
 
-        /* --- WALL OF LOVE (2-3 CỘT MOBILE) --- */
+        /* --- WALL OF LOVE (GRID 2-3 CỘT) --- */
         .grid-wall {
             display: grid;
-            /* Phối hợp để có 2-3 cột trên màn hình nhỏ */
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 12px; padding-bottom: 120px;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 15px; padding-bottom: 120px;
         }
 
         @media (min-width: 768px) {
             .grid-wall { grid-template-columns: repeat(4, 1fr); gap: 30px; }
         }
 
-        /* MỞ RỘNG SHEEP CARD */
+        /* SHEEP CARD CHỐNG TRÀN TUYỆT ĐỐI */
         .sheep-card {
             position: relative; width: 100%; aspect-ratio: 1.1 / 1;
             background: url("./sheep.png") center/contain no-repeat;
@@ -138,22 +130,26 @@
 
         .card-inner {
             position: absolute; 
-            width: 78%; /* Nới rộng vùng chứa 100 chữ */
-            height: 68%;
-            top: 20%; display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            text-align: center; padding: 5px; overflow: hidden;
+            width: 75%; height: 60%;
+            top: 25%; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column;
+            text-align: center; padding: 5px;
+            /* Thanh cuộn ẩn để chứa 100-200 chữ */
+            overflow-y: auto; 
+            scrollbar-width: none; /* Firefox */
         }
+        .card-inner::-webkit-scrollbar { display: none; } /* Chrome/Safari */
 
         .card-inner b {
-            color: var(--accent); font-size: clamp(8px, 2.5vw, 12px);
+            color: var(--accent); font-size: 11px;
             margin-bottom: 2px; font-weight: 900;
+            position: sticky; top: 0; background: transparent;
         }
 
         .card-inner span {
             color: var(--card-text); font-weight: 700;
-            line-height: 1.1; word-break: break-word;
-            /* Font-size sẽ được JS tính toán động */
+            line-height: 1.2; word-break: break-word;
+            font-size: 10px; /* Cố định cỡ chữ nhỏ để dễ đọc khi cuộn */
         }
 
         /* --- CONTROLS --- */
@@ -185,7 +181,7 @@
         .input-box {
             width: 100%; padding: 14px; margin: 10px 0;
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px; color: #fff; font-size: 16px;
+            border-radius: 12px; color: #fff; font-size: 16px; font-family: inherit;
         }
 
         footer { text-align: center; padding: 40px; font-size: 10px; opacity: 0.5; }
@@ -200,15 +196,13 @@
     </div>
 
     <header class="hero">
-        <div style="font-size:10px; letter-spacing:5px; opacity:0.7; margin-bottom:10px">THE RETURN OF</div>
+        <div style="font-size:9px; letter-spacing:4px; opacity:0.7; margin-bottom:5px">THE RETURN OF</div>
         <h1>CAPTAIN BOY</h1>
-        <div style="font-size: clamp(20px, 6vw, 50px); font-weight: 800; text-shadow: 0 0 15px var(--primary);">WISHING WALL</div>
         <div class="sub-bottom">✦ CAPTAIN BOY - TINH HÀ SAY HI ✦</div>
     </header>
 
     <div class="container">
-        <!-- KHUNG KIM TỰ THÁP -->
-        <div class="pyramid-title">CỪU CÓ CÁNH WITH LOVE</div>
+        <div style="text-align:center; font-weight:900; color:var(--primary-light); font-size:18px; margin-top:20px">CỪU CÓ CÁNH WITH LOVE</div>
         <div class="pyramid-wrapper" id="pyramidZone"></div>
 
         <section>
@@ -228,10 +222,12 @@
     <div class="modal" id="wishModal">
         <div class="modal-box">
             <h2 style="margin-bottom:15px; font-weight:900">Gửi lời chúc ✨</h2>
-            <input type="text" id="uName" class="input-box" placeholder="Tên của Cừu..." required maxlength="25">
-            <textarea id="uMsg" class="input-box" rows="5" placeholder="Lời chúc dành cho CAPTAIN BOY..." required maxlength="500"></textarea>
-            <button onclick="submitWish()" id="sendBtn" style="width:100%; padding:16px; background:var(--primary); border:none; border-radius:12px; color:#fff; font-weight:900; cursor:pointer">GỬI NGAY ✨</button>
-            <button onclick="setModal(false)" style="width:100%; background:none; border:none; color:#666; margin-top:15px">Hủy</button>
+            <form id="wishForm">
+                <input type="text" id="uName" class="input-box" placeholder="Tên của Cừu..." required maxlength="25">
+                <textarea id="uMsg" class="input-box" rows="5" placeholder="Nhập lời nhắn của bạn dành cho CAPTAIN BOY..." required maxlength="1000"></textarea>
+                <button type="submit" id="sendBtn" style="width:100%; padding:16px; background:var(--primary); border:none; border-radius:12px; color:#fff; font-weight:900; cursor:pointer">GỬI NGAY ✨</button>
+                <button type="button" onclick="setModal(false)" style="width:100%; background:none; border:none; color:#666; margin-top:15px">Hủy</button>
+            </form>
         </div>
     </div>
 
@@ -240,11 +236,10 @@
     <script>
         const API = "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
 
-        // 1. Tạo Tinh hà & Đám mây
+        // Tạo Sao & Mây
         const sf = document.getElementById("starField");
         const cf = document.getElementById("cloudField");
-        
-        for(let i=0; i<150; i++){
+        for(let i=0; i<120; i++){
             const s = document.createElement("div"); s.className = "star";
             const sz = Math.random() * 3 + 1;
             s.style.width = s.style.height = sz + "px";
@@ -252,17 +247,15 @@
             s.style.setProperty('--t', (Math.random() * 3 + 2) + "s");
             sf.appendChild(s);
         }
-
-        for(let i=0; i<6; i++){
+        for(let i=0; i<5; i++){
             const c = document.createElement("div"); c.className = "cloud";
-            c.style.width = (Math.random() * 300 + 200) + "px";
-            c.style.height = (Math.random() * 150 + 100) + "px";
+            c.style.width = (Math.random() * 250 + 150) + "px";
+            c.style.height = (Math.random() * 100 + 80) + "px";
             c.style.left = Math.random() * 90 + "%"; c.style.top = Math.random() * 90 + "%";
-            c.style.setProperty('--d', (Math.random() * 10 + 15) + "s");
+            c.style.setProperty('--d', (Math.random() * 8 + 12) + "s");
             cf.appendChild(c);
         }
 
-        // 2. Fetch Data
         async function load() {
             try {
                 const r = await fetch(API + "?action=list");
@@ -276,24 +269,14 @@
 
         function renderGrid(list) {
             const grid = document.getElementById("wishGrid");
-            grid.innerHTML = list.slice().reverse().map(i => {
-                const msg = i.message;
-                // THUẬT TOÁN CO GIÃN CHỮ CỰC MẠNH
-                let fontSize = "11px";
-                if (msg.length > 300) fontSize = "5.5px";
-                else if (msg.length > 200) fontSize = "6.5px";
-                else if (msg.length > 120) fontSize = "7.5px";
-                else if (msg.length > 70) fontSize = "8.5px";
-
-                return `
-                    <div class="sheep-card">
-                        <div class="card-inner">
-                            <b>From: ${esc(i.name)}</b>
-                            <span style="font-size: ${fontSize}">${esc(msg)}</span>
-                        </div>
+            grid.innerHTML = list.slice().reverse().map(i => `
+                <div class="sheep-card">
+                    <div class="card-inner">
+                        <b>From: ${esc(i.name)}</b>
+                        <span>${esc(i.message)}</span>
                     </div>
-                `;
-            }).join("");
+                </div>
+            `).join("");
         }
 
         function renderPyramid(list) {
@@ -303,36 +286,35 @@
                 const i = list[Math.floor(Math.random()*list.length)];
                 const w = document.createElement("div");
                 w.className = "flying-wish";
-                w.style.setProperty('--startX', (Math.random() * 90 + 5) + "%");
-                w.style.setProperty('--duration', (Math.random() * 5 + 7) + "s");
-                w.innerText = esc(i.name) + ": " + (i.message.substring(0,25) + "...");
+                w.style.setProperty('--startX', (Math.random() * 70 + 15) + "%");
+                w.style.setProperty('--duration', (Math.random() * 4 + 6) + "s");
+                // Cắt bớt lời nhắn bay cho đỡ dài
+                w.innerText = esc(i.name) + ": " + (i.message.length > 50 ? i.message.substring(0, 50) + "..." : i.message);
                 pZone.appendChild(w);
-                setTimeout(() => w.remove(), 12000);
+                setTimeout(() => w.remove(), 10000);
             }, 3000);
         }
 
-        async function submitWish() {
-            const n = document.getElementById("uName").value.trim();
-            const m = document.getElementById("uMsg").value.trim();
-            if(!n || !m) return alert("Điền đủ nha!");
-            const b = document.getElementById("sendBtn");
-            b.innerText = "ĐANG GỬI..."; b.disabled = true;
+        document.getElementById("wishForm").onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById("sendBtn");
+            const name = document.getElementById("uName").value.trim();
+            const message = document.getElementById("uMsg").value.trim();
+            btn.innerText = "ĐANG GỬI..."; btn.disabled = true;
             try {
-                await fetch(API, { method:"POST", body: JSON.stringify({action:"submit", name:n, message:m, id:Date.now()}) });
-                alert("Thành công! Chờ duyệt nhé ✨");
+                await fetch(API, { method:"POST", body: JSON.stringify({action:"submit", name, message, id: Date.now()}) });
+                alert("Gửi thành công! Chờ duyệt nhé ✨");
                 setModal(false); location.reload();
-            } catch(e) { alert("Lỗi!"); b.disabled = false; b.innerText = "GỬI NGAY ✨"; }
-        }
+            } catch(e) { alert("Lỗi!"); btn.disabled = false; btn.innerText = "GỬI NGAY ✨"; }
+        };
 
         function setModal(s) { document.getElementById("wishModal").classList.toggle("active", s); }
         function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
 
         const bgm = document.getElementById("bgm");
-        const mBtn = document.getElementById("musicBtn");
-        mBtn.onclick = () => {
-            if(bgm.paused) { bgm.play(); mBtn.innerHTML = "🔊"; }
-            else { bgm.pause(); mBtn.innerHTML = "🔇"; }
-        }
+        document.getElementById("musicBtn").onclick = () => {
+            if(bgm.paused) { bgm.play(); } else { bgm.pause(); }
+        };
 
         load();
     </script>
