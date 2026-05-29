@@ -15,7 +15,7 @@
             --bg: #05030d;
             --text: #ffffff;
             --card-text: #1a1a1a;
-            --star-color: #ffffff;
+            --accent: #ff3b3b;
         }
 
         * {
@@ -28,182 +28,156 @@
             background: var(--bg);
             color: var(--text);
             overflow-x: hidden;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
-        /* --- UNIVERSE BACKGROUND - FIX ĐEN THUI --- */
+        /* FIX LỖI PHÔNG CHỮ Ô NHẬP LIỆU */
+        input, textarea, button {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 16px;
+        }
+
+        /* --- UNIVERSE & STARS --- */
         .universe {
-            position: fixed;
-            inset: 0;
-            z-index: -10;
-            /* Chuyển màu nền từ tím đậm sang đen để tạo chiều sâu không gian */
-            background: radial-gradient(circle at center, #1e1450 0%, #0c0825 50%, #05030d 100%);
+            position: fixed; inset: 0; z-index: -10;
+            background: radial-gradient(circle at center, #1e1450 0%, #05030d 100%);
         }
 
         .nebula {
-            position: absolute;
-            inset: 0;
+            position: absolute; inset: 0;
             background: url("./nền.png") center/cover no-repeat;
-            opacity: 0.6; /* Tăng độ hiển thị phông nền */
-            filter: saturate(1.5) contrast(1.1);
+            opacity: 0.5; filter: saturate(1.4);
         }
 
-        /* SAO LẤP LÁNH RỰC RỠ */
         .star {
-            position: absolute;
-            background: var(--star-color);
-            border-radius: 50%;
-            /* Hiệu ứng tỏa sáng cho từng ngôi sao */
-            box-shadow: 0 0 5px #fff, 0 0 10px rgba(255,255,255,0.5);
+            position: absolute; background: #fff; border-radius: 50%;
+            box-shadow: 0 0 8px #fff;
             animation: twinkle var(--t) infinite ease-in-out;
-            pointer-events: none;
         }
 
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.3); filter: brightness(1.5); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* SAO BĂNG */
         .shooting-star {
-            position: absolute;
-            width: 3px;
-            height: 120px;
+            position: absolute; width: 2px; height: 100px;
             background: linear-gradient(to bottom, #fff, transparent);
-            transform: rotate(45deg);
-            opacity: 0;
-            animation: shoot 6s linear infinite;
+            transform: rotate(45deg); opacity: 0;
+            animation: shoot 8s linear infinite;
         }
 
         @keyframes shoot {
             0% { transform: translate(-100px, -100px) rotate(45deg); opacity: 0; }
             10% { opacity: 1; }
-            25% { transform: translate(600px, 600px) rotate(45deg); opacity: 0; }
+            20% { transform: translate(600px, 600px) rotate(45deg); opacity: 0; }
             100% { transform: translate(600px, 600px) rotate(45deg); opacity: 0; }
         }
 
         /* --- HERO SECTION --- */
         .hero {
             height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; padding: 20px;
         }
 
         .hero h1 {
-            font-size: clamp(45px, 12vw, 120px);
-            font-weight: 900;
+            font-size: clamp(40px, 12vw, 110px);
+            font-weight: 900; line-height: 0.9;
             background: linear-gradient(to bottom, #fff, var(--primary-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.6));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 5px;
         }
 
         .hero .wishing-wall {
-            font-size: clamp(28px, 8vw, 65px);
-            font-weight: 800;
-            margin-bottom: 25px;
-            text-shadow: 0 0 20px rgba(192, 132, 252, 0.8);
+            font-size: clamp(26px, 8vw, 60px);
+            font-weight: 800; margin-bottom: 25px;
+            text-shadow: 0 0 20px var(--primary);
         }
 
+        /* FIX 1 DÒNG DUY NHẤT TRÊN MOBILE */
         .hero .sub-bottom {
-            font-size: clamp(10px, 3.5vw, 22px);
-            letter-spacing: 2px;
-            font-weight: 600;
-            white-space: nowrap; /* Luôn 1 dòng trên mobile */
+            font-size: clamp(10px, 3.8vw, 22px);
+            letter-spacing: 1px; font-weight: 600;
+            white-space: nowrap; 
+            width: 95%; overflow: hidden; text-overflow: ellipsis;
         }
 
-        /* --- GRID WALL --- */
+        /* --- GRID WALL (PHÓNG TO CARD TRÊN MOBILE) --- */
         .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
+            width: 100%; max-width: 1200px;
+            margin: 0 auto; padding: 0 15px;
         }
 
         .grid-wall {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-            gap: 15px;
-            padding-bottom: 120px;
+            /* Phóng to card: Trên điện thoại nhỏ sẽ hiện 1 cột, điện thoại to 2 cột */
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 15px; padding-bottom: 120px;
         }
 
         @media (min-width: 768px) {
             .grid-wall { grid-template-columns: repeat(3, 1fr); gap: 30px; }
         }
 
-        /* --- SHEEP CARD MỞ RỘNG --- */
         .sheep-card {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1.1 / 1;
+            position: relative; width: 100%; aspect-ratio: 1.1 / 1;
             background: url("./sheep.png") center/contain no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
         }
 
         .card-inner {
             position: absolute;
-            width: 68%; height: 62%;
-            top: 25%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 8px;
+            width: 72%; /* Tối đa vùng bụng cừu */
+            height: 65%;
+            top: 22%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center; padding: 10px;
+            overflow: hidden;
         }
 
         .card-inner b {
-            color: #ff3b3b;
-            font-size: clamp(10px, 3vw, 15px);
-            margin-bottom: 4px;
-            font-weight: 900;
+            color: var(--accent);
+            font-size: clamp(10px, 3.2vw, 15px);
+            margin-bottom: 3px; font-weight: 900;
+            display: block;
         }
 
         .card-inner span {
             color: var(--card-text);
             font-weight: 700;
-            font-size: clamp(8px, 2.3vw, 12px);
+            /* Chữ tự nhỏ lại nếu quá nhiều (lên đến 100 chữ) */
+            font-size: clamp(8px, 2.5vw, 12px);
             line-height: 1.2;
             display: -webkit-box;
-            -webkit-line-clamp: 10;
+            -webkit-line-clamp: 10; /* Tăng giới hạn dòng */
             -webkit-box-orient: vertical;
             overflow: hidden;
+            word-break: break-word;
         }
 
         /* --- CONTROLS --- */
         .btn-float {
-            position: fixed;
-            right: 15px; bottom: 25px;
+            position: fixed; right: 15px; bottom: 25px;
             padding: 14px 22px;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             border: none; border-radius: 50px;
-            color: #fff; font-weight: 800; font-size: 14px;
+            color: #fff; font-weight: 800; font-size: 13px;
             box-shadow: 0 5px 20px rgba(124, 58, 237, 0.6);
             z-index: 100;
-            cursor: pointer;
         }
 
-        /* MODAL FIX FONT */
-        input, textarea, button { font-family: 'Inter', sans-serif !important; }
-
         .modal {
-            position: fixed; inset: 0;
-            background: rgba(0,0,0,0.9);
+            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
             display: none; align-items: center; justify-content: center;
-            padding: 20px; z-index: 1000;
-            backdrop-filter: blur(10px);
+            padding: 20px; z-index: 1000; backdrop-filter: blur(10px);
         }
         .modal.active { display: flex; }
         .modal-box {
             background: #111026; width: 100%; max-width: 450px;
-            padding: 30px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
         }
         .input-box {
             width: 100%; padding: 14px; margin: 10px 0;
@@ -216,7 +190,6 @@
         }
 
         footer { text-align: center; padding: 40px; font-size: 10px; opacity: 0.5; }
-
     </style>
 </head>
 <body>
@@ -224,12 +197,12 @@
     <div class="universe">
         <div class="nebula"></div>
         <div id="starField"></div>
-        <div class="shooting-star" style="top:10%; left:10%; animation-delay: 1s;"></div>
-        <div class="shooting-star" style="top:40%; left:60%; animation-delay: 5s;"></div>
+        <div class="shooting-star" style="top:15%; left:20%; animation-delay: 2s;"></div>
+        <div class="shooting-star" style="top:45%; left:75%; animation-delay: 6s;"></div>
     </div>
 
     <header class="hero">
-        <div style="font-size:10px; letter-spacing:5px; opacity:0.8; margin-bottom:10px">THE RETURN OF</div>
+        <div style="font-size:10px; letter-spacing:5px; opacity:0.7; margin-bottom:10px">THE RETURN OF</div>
         <h1>CAPTAIN BOY</h1>
         <div class="wishing-wall">WISHING WALL</div>
         <div class="sub-bottom">✦ CAPTAIN BOY - TINH HÀ SAY HI ✦</div>
@@ -237,7 +210,7 @@
 
     <div class="container">
         <div style="text-align: center; margin: 40px 0;">
-            <h2 style="font-size: 32px; font-weight: 900;">WALL OF LOVE</h2>
+            <h2 style="font-size: clamp(24px, 6vw, 36px); font-weight: 900;">WALL OF LOVE</h2>
             <p style="opacity: 0.7; font-size: 13px;">Lời yêu thương dành cho CAPTAIN BOY ✦</p>
         </div>
 
@@ -250,40 +223,41 @@
 
     <div class="modal" id="wishModal">
         <div class="modal-box">
-            <h2 style="margin-bottom:15px">Gửi lời chúc ✨</h2>
-            <input type="text" id="uName" class="input-box" placeholder="Tên bạn là..." required maxlength="25">
-            <textarea id="uMsg" class="input-box" rows="5" placeholder="Lời nhắn gửi (Tối đa 100 ký tự)..." required maxlength="300"></textarea>
-            <button id="sendBtn" onclick="submitWish()" class="submit-btn">GỬI NGAY</button>
-            <button onclick="setModal(false)" style="width:100%; background:none; border:none; color:#777; margin-top:15px">Đóng</button>
+            <h2 style="margin-bottom:15px; font-weight:900">Gửi lời chúc ✨</h2>
+            <input type="text" id="uName" class="input-box" placeholder="Tên của bạn..." required maxlength="25">
+            <textarea id="uMsg" class="input-box" rows="5" placeholder="Bạn muốn nói gì với Captain? (Tối đa 300 ký tự)..." required maxlength="300"></textarea>
+            <button id="sendBtn" onclick="submitWish()" class="submit-btn">GỬI NGAY ✨</button>
+            <button onclick="setModal(false)" style="width:100%; background:none; border:none; color:#666; margin-top:15px">Đóng</button>
         </div>
     </div>
 
-    <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
+    <audio id="bgm" loop src="./music.mp3"></audio>
 
-        // Tạo 150 ngôi sao rực rỡ
-        const field = document.getElementById("starField");
+    <script>
+        const API = "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
+
+        // Tinh hà
+        const f = document.getElementById("starField");
         for(let i=0; i<150; i++){
             const s = document.createElement("div");
             s.className = "star";
-            const sz = Math.random() * 3 + 1; // Sao to từ 1px đến 4px
+            const sz = Math.random() * 3 + 1;
             s.style.width = s.style.height = sz + "px";
             s.style.left = Math.random() * 100 + "%";
             s.style.top = Math.random() * 100 + "%";
-            s.style.setProperty('--t', (Math.random() * 3 + 1) + "s");
-            field.appendChild(s);
+            s.style.setProperty('--t', (Math.random() * 3 + 2) + "s");
+            f.appendChild(s);
         }
 
-        async function loadData() {
+        async function load() {
             try {
-                const res = await fetch(SCRIPT_URL + "?action=list");
-                const data = await res.json();
-                if(data.approved) {
-                    const grid = document.getElementById("wishGrid");
-                    grid.innerHTML = data.approved.slice().reverse().map(i => `
+                const r = await fetch(API + "?action=list");
+                const d = await r.json();
+                if(d.approved) {
+                    document.getElementById("wishGrid").innerHTML = d.approved.slice().reverse().map(i => `
                         <div class="sheep-card">
                             <div class="card-inner">
-                                <b>${esc(i.name)}</b>
+                                <b>From: ${esc(i.name)}</b>
                                 <span>${esc(i.message)}</span>
                             </div>
                         </div>
@@ -295,24 +269,20 @@
         async function submitWish() {
             const n = document.getElementById("uName").value.trim();
             const m = document.getElementById("uMsg").value.trim();
-            if(!n || !m) return alert("Vui lòng điền đủ thông tin!");
+            if(!n || !m) return alert("Điền đủ thông tin nha Cừu!");
             const b = document.getElementById("sendBtn");
             b.innerText = "ĐANG GỬI..."; b.disabled = true;
             try {
-                await fetch(SCRIPT_URL, {
-                    method: "POST",
-                    body: JSON.stringify({action: "submit", name:n, message:m, id:Date.now()})
-                });
-                alert("Gửi thành công!");
-                setModal(false);
-                location.reload();
-            } catch(e) { alert("Lỗi!"); b.disabled = false; b.innerText = "GỬI NGAY"; }
+                await fetch(API, { method:"POST", body: JSON.stringify({action:"submit", name:n, message:m, id:Date.now()}) });
+                alert("Đã gửi thành công! Chờ duyệt nhé ✨");
+                setModal(false); location.reload();
+            } catch(e) { alert("Lỗi gửi!"); b.disabled = false; b.innerText = "GỬI NGAY ✨"; }
         }
 
         function setModal(s) { document.getElementById("wishModal").classList.toggle("active", s); }
         function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
-
-        loadData();
+        
+        load();
     </script>
 </body>
 </html>
