@@ -668,7 +668,6 @@ body{
 }
 
 .wish-card p{
-  width:100%;
   color:#111;
 
   font-size:18px;
@@ -684,8 +683,13 @@ body{
   -webkit-box-orient:vertical;
   -webkit-line-clamp:5;
 
-  word-break:break-word;
-  overflow-wrap:anywhere;
+  word-break:normal;
+  overflow-wrap:break-word;
+}
+
+.wish-card strong{
+  word-break:normal;
+  overflow-wrap:break-word;
 }
 /* ================= BUTTON ================= */
 
