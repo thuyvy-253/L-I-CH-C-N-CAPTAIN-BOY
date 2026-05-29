@@ -377,9 +377,9 @@ body{
   display:grid;
 
   grid-template-columns:
-  repeat(auto-fit,minmax(280px,1fr));
+  repeat(auto-fit,minmax(300px,1fr));
 
-  gap:22px;
+  gap:24px;
 
   margin-top:30px;
 }
@@ -390,8 +390,8 @@ body{
   position:relative;
 
   width:100%;
-  max-width:200px;
-  height:300px;
+  max-width:280px;
+  height:350px;
 
   margin:auto;
 
@@ -408,18 +408,16 @@ body{
 .wish-content{
   position:absolute;
 
-  width:58%;
-  height:40%;
+  width:60%;
+  height:44%;
 
   left:50%;
-  top:36%;
+  top:34%;
 
   transform:translateX(-50%);
 
   display:flex;
   flex-direction:column;
-  align-items:center;
-  justify-content:center;
 
   text-align:center;
 
@@ -435,14 +433,16 @@ body{
 
   text-align:center;
 
-  color:#ff3b3b;
+  color:#ff2d2d;
 
-  font-size:11px;
+  font-size:12px;
   font-weight:900;
 
   line-height:1.2;
 
-  margin-bottom:6px;
+  margin-bottom:7px;
+
+  min-height:30px;
 
   word-break:break-word;
   overflow-wrap:break-word;
@@ -459,24 +459,32 @@ body{
 .wish-content p{
   width:100%;
 
+  flex:1;
+
   color:#111;
 
-  font-size:9px;
+  font-size:10px;
   font-weight:700;
 
-  line-height:1.25;
+  line-height:1.28;
 
   text-align:center;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
   word-break:break-word;
   overflow-wrap:break-word;
 
+  overflow:hidden;
+
+  padding:0 2px;
+
   display:-webkit-box;
   -webkit-box-orient:vertical;
 
-  -webkit-line-clamp:7;
-
-  overflow:hidden;
+  -webkit-line-clamp:8;
 }
 
 /* BUTTON */
@@ -697,32 +705,32 @@ body{
 
   .wish-grid{
     grid-template-columns:repeat(2,1fr);
-    gap:8px;
+    gap:10px;
   }
 
   .wish-card{
-    max-width:185px;
-    height:235px;
+    max-width:220px;
+    height:280px;
   }
 
   .wish-content{
-    width:58%;
-    height:38%;
-
-    top:37%;
+    width:60%;
+    height:44%;
+    top:34%;
   }
 
   .wish-content strong{
-    font-size:8px;
-    margin-bottom:4px;
+    font-size:9px;
+    margin-bottom:5px;
+    min-height:22px;
     line-height:1.15;
   }
 
   .wish-content p{
-    font-size:7px;
-    line-height:1.12;
+    font-size:8px;
+    line-height:1.15;
 
-    -webkit-line-clamp:6;
+    -webkit-line-clamp:7;
   }
 
   .footer{
