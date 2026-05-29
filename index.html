@@ -2,7 +2,8 @@
 <html lang="vi">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <!-- Đã bỏ maximum-scale và user-scalable=no để cho phép ZOOM -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,7 +61,7 @@
             position: absolute; width: 2px; height: 100px;
             background: linear-gradient(to bottom, #fff, transparent);
             transform: rotate(45deg); opacity: 0;
-            animation: shoot 9s linear infinite;
+            animation: shoot 8s linear infinite;
         }
 
         @keyframes shoot {
@@ -91,55 +92,57 @@
             text-shadow: 0 0 20px var(--primary);
         }
 
-        /* Dòng chữ TINH HÀ SAY HI luôn 1 dòng */
         .hero .sub-bottom {
             font-size: clamp(9px, 3.2vw, 22px);
             letter-spacing: 2px; font-weight: 700;
             white-space: nowrap; display: block; width: 100%;
         }
 
-        /* --- FLYING AREA (KHU VỰC GIỮ LẠI) --- */
+        /* --- CONTAINER --- */
         .container {
             width: 100%; max-width: 1200px;
-            margin: 0 auto; padding: 0 15px;
+            margin: 0 auto; padding: 0 10px;
         }
 
+        /* --- FLYING BOX (KHUNG LỜI CHÚC BAY) --- */
         .flying-section {
-            text-align: center; margin-bottom: 60px;
+            text-align: center; margin-bottom: 50px;
         }
 
         .flying-box {
-            position: relative; width: 100%; height: 380px;
-            background: rgba(255, 255, 255, 0.04);
+            position: relative; width: 100%; height: 350px;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 25px; overflow: hidden;
-            backdrop-filter: blur(12px); margin-top: 20px;
+            backdrop-filter: blur(12px); margin-top: 15px;
         }
 
         .bubble {
-            position: absolute; background: rgba(255,255,255,0.9);
-            padding: 10px 18px; border-radius: 25px;
-            color: #111; font-size: 11px; font-weight: 700;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: float linear infinite;
+            position: absolute; background: rgba(255,255,255,0.92);
+            padding: 8px 15px; border-radius: 20px;
+            color: #111; font-size: 10px; font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            animation: floatUp linear infinite;
+            white-space: nowrap;
         }
 
-        @keyframes float {
-            from { transform: translateY(420px); opacity: 0; }
+        @keyframes floatUp {
+            from { transform: translateY(380px); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            to { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(-80px); opacity: 0; }
         }
 
-        /* --- WALL OF LOVE GRID --- */
+        /* --- GRID WALL (2-3 CỘT TRÊN MOBILE) --- */
         .grid-wall {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 15px; padding-bottom: 120px;
+            /* Thiết lập để có 2-3 cột trên điện thoại nhỏ */
+            grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+            gap: 10px; padding-bottom: 120px;
         }
 
         @media (min-width: 768px) {
-            .grid-wall { grid-template-columns: repeat(3, 1fr); gap: 35px; }
+            .grid-wall { grid-template-columns: repeat(4, 1fr); gap: 30px; }
         }
 
         .sheep-card {
@@ -149,27 +152,27 @@
         }
 
         .card-inner {
-            position: absolute; width: 74%; height: 65%;
+            position: absolute; width: 75%; height: 65%;
             top: 22%; display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            text-align: center; padding: 8px; overflow: hidden;
+            text-align: center; padding: 5px; overflow: hidden;
         }
 
         .card-inner b {
-            color: var(--accent); font-size: clamp(10px, 3.2vw, 15px);
-            margin-bottom: 3px; font-weight: 900;
+            color: var(--accent); font-size: clamp(9px, 2.8vw, 13px);
+            margin-bottom: 2px; font-weight: 900;
         }
 
         .card-inner span {
             color: var(--card-text); font-weight: 700;
-            line-height: 1.2; word-break: break-word;
-            /* Font-size sẽ được JS tính toán để nhét đủ 100 chữ */
+            line-height: 1.15; word-break: break-word;
+            /* Font-size tự động co giãn bằng JS */
         }
 
-        /* --- UI CONTROLS --- */
+        /* --- CONTROLS --- */
         .btn-float {
             position: fixed; right: 15px; bottom: 25px;
-            padding: 14px 22px;
+            padding: 12px 20px;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             border: none; border-radius: 50px;
             color: #fff; font-weight: 800; font-size: 13px;
@@ -191,7 +194,7 @@
         .modal.active { display: flex; }
         .modal-box {
             background: #111026; width: 100%; max-width: 450px;
-            padding: 30px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
+            padding: 25px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
         }
 
         .input-box {
@@ -220,18 +223,18 @@
     </header>
 
     <div class="container">
-        <!-- PHẦN GIỮ LẠI: LỜI NHẮN BAY LƠ LỬNG -->
+        <!-- KHUNG LỜI CHÚC BAY (ĐÃ KHÔI PHỤC) -->
         <section class="flying-section">
-            <h2 style="font-size: 28px; font-weight: 900;">CỪU CÓ CÁNH WITH LOVE</h2>
-            <p style="opacity: 0.7; font-size: 13px;">Những lời nhắn đang bay tới CAPTAIN BOY...</p>
+            <h2 style="font-size: 26px; font-weight: 900;">CỪU CÓ CÁNH WITH LOVE</h2>
+            <p style="opacity: 0.7; font-size: 12px;">Lời yêu thương đang bay tới CAPTAIN BOY...</p>
             <div class="flying-box" id="flyingZone"></div>
         </section>
 
-        <!-- PHẦN WALL OF LOVE (Grid) -->
+        <!-- WALL OF LOVE -->
         <section>
-            <div style="text-align: center; margin-bottom: 30px;">
-                <h2 style="font-size: 32px; font-weight: 900;">WALL OF LOVE</h2>
-                <p style="opacity: 0.6; font-size: 13px;">Kho tàng lời nhắn dành cho CAPTAIN BOY ✦</p>
+            <div style="text-align: center; margin-bottom: 25px;">
+                <h2 style="font-size: 30px; font-weight: 900;">WALL OF LOVE</h2>
+                <p style="opacity: 0.6; font-size: 12px;">Nơi hội tụ những kỷ niệm rực rỡ ✦</p>
             </div>
             <div class="grid-wall" id="wishGrid"></div>
         </section>
@@ -245,10 +248,12 @@
     <div class="modal" id="wishModal">
         <div class="modal-box">
             <h2 style="margin-bottom:15px; font-weight:900">Gửi lời chúc ✨</h2>
-            <input type="text" id="uName" class="input-box" placeholder="Tên của bạn..." required maxlength="25">
-            <textarea id="uMsg" class="input-box" rows="5" placeholder="Nhắn nhủ gì với CAPTAIN BOY? ( Tối đa 100 chữ)..." required maxlength="500"></textarea>
-            <button onclick="submitWish()" id="sendBtn" style="width:100%; padding:16px; background:var(--primary); border:none; border-radius:12px; color:#fff; font-weight:900; cursor:pointer">GỬI NGAY ✨</button>
-            <button onclick="setModal(false)" style="width:100%; background:none; border:none; color:#666; margin-top:15px">Hủy bỏ</button>
+            <form id="wishForm">
+                <input type="text" id="uName" class="input-box" placeholder="Tên của Cừu..." required maxlength="25">
+                <textarea id="uMsg" class="input-box" rows="5" placeholder="Nhắn nhủ điều gì nè? (Tự nhỏ chữ nếu viết dài)..." required maxlength="500"></textarea>
+                <button onclick="submitWish()" id="sendBtn" style="width:100%; padding:16px; background:var(--primary); border:none; border-radius:12px; color:#fff; font-weight:900; cursor:pointer">GỬI NGAY ✨</button>
+                <button type="button" onclick="setModal(false)" style="width:100%; background:none; border:none; color:#666; margin-top:15px">Hủy</button>
+            </form>
         </div>
     </div>
 
@@ -285,12 +290,12 @@
             const grid = document.getElementById("wishGrid");
             grid.innerHTML = list.slice().reverse().map(i => {
                 const msg = i.message;
-                // LOGIC AUTO-SHRINK (Tự nhỏ chữ cho đủ 100 chữ)
-                let fontSize = "11.5px";
-                if (msg.length > 250) fontSize = "7px";
-                else if (msg.length > 180) fontSize = "8px";
-                else if (msg.length > 100) fontSize = "9px";
-                else if (msg.length > 60) fontSize = "10.5px";
+                // LOGIC AUTO-SHRINK CỰC MẠNH (Cho 2-3 cột mobile)
+                let fontSize = "11px";
+                if (msg.length > 200) fontSize = "6.5px";
+                else if (msg.length > 130) fontSize = "7.5px";
+                else if (msg.length > 80) fontSize = "8.5px";
+                else if (msg.length > 40) fontSize = "9.5px";
 
                 return `
                     <div class="sheep-card">
@@ -315,7 +320,7 @@
                 b.innerText = esc(i.name) + ": " + esc(i.message);
                 zone.appendChild(b);
                 setTimeout(() => b.remove(), 12000);
-            }, 3500);
+            }, 3000);
         }
 
         async function submitWish() {
@@ -328,7 +333,7 @@
                 await fetch(API, { method:"POST", body: JSON.stringify({action:"submit", name:n, message:m, id:Date.now()}) });
                 alert("Thành công! Chờ duyệt nhé ✨");
                 setModal(false); location.reload();
-            } catch(e) { alert("Lỗi!"); b.disabled = false; b.innerText = "GỬI NGAY ✨"; }
+            } catch(e) { alert("Lỗi gửi!"); b.disabled = false; b.innerText = "GỬI NGAY ✨"; }
         }
 
         function setModal(s) { document.getElementById("wishModal").classList.toggle("active", s); }
