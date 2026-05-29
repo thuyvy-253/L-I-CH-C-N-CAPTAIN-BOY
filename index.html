@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8" />
-<meta name="viewport" content="width=1200, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=0.32">
   <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -139,7 +139,7 @@ z-index:-1;
     }
 
     .hero h1{
-      font-size:clamp(58px,10vw,140px);
+  font-size:120px;
       font-weight:900;
       line-height:.9;
       letter-spacing:3px;
@@ -208,7 +208,7 @@ z-index:-1;
 }
 
     .section-head h2{
-      font-size:clamp(28px,5vw,46px);
+      font-size:42px;
       font-weight:900;
       margin-bottom:10px;
     }
@@ -469,19 +469,25 @@ z-index:-1;
   max-width:300px;
 }
 
-/* MOBILE */
+/* =========================
+MOBILE DESKTOP STYLE
+========================= */
 
 @media(max-width:768px){
 
+  html,
   body{
-    min-width:1200px;
+    width:1200px;
+    overflow-x:auto;
   }
 
-  .container{
-    width:1180px;
+  body{
+    zoom:0.33;
   }
 
 }
+
+
   /* ===== BUTTON ===== */
 
    .floating-btn{
@@ -735,7 +741,7 @@ z-index:-1;
   <div class="section-head">
 
   <h2 style="
-    font-size:80px;
+    font-size:68px;
     font-weight:900;
     color:#f5d0fe;
     text-shadow:0 0 30px rgba(168,85,247,.5);
