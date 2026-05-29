@@ -16,6 +16,7 @@
   --primary2:#c084fc;
   --bg:#05030d;
 
+  --card:rgba(18,15,38,.75);
   --line:rgba(255,255,255,.08);
 
   --text:#ffffff;
@@ -37,8 +38,8 @@ html{
 
 body{
   font-family:'Inter',sans-serif;
-  background:#05030d;
-  color:#fff;
+  background:var(--bg);
+  color:var(--text);
   overflow-x:hidden;
   min-height:100vh;
   line-height:1.6;
@@ -49,7 +50,7 @@ body{
 .bg{
   position:fixed;
   inset:0;
-  z-index:-10;
+  z-index:-6;
 
   background:
   radial-gradient(circle at top,
@@ -72,7 +73,7 @@ body{
 .stars{
   position:fixed;
   inset:0;
-  z-index:-8;
+  z-index:-5;
   overflow:hidden;
   pointer-events:none;
 }
@@ -83,7 +84,10 @@ body{
   height:2px;
   background:#fff;
   border-radius:50%;
-  animation:twinkle 3s infinite ease-in-out;
+  opacity:.9;
+
+  animation:
+  twinkle 3s infinite ease-in-out;
 }
 
 @keyframes twinkle{
@@ -133,7 +137,8 @@ body{
   background:#fff;
   border-radius:50%;
 
-  box-shadow:0 0 20px #fff;
+  box-shadow:
+  0 0 20px #fff;
 }
 
 @keyframes shoot{
@@ -171,7 +176,8 @@ body{
   background:#fff;
   border-radius:50%;
 
-  box-shadow:0 0 14px #fff;
+  box-shadow:
+  0 0 14px #fff;
 
   animation:falling 10s linear infinite;
 }
@@ -200,7 +206,19 @@ body{
 
 }
 
-/* GLOW */
+.noise{
+  position:fixed;
+  inset:0;
+  z-index:-3;
+
+  opacity:.04;
+
+  background-image:
+  linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+
+  background-size:3px 3px;
+}
 
 .glow{
   position:fixed;
@@ -209,7 +227,7 @@ body{
   border-radius:50%;
   filter:blur(120px);
   opacity:.15;
-  z-index:-7;
+  z-index:-2;
 
   animation:floatGlow 12s ease-in-out infinite;
 }
@@ -264,6 +282,10 @@ body{
   padding:80px 0 140px;
 }
 
+.hero-inner{
+  width:100%;
+}
+
 .hero h1{
   font-size:clamp(50px,8vw,120px);
 
@@ -286,6 +308,7 @@ body{
 }
 
 .section-head{
+  width:100%;
   text-align:center;
 }
 
@@ -300,7 +323,7 @@ body{
   font-size:15px;
 }
 
-/* FLYING WISH */
+/* WISH SECTION */
 
 .cuucocanh-section{
   margin-top:10px;
@@ -342,6 +365,8 @@ body{
   font-weight:700;
 }
 
+/* FLYING WISH */
+
 .flying-wish{
   position:absolute;
 
@@ -363,6 +388,10 @@ body{
 
   border:3px solid rgba(255,255,255,.7);
 
+  box-shadow:
+  0 10px 30px rgba(168,85,247,.25),
+  inset 0 2px 10px rgba(255,255,255,.8);
+
   display:flex;
   flex-direction:column;
   gap:5px;
@@ -370,8 +399,6 @@ body{
   animation-name:flyUp;
   animation-timing-function:linear;
   animation-fill-mode:forwards;
-
-  overflow:hidden;
 }
 
 .flying-wish strong{
@@ -391,6 +418,7 @@ body{
   0%{
     transform:
     translateY(0)
+    translateX(0)
     scale(.7);
 
     opacity:0;
@@ -400,10 +428,18 @@ body{
     opacity:1;
   }
 
+  50%{
+    transform:
+    translateY(-320px)
+    translateX(-20px)
+    scale(1);
+  }
+
   100%{
     transform:
     translateY(-760px)
-    scale(1.1);
+    translateX(40px)
+    scale(1.12);
 
     opacity:0;
   }
@@ -433,7 +469,7 @@ body{
   position:relative;
 
   width:100%;
-  max-width:370px;
+  max-width:360px;
   aspect-ratio:1/1;
 
   margin:auto;
@@ -450,35 +486,42 @@ body{
   overflow:hidden;
 }
 
-/* KHUNG TEXT */
-
-.wish-content{
-  width:58%;
-  height:48%;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-
-  text-align:center;
-
-  margin-top:20px;
-}
-
 /* FROM */
 
 .wish-card strong{
+  position:absolute;
+
+  top:118px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:150px;
+
+  text-align:center;
+
   color:#ff3b3b;
 
   font-size:13px;
   font-weight:900;
 
-  line-height:1.25;
+  line-height:1.3;
 
-  width:100%;
+  word-break:break-word;
+}
 
-  margin-bottom:12px;
+/* MESSAGE */
+
+.wish-card p{
+  position:absolute;
+
+  top:160px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:165px;
+  height:105px;
 
   display:flex;
   align-items:center;
@@ -486,13 +529,6 @@ body{
 
   text-align:center;
 
-  word-break:break-word;
-  overflow-wrap:break-word;
-}
-
-/* MESSAGE */
-
-.wish-card p{
   color:#111;
 
   font-size:12px;
@@ -500,22 +536,10 @@ body{
 
   line-height:1.45;
 
-  width:100%;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  text-align:center;
-
+  word-break:break-word;
   overflow:hidden;
 
-  word-break:break-word;
-  overflow-wrap:break-word;
-
-  display:-webkit-box;
-  -webkit-line-clamp:7;
-  -webkit-box-orient:vertical;
+  padding:0 4px;
 }
 
 /* BUTTON */
@@ -554,16 +578,40 @@ body{
   font-size:14px;
   font-weight:800;
 
+  letter-spacing:1px;
+
   box-shadow:
   0 12px 35px rgba(124,58,237,.42);
 
   transition:.35s ease;
 }
 
-.floating-btn:hover{
-  transform:
-  translateY(-4px)
-  scale(1.02);
+#musicBtn{
+  position:fixed;
+
+  left:20px;
+  bottom:20px;
+
+  z-index:9999;
+
+  width:58px;
+  height:58px;
+
+  border:none;
+  border-radius:50%;
+
+  background:
+  linear-gradient(
+  135deg,
+  #8b5cf6,
+  #c084fc
+  );
+
+  color:#fff;
+
+  font-size:24px;
+
+  cursor:pointer;
 }
 
 /* MODAL */
@@ -636,9 +684,13 @@ body{
 
 .input-group label{
   display:block;
+
   margin-bottom:8px;
+
   font-size:13px;
+
   color:rgba(255,255,255,.75);
+
   font-weight:600;
 }
 
@@ -672,6 +724,7 @@ body{
   width:100%;
 
   border:none;
+  outline:none;
   cursor:pointer;
 
   padding:18px;
@@ -687,6 +740,8 @@ body{
 
   color:#fff;
 
+  font-family:'Inter',sans-serif;
+
   font-size:15px;
   font-weight:800;
 }
@@ -700,53 +755,17 @@ body{
 
   color:rgba(255,255,255,.45);
 
-  font-size:12px;
+  font-size:13px;
 
-  padding:0 12px;
-}
-
-/* MUSIC */
-
-#musicBtn{
-  position:fixed;
-
-  left:20px;
-  bottom:20px;
-
-  z-index:9999;
-
-  width:58px;
-  height:58px;
-
-  border:none;
-  border-radius:50%;
-
-  background:
-  linear-gradient(
-  135deg,
-  #8b5cf6,
-  #c084fc
-  );
-
-  color:#fff;
-
-  font-size:24px;
-
-  cursor:pointer;
+  padding:0 10px;
 }
 
 /* MOBILE */
 
 @media(max-width:768px){
 
-  .hero{
-    min-height:100vh;
-    padding:60px 0 120px;
-  }
-
   .hero h1{
-    font-size:54px;
-    line-height:1.05;
+    font-size:58px;
   }
 
   .wish-grid{
@@ -760,22 +779,25 @@ body{
     max-width:100%;
   }
 
-  .wish-content{
-    width:60%;
-    height:46%;
-    margin-top:28px;
-  }
-
   .wish-card strong{
+    top:94px;
+
+    width:110px;
+
     font-size:10px;
-    margin-bottom:8px;
+    line-height:1.2;
   }
 
   .wish-card p{
+    top:126px;
+
+    width:120px;
+    height:78px;
+
     font-size:9px;
     line-height:1.25;
 
-    -webkit-line-clamp:7;
+    padding:0 2px;
   }
 
   .footer{
@@ -788,30 +810,11 @@ body{
 @media(max-width:480px){
 
   .hero h1{
-    font-size:38px;
+    font-size:40px;
   }
 
   .section-head h2{
-    font-size:22px;
-  }
-
-  .section-head p{
-    font-size:12px;
-  }
-
-  .wish-content{
-    width:60%;
-    height:45%;
-    margin-top:32px;
-  }
-
-  .wish-card strong{
-    font-size:9px;
-  }
-
-  .wish-card p{
-    font-size:8px;
-    line-height:1.2;
+    font-size:24px;
   }
 
 }
@@ -832,6 +835,8 @@ body{
 </div>
 
 <div class="stars" id="fallingStars"></div>
+
+<div class="noise"></div>
 
 <div class="glow one"></div>
 <div class="glow two"></div>
@@ -994,8 +999,6 @@ googleScriptUrl:
 let listApproved = [];
 let flyInterval = null;
 
-/* STARS */
-
 const starsWrap =
 document.getElementById("stars");
 
@@ -1015,14 +1018,9 @@ Math.random() * 100 + "%";
 star.style.animationDelay =
 Math.random() * 5 + "s";
 
-star.style.opacity =
-Math.random();
-
 starsWrap.appendChild(star);
 
 }
-
-/* FALLING STARS */
 
 const fallingWrap =
 document.getElementById("fallingStars");
@@ -1047,8 +1045,6 @@ fallingWrap.appendChild(fall);
 
 }
 
-/* MODAL */
-
 function toggleModal(show){
 
 document
@@ -1057,7 +1053,13 @@ document
 
 }
 
-/* FETCH */
+window.addEventListener("keydown",(e)=>{
+
+if(e.key === "Escape"){
+toggleModal(false);
+}
+
+});
 
 async function fetchWishes(){
 
@@ -1084,13 +1086,14 @@ startFlying();
 
 }catch(error){
 
-console.error(error);
+console.error(
+"Lỗi tải dữ liệu:",
+error
+);
 
 }
 
 }
-
-/* RENDER WALL */
 
 function renderWall(){
 
@@ -1100,12 +1103,19 @@ document.getElementById("wishGrid");
 if(!listApproved.length){
 
 grid.innerHTML = `
+
 <div class="wish-card">
-<div class="wish-content">
-<strong>From: CỪU CÓ CÁNH</strong>
-<p>Chưa có lời chúc nào ✨</p>
+
+<strong>
+From: CỪU CÓ CÁNH
+</strong>
+
+<p>
+Chưa có lời chúc nào ✨
+</p>
+
 </div>
-</div>
+
 `;
 
 return;
@@ -1120,8 +1130,6 @@ listApproved
 
 <div class="wish-card">
 
-<div class="wish-content">
-
 <strong>
 From: ${escapeHtml(item.name)}
 </strong>
@@ -1132,13 +1140,9 @@ ${escapeHtml(item.message)}
 
 </div>
 
-</div>
-
 `).join("");
 
 }
-
-/* FLYING */
 
 function startFlying(){
 
@@ -1206,8 +1210,6 @@ setInterval(createWish,2200);
 
 }
 
-/* SUBMIT */
-
 document
 .getElementById("wishForm")
 .addEventListener("submit", async (e)=>{
@@ -1273,7 +1275,7 @@ await response.json();
 if(data.ok){
 
 alert(
-"Đã gửi thành công ✨"
+"Đã gửi thành công ✨ Lời chúc đang chờ duyệt."
 );
 
 document
@@ -1304,8 +1306,6 @@ btn.innerText = "GỬI NGAY ✨";
 
 });
 
-/* ESCAPE */
-
 function escapeHtml(text){
 
 const div =
@@ -1317,13 +1317,9 @@ return div.innerHTML;
 
 }
 
-/* LOAD */
-
 fetchWishes();
 
 setInterval(fetchWishes,30000);
-
-/* MUSIC */
 
 const music =
 document.getElementById("bgMusic");
@@ -1337,7 +1333,9 @@ document.addEventListener("click",()=>{
 
 if(music.paused){
 
-music.play().catch(()=>{});
+music.play().catch(err=>{
+console.log(err);
+});
 
 }
 
@@ -1350,11 +1348,13 @@ e.stopPropagation();
 if(music.paused){
 
 music.play();
+
 musicBtn.innerHTML = "🔊";
 
 }else{
 
 music.pause();
+
 musicBtn.innerHTML = "🔇";
 
 }
