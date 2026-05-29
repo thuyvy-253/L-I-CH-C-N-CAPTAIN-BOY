@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -14,7 +14,7 @@
             --bg: #05030d;
             --text: #ffffff;
             --card-text: #1a1a1a;
-            --shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+            --shadow: 0 0 25px rgba(124, 58, 237, 0.6);
         }
 
         * {
@@ -29,10 +29,15 @@
             background: var(--bg);
             color: var(--text);
             overflow-x: hidden;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
-        /* --- BACKGROUND & STARS --- */
+        /* Đảm bảo phông chữ đồng nhất cho cả Form */
+        input, textarea, button, select {
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        /* --- BACKGROUND & GALAXY EFFECTS --- */
         .universe {
             position: fixed;
             inset: 0;
@@ -45,8 +50,8 @@
             position: absolute;
             inset: 0;
             background: url("./nền.png") center/cover no-repeat;
-            opacity: 0.45;
-            filter: saturate(1.2);
+            opacity: 0.4;
+            filter: saturate(1.3);
         }
 
         .star {
@@ -57,28 +62,28 @@
         }
 
         @keyframes blink {
-            0%, 100% { opacity: 0.1; transform: scale(0.8); }
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
             50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px #fff; }
         }
 
         .shooting-star {
             position: absolute;
             width: 2px;
-            height: 100px;
+            height: 120px;
             background: linear-gradient(to bottom, #fff, transparent);
             transform: rotate(45deg);
             opacity: 0;
-            animation: shoot 8s linear infinite;
+            animation: shoot 7s linear infinite;
         }
 
         @keyframes shoot {
-            0% { transform: translate(-100px, -100px) rotate(45deg); opacity: 0; }
+            0% { transform: translate(-150px, -150px) rotate(45deg); opacity: 0; }
             5% { opacity: 1; }
-            15% { transform: translate(500px, 500px) rotate(45deg); opacity: 0; }
-            100% { transform: translate(500px, 500px) rotate(45deg); opacity: 0; }
+            15% { transform: translate(600px, 600px) rotate(45deg); opacity: 0; }
+            100% { transform: translate(600px, 600px) rotate(45deg); opacity: 0; }
         }
 
-        /* --- HERO INTRO SECTION --- */
+        /* --- HERO SECTION --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -90,49 +95,46 @@
         }
 
         .hero .sub-top {
-            font-size: 10px;
-            letter-spacing: 4px;
+            font-size: 11px;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            opacity: 0.7;
+            margin-bottom: 12px;
+            opacity: 0.8;
+            color: var(--primary-light);
         }
 
         .hero h1 {
-            font-size: clamp(45px, 12vw, 120px);
+            font-size: clamp(48px, 14vw, 130px);
             font-weight: 900;
-            line-height: 0.9;
+            line-height: 0.85;
             margin-bottom: 10px;
             background: linear-gradient(to bottom, #fff, var(--primary-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.25));
         }
 
         .hero .wishing-wall {
-            font-size: clamp(28px, 8vw, 65px);
+            font-size: clamp(32px, 9vw, 75px);
             font-weight: 800;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             text-shadow: var(--shadow);
-            opacity: 0.9;
         }
 
         .hero .sub-bottom {
-            font-size: clamp(14px, 4vw, 22px);
+            font-size: clamp(14px, 4vw, 24px);
             letter-spacing: 2px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            font-weight: 600;
         }
 
         /* --- FLYING AREA --- */
         .flying-zone {
             position: relative;
             width: 100%;
-            height: 350px;
+            height: 380px;
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
             margin: 40px 0;
             overflow: hidden;
             backdrop-filter: blur(10px);
@@ -140,263 +142,43 @@
 
         .bubble {
             position: absolute;
-            background: rgba(255,255,255,0.85);
-            padding: 8px 14px;
-            border-radius: 20px;
-            color: #222;
-            font-size: 11px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.9);
+            padding: 10px 16px;
+            border-radius: 25px;
+            color: #111;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
             animation: float linear infinite;
+            white-space: nowrap;
         }
 
         @keyframes float {
-            from { transform: translateY(400px); opacity: 0; }
+            from { transform: translateY(450px); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            to { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(-120px); opacity: 0; }
         }
 
         /* --- GRID WALL (2-3 CỘT MOBILE) --- */
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 0 15px;
         }
 
         .grid-wall {
             display: grid;
-            /* Tự động chia 2 cột trên điện thoại nhỏ, 3 cột trên điện thoại lớn/tablet */
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 12px;
+            /* Phóng to ô Grid để card bự hơn */
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
             padding-bottom: 120px;
         }
 
         @media (min-width: 768px) {
-            .grid-wall { grid-template-columns: repeat(4, 1fr); gap: 25px; }
+            .grid-wall { grid-template-columns: repeat(4, 1fr); gap: 30px; }
         }
 
+        /* --- MỞ RỘNG SHEEP CARD --- */
         .sheep-card {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1.1 / 1;
-            background: url("./sheep.png") center/contain no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .card-inner {
-            position: absolute;
-            width: 60%;
-            height: 52%;
-            top: 28%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 5px;
-        }
-
-        .card-inner b {
-            color: #ff3b3b;
-            font-size: clamp(9px, 2.5vw, 12px);
-            margin-bottom: 2px;
-            display: block;
-        }
-
-        .card-inner span {
-            color: var(--card-text);
-            font-weight: 700;
-            font-size: clamp(8px, 2.2vw, 11px);
-            line-height: 1.2;
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* --- CONTROLS --- */
-        .btn-float {
-            position: fixed;
-            right: 15px; bottom: 20px;
-            padding: 12px 20px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border: none; border-radius: 50px;
-            color: #fff; font-weight: 800; font-size: 13px;
-            box-shadow: 0 5px 20px rgba(124, 58, 237, 0.4);
-            z-index: 100;
-        }
-
-        #musicBtn {
-            position: fixed;
-            left: 15px; bottom: 20px;
-            width: 45px; height: 45px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #fff; z-index: 100;
-        }
-
-        .modal {
-            position: fixed; inset: 0;
-            background: rgba(0,0,0,0.85);
-            display: none; align-items: center; justify-content: center;
-            padding: 20px; z-index: 1000;
-        }
-        .modal.active { display: flex; }
-        .modal-box {
-            background: #111026; width: 100%; max-width: 400px;
-            padding: 25px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .input-box {
-            width: 100%; padding: 12px; margin: 10px 0;
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px; color: #fff; outline: none;
-        }
-
-        footer { text-align: center; padding: 40px; font-size: 10px; opacity: 0.5; }
-
-    </style>
-</head>
-<body>
-
-    <div class="universe">
-        <div class="nebula"></div>
-        <div id="starField"></div>
-        <!-- Sao băng chạy ngẫu nhiên -->
-        <div class="shooting-star" style="top:10%; left:20%; animation-delay: 1s;"></div>
-        <div class="shooting-star" style="top:30%; left:70%; animation-delay: 4s;"></div>
-    </div>
-
-    <header class="hero">
-        <div class="sub-top">THE RETURN OF</div>
-        <h1>CAPTAIN BOY</h1>
-        <div class="wishing-wall">WISHING WALL</div>
-        <div class="sub-bottom">
-            <span>✦</span> CAPTAIN BOY - TINH HÀ SAY HI <span>✦</span>
-        </div>
-    </header>
-
-    <div class="container">
-        <div class="flying-zone" id="flyingZone"></div>
-
-        <div style="text-align: center; margin: 40px 0;">
-            <h2 style="font-size: 32px; font-weight: 900;">WALL OF LOVE</h2>
-            <p style="opacity: 0.6; font-size: 13px;">Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦</p>
-        </div>
-
-        <div class="grid-wall" id="wishGrid"></div>
-
-        <footer>
-            PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
-        </footer>
-    </div>
-
-    <button class="btn-float" onclick="setModal(true)">+ GỬI LỜI CHÚC</button>
-    <button id="musicBtn">🔊</button>
-
-    <div class="modal" id="wishModal">
-        <div class="modal-box">
-            <h2 style="margin-bottom:15px">Gửi tín hiệu ✨</h2>
-            <input type="text" id="uName" class="input-box" placeholder="Tên của Cừu..." maxlength="20">
-            <textarea id="uMsg" class="input-box" rows="3" placeholder="Lời nhắn gửi đến CAPTAIN BOY..." maxlength="120"></textarea>
-            <button id="sendBtn" onclick="submitWish()" class="input-box" style="background:var(--primary); font-weight:900; border:none;">GỬI NGAY</button>
-            <button onclick="setModal(false)" style="width:100%; background:none; border:none; color:#666; margin-top:10px">Hủy</button>
-        </div>
-    </div>
-
-    <audio id="bgm" loop src="./music.mp3"></audio>
-
-    <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
-
-        // 1. Tạo tinh hà (Sao nhấp nháy)
-        const field = document.getElementById("starField");
-        for(let i=0; i<100; i++){
-            const s = document.createElement("div");
-            s.className = "star";
-            const sz = Math.random() * 2.5;
-            s.style.width = s.style.height = sz + "px";
-            s.style.left = Math.random() * 100 + "%";
-            s.style.top = Math.random() * 100 + "%";
-            s.style.setProperty('--t', (Math.random() * 3 + 2) + "s");
-            field.appendChild(s);
-        }
-
-        // 2. Fetch data
-        async function loadWishes() {
-            try {
-                const res = await fetch(SCRIPT_URL + "?action=list");
-                const data = await res.json();
-                if(data.approved) {
-                    renderGrid(data.approved);
-                    renderBubbles(data.approved);
-                }
-            } catch(e) {}
-        }
-
-        function renderGrid(list) {
-            const grid = document.getElementById("wishGrid");
-            grid.innerHTML = list.slice().reverse().map(i => `
-                <div class="sheep-card">
-                    <div class="card-inner">
-                        <b>${esc(i.name)}</b>
-                        <span>${esc(i.message)}</span>
-                    </div>
-                </div>
-            `).join("");
-        }
-
-        function renderBubbles(list) {
-            const zone = document.getElementById("flyingZone");
-            zone.innerHTML = "";
-            setInterval(() => {
-                const i = list[Math.floor(Math.random() * list.length)];
-                const b = document.createElement("div");
-                b.className = "bubble";
-                b.style.left = Math.random() * 80 + "%";
-                b.style.animationDuration = (Math.random() * 5 + 8) + "s";
-                b.innerText = esc(i.name) + ": " + esc(i.message);
-                zone.appendChild(b);
-                setTimeout(() => b.remove(), 12000);
-            }, 3000);
-        }
-
-        // 3. Submit
-        async function submitWish() {
-            const name = document.getElementById("uName").value.trim();
-            const msg = document.getElementById("uMsg").value.trim();
-            if(!name || !msg) return alert("Cừu ơi điền đủ thông tin nha!");
-
-            const btn = document.getElementById("sendBtn");
-            btn.disabled = true; btn.innerText = "ĐANG GỬI...";
-
-            try {
-                await fetch(SCRIPT_URL, {
-                    method: "POST",
-                    body: JSON.stringify({action: "submit", name, message: msg, id: Date.now()})
-                });
-                alert("Đã gửi! Chờ duyệt nhé ✨");
-                setModal(false);
-                location.reload();
-            } catch(e) { alert("Lỗi gửi!"); }
-        }
-
-        function setModal(s) { document.getElementById("wishModal").classList.toggle("active", s); }
-        function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
-
-        const bgm = document.getElementById("bgm");
-        const mBtn = document.getElementById("musicBtn");
-        mBtn.onclick = () => {
-            if(bgm.paused) { bgm.play(); mBtn.innerHTML = "🔊"; }
-            else { bgm.pause(); mBtn.innerHTML = "🔇"; }
-        }
-
-        loadWishes();
-    </script>
-</body>
-</html>
