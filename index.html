@@ -31,13 +31,9 @@
             line-height: 1.4;
         }
 
-        /* FIX LỖI PHÔNG CHỮ Ô NHẬP LIỆU */
-        input, textarea, button {
-            font-family: 'Inter', sans-serif !important;
-            font-size: 16px;
-        }
+        input, textarea, button { font-family: 'Inter', sans-serif !important; }
 
-        /* --- UNIVERSE & STARS --- */
+        /* --- BACKGROUND --- */
         .universe {
             position: fixed; inset: 0; z-index: -10;
             background: radial-gradient(circle at center, #1e1450 0%, #05030d 100%);
@@ -46,7 +42,7 @@
         .nebula {
             position: absolute; inset: 0;
             background: url("./nền.png") center/cover no-repeat;
-            opacity: 0.5; filter: saturate(1.4);
+            opacity: 0.45; filter: saturate(1.4);
         }
 
         .star {
@@ -64,7 +60,7 @@
             position: absolute; width: 2px; height: 100px;
             background: linear-gradient(to bottom, #fff, transparent);
             transform: rotate(45deg); opacity: 0;
-            animation: shoot 8s linear infinite;
+            animation: shoot 9s linear infinite;
         }
 
         @keyframes shoot {
@@ -87,38 +83,63 @@
             font-weight: 900; line-height: 0.9;
             background: linear-gradient(to bottom, #fff, var(--primary-light));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
         }
 
         .hero .wishing-wall {
             font-size: clamp(26px, 8vw, 60px);
-            font-weight: 800; margin-bottom: 25px;
+            font-weight: 800; margin: 10px 0 25px;
             text-shadow: 0 0 20px var(--primary);
         }
 
-        /* FIX 1 DÒNG DUY NHẤT TRÊN MOBILE */
+        /* Dòng chữ TINH HÀ SAY HI luôn 1 dòng */
         .hero .sub-bottom {
-            font-size: clamp(10px, 3.8vw, 22px);
-            letter-spacing: 1px; font-weight: 600;
-            white-space: nowrap; 
-            width: 95%; overflow: hidden; text-overflow: ellipsis;
+            font-size: clamp(9px, 3.2vw, 22px);
+            letter-spacing: 2px; font-weight: 700;
+            white-space: nowrap; display: block; width: 100%;
         }
 
-        /* --- GRID WALL (PHÓNG TO CARD TRÊN MOBILE) --- */
+        /* --- FLYING AREA (KHU VỰC GIỮ LẠI) --- */
         .container {
             width: 100%; max-width: 1200px;
             margin: 0 auto; padding: 0 15px;
         }
 
+        .flying-section {
+            text-align: center; margin-bottom: 60px;
+        }
+
+        .flying-box {
+            position: relative; width: 100%; height: 380px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px; overflow: hidden;
+            backdrop-filter: blur(12px); margin-top: 20px;
+        }
+
+        .bubble {
+            position: absolute; background: rgba(255,255,255,0.9);
+            padding: 10px 18px; border-radius: 25px;
+            color: #111; font-size: 11px; font-weight: 700;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translateY(420px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            to { transform: translateY(-100px); opacity: 0; }
+        }
+
+        /* --- WALL OF LOVE GRID --- */
         .grid-wall {
             display: grid;
-            /* Phóng to card: Trên điện thoại nhỏ sẽ hiện 1 cột, điện thoại to 2 cột */
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 15px; padding-bottom: 120px;
         }
 
         @media (min-width: 768px) {
-            .grid-wall { grid-template-columns: repeat(3, 1fr); gap: 30px; }
+            .grid-wall { grid-template-columns: repeat(3, 1fr); gap: 35px; }
         }
 
         .sheep-card {
@@ -128,45 +149,38 @@
         }
 
         .card-inner {
-            position: absolute;
-            width: 72%; /* Tối đa vùng bụng cừu */
-            height: 65%;
-            top: 22%;
-            display: flex; flex-direction: column;
+            position: absolute; width: 74%; height: 65%;
+            top: 22%; display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            text-align: center; padding: 10px;
-            overflow: hidden;
+            text-align: center; padding: 8px; overflow: hidden;
         }
 
         .card-inner b {
-            color: var(--accent);
-            font-size: clamp(10px, 3.2vw, 15px);
+            color: var(--accent); font-size: clamp(10px, 3.2vw, 15px);
             margin-bottom: 3px; font-weight: 900;
-            display: block;
         }
 
         .card-inner span {
-            color: var(--card-text);
-            font-weight: 700;
-            /* Chữ tự nhỏ lại nếu quá nhiều (lên đến 100 chữ) */
-            font-size: clamp(8px, 2.5vw, 12px);
-            line-height: 1.2;
-            display: -webkit-box;
-            -webkit-line-clamp: 10; /* Tăng giới hạn dòng */
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            word-break: break-word;
+            color: var(--card-text); font-weight: 700;
+            line-height: 1.2; word-break: break-word;
+            /* Font-size sẽ được JS tính toán để nhét đủ 100 chữ */
         }
 
-        /* --- CONTROLS --- */
+        /* --- UI CONTROLS --- */
         .btn-float {
             position: fixed; right: 15px; bottom: 25px;
             padding: 14px 22px;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             border: none; border-radius: 50px;
             color: #fff; font-weight: 800; font-size: 13px;
-            box-shadow: 0 5px 20px rgba(124, 58, 237, 0.6);
-            z-index: 100;
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5); z-index: 100;
+        }
+
+        #musicBtn {
+            position: fixed; left: 15px; bottom: 25px;
+            width: 45px; height: 45px; border-radius: 50%;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; z-index: 100;
         }
 
         .modal {
@@ -179,14 +193,11 @@
             background: #111026; width: 100%; max-width: 450px;
             padding: 30px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);
         }
+
         .input-box {
             width: 100%; padding: 14px; margin: 10px 0;
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px; color: #fff;
-        }
-        .submit-btn {
-            width: 100%; padding: 16px; background: var(--primary);
-            border: none; border-radius: 12px; color: #fff; font-weight: 900;
+            border-radius: 12px; color: #fff; font-size: 16px;
         }
 
         footer { text-align: center; padding: 40px; font-size: 10px; opacity: 0.5; }
@@ -197,8 +208,8 @@
     <div class="universe">
         <div class="nebula"></div>
         <div id="starField"></div>
-        <div class="shooting-star" style="top:15%; left:20%; animation-delay: 2s;"></div>
-        <div class="shooting-star" style="top:45%; left:75%; animation-delay: 6s;"></div>
+        <div class="shooting-star" style="top:10%; left:20%; animation-delay: 2s;"></div>
+        <div class="shooting-star" style="top:40%; left:70%; animation-delay: 6s;"></div>
     </div>
 
     <header class="hero">
@@ -209,25 +220,35 @@
     </header>
 
     <div class="container">
-        <div style="text-align: center; margin: 40px 0;">
-            <h2 style="font-size: clamp(24px, 6vw, 36px); font-weight: 900;">WALL OF LOVE</h2>
-            <p style="opacity: 0.7; font-size: 13px;">Lời yêu thương dành cho CAPTAIN BOY ✦</p>
-        </div>
+        <!-- PHẦN GIỮ LẠI: LỜI NHẮN BAY LƠ LỬNG -->
+        <section class="flying-section">
+            <h2 style="font-size: 28px; font-weight: 900;">CỪU CÓ CÁNH WITH LOVE</h2>
+            <p style="opacity: 0.7; font-size: 13px;">Những lời nhắn đang bay tới CAPTAIN BOY...</p>
+            <div class="flying-box" id="flyingZone"></div>
+        </section>
 
-        <div class="grid-wall" id="wishGrid"></div>
+        <!-- PHẦN WALL OF LOVE (Grid) -->
+        <section>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="font-size: 32px; font-weight: 900;">WALL OF LOVE</h2>
+                <p style="opacity: 0.6; font-size: 13px;">Kho tàng lời nhắn dành cho CAPTAIN BOY ✦</p>
+            </div>
+            <div class="grid-wall" id="wishGrid"></div>
+        </section>
 
         <footer>PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY</footer>
     </div>
 
     <button class="btn-float" onclick="setModal(true)">+ GỬI LỜI CHÚC</button>
+    <button id="musicBtn">🔊</button>
 
     <div class="modal" id="wishModal">
         <div class="modal-box">
             <h2 style="margin-bottom:15px; font-weight:900">Gửi lời chúc ✨</h2>
             <input type="text" id="uName" class="input-box" placeholder="Tên của bạn..." required maxlength="25">
-            <textarea id="uMsg" class="input-box" rows="5" placeholder="Bạn muốn nói gì với Captain? (Tối đa 300 ký tự)..." required maxlength="300"></textarea>
-            <button id="sendBtn" onclick="submitWish()" class="submit-btn">GỬI NGAY ✨</button>
-            <button onclick="setModal(false)" style="width:100%; background:none; border:none; color:#666; margin-top:15px">Đóng</button>
+            <textarea id="uMsg" class="input-box" rows="5" placeholder="Nhắn nhủ gì với CAPTAIN BOY? ( Tối đa 100 chữ)..." required maxlength="500"></textarea>
+            <button onclick="submitWish()" id="sendBtn" style="width:100%; padding:16px; background:var(--primary); border:none; border-radius:12px; color:#fff; font-weight:900; cursor:pointer">GỬI NGAY ✨</button>
+            <button onclick="setModal(false)" style="width:100%; background:none; border:none; color:#666; margin-top:15px">Hủy bỏ</button>
         </div>
     </div>
 
@@ -236,12 +257,12 @@
     <script>
         const API = "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
 
-        // Tinh hà
+        // Tinh hà rực rỡ
         const f = document.getElementById("starField");
         for(let i=0; i<150; i++){
             const s = document.createElement("div");
             s.className = "star";
-            const sz = Math.random() * 3 + 1;
+            const sz = Math.random() * 3 + 1.2;
             s.style.width = s.style.height = sz + "px";
             s.style.left = Math.random() * 100 + "%";
             s.style.top = Math.random() * 100 + "%";
@@ -254,34 +275,72 @@
                 const r = await fetch(API + "?action=list");
                 const d = await r.json();
                 if(d.approved) {
-                    document.getElementById("wishGrid").innerHTML = d.approved.slice().reverse().map(i => `
-                        <div class="sheep-card">
-                            <div class="card-inner">
-                                <b>From: ${esc(i.name)}</b>
-                                <span>${esc(i.message)}</span>
-                            </div>
-                        </div>
-                    `).join("");
+                    renderGrid(d.approved);
+                    renderFlying(d.approved);
                 }
             } catch(e) {}
+        }
+
+        function renderGrid(list) {
+            const grid = document.getElementById("wishGrid");
+            grid.innerHTML = list.slice().reverse().map(i => {
+                const msg = i.message;
+                // LOGIC AUTO-SHRINK (Tự nhỏ chữ cho đủ 100 chữ)
+                let fontSize = "11.5px";
+                if (msg.length > 250) fontSize = "7px";
+                else if (msg.length > 180) fontSize = "8px";
+                else if (msg.length > 100) fontSize = "9px";
+                else if (msg.length > 60) fontSize = "10.5px";
+
+                return `
+                    <div class="sheep-card">
+                        <div class="card-inner">
+                            <b>From: ${esc(i.name)}</b>
+                            <span style="font-size: ${fontSize}">${esc(msg)}</span>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function renderFlying(list) {
+            const zone = document.getElementById("flyingZone");
+            zone.innerHTML = "";
+            setInterval(() => {
+                const i = list[Math.floor(Math.random()*list.length)];
+                const b = document.createElement("div");
+                b.className = "bubble";
+                b.style.left = Math.random()*70 + "%";
+                b.style.animationDuration = (Math.random()*5 + 8) + "s";
+                b.innerText = esc(i.name) + ": " + esc(i.message);
+                zone.appendChild(b);
+                setTimeout(() => b.remove(), 12000);
+            }, 3500);
         }
 
         async function submitWish() {
             const n = document.getElementById("uName").value.trim();
             const m = document.getElementById("uMsg").value.trim();
-            if(!n || !m) return alert("Điền đủ thông tin nha Cừu!");
+            if(!n || !m) return alert("Điền đủ thông tin nha!");
             const b = document.getElementById("sendBtn");
             b.innerText = "ĐANG GỬI..."; b.disabled = true;
             try {
                 await fetch(API, { method:"POST", body: JSON.stringify({action:"submit", name:n, message:m, id:Date.now()}) });
-                alert("Đã gửi thành công! Chờ duyệt nhé ✨");
+                alert("Thành công! Chờ duyệt nhé ✨");
                 setModal(false); location.reload();
-            } catch(e) { alert("Lỗi gửi!"); b.disabled = false; b.innerText = "GỬI NGAY ✨"; }
+            } catch(e) { alert("Lỗi!"); b.disabled = false; b.innerText = "GỬI NGAY ✨"; }
         }
 
         function setModal(s) { document.getElementById("wishModal").classList.toggle("active", s); }
         function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
-        
+
+        const bgm = document.getElementById("bgm");
+        const mBtn = document.getElementById("musicBtn");
+        mBtn.onclick = () => {
+            if(bgm.paused) { bgm.play(); mBtn.innerHTML = "🔊"; }
+            else { bgm.pause(); mBtn.innerHTML = "🔇"; }
+        }
+
         load();
     </script>
 </body>
