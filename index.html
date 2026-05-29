@@ -1,31 +1,37 @@
+```html
 <!doctype html>
 <html lang="vi">
 <head>
-<meta charset="utf-8" />
+
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
+
   --primary:#7c3aed;
-  --primary2:#a78bfa;
-  --primary3:#312e81;
+  --primary2:#c084fc;
 
   --bg:#060510;
-  --card:rgba(20,18,40,.72);
-  --card2:rgba(15,13,32,.9);
+
+  --card:rgba(18,15,35,.78);
 
   --line:rgba(255,255,255,.08);
 
   --text:#f5f3ff;
-  --muted:rgba(255,255,255,.7);
 
-  --shadow:0 10px 40px rgba(124,58,237,.25);
+  --muted:rgba(255,255,255,.72);
+
+  --shadow:
+  0 10px 40px rgba(124,58,237,.28);
+
 }
 
 *{
@@ -39,54 +45,79 @@ html{
 }
 
 body{
+
   font-family:'Inter',sans-serif;
+
   background:#060510;
+
   color:white;
+
   overflow-x:hidden;
+
   min-height:100vh;
-  line-height:1.6;
+
 }
 
-/* ================= BACKGROUND ================= */
+/* BACKGROUND */
 
 .bg{
+
   position:fixed;
   inset:0;
+
   z-index:-3;
 
   background:
-    radial-gradient(circle at top, rgba(124,58,237,.22), transparent 35%),
-    radial-gradient(circle at bottom, rgba(167,139,250,.12), transparent 35%),
-    url("./nền.png");
+  radial-gradient(circle at top,
+  rgba(124,58,237,.22),
+  transparent 35%),
+
+  radial-gradient(circle at bottom,
+  rgba(167,139,250,.12),
+  transparent 35%),
+
+  url("./nền.png");
 
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
+
 }
 
 .noise{
+
   position:fixed;
   inset:0;
+
   z-index:-2;
+
   opacity:.04;
-  pointer-events:none;
 
   background-image:
-    linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+  linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
 
   background-size:3px 3px;
+
 }
 
 .glow{
+
   position:fixed;
+
   width:500px;
   height:500px;
+
   border-radius:50%;
+
   filter:blur(120px);
+
   opacity:.18;
+
   z-index:-1;
+
   animation:floatGlow 12s ease-in-out infinite;
+
 }
 
 .glow.one{
@@ -99,117 +130,171 @@ body{
   bottom:-150px;
   right:-120px;
   background:#a78bfa;
-  animation-delay:3s;
 }
 
 @keyframes floatGlow{
+
   0%,100%{
     transform:translateY(0) scale(1);
   }
+
   50%{
     transform:translateY(30px) scale(1.08);
   }
+
 }
 
 .container{
+
   width:min(1180px,92%);
+
   margin:auto;
+
   padding-bottom:120px;
+
 }
 
-/* ================= HERO ================= */
+/* HERO */
 
 .hero{
+
   min-height:100vh;
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   text-align:center;
-  position:relative;
+
   padding:80px 0;
+
 }
 
 .hero h1{
-  font-size:clamp(54px,10vw,140px);
-  font-weight:900;
-  line-height:.95;
-  letter-spacing:2px;
-  margin-bottom:18px;
 
-  background:linear-gradient(to bottom,#fff,#d8b4fe);
+  font-size:clamp(58px,10vw,140px);
+
+  font-weight:900;
+
+  line-height:.9;
+
+  letter-spacing:2px;
+
+  margin-bottom:20px;
+
+  word-break:keep-all;
+
+  background:
+  linear-gradient(to bottom,#fff,#d8b4fe);
+
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 
-  text-shadow:0 0 30px rgba(124,58,237,.35);
+  text-shadow:
+  0 0 30px rgba(124,58,237,.35);
+
 }
 
 .big-title{
-  font-size:clamp(28px,6vw,80px);
+
+  font-size:clamp(34px,6vw,80px);
+
   font-weight:900;
+
   color:#f5d0fe;
-  text-shadow:0 0 30px rgba(168,85,247,.5);
-  margin-bottom:16px;
+
+  margin-bottom:18px;
+
+  text-shadow:
+  0 0 30px rgba(168,85,247,.45);
+
 }
 
 .sub-title{
-  font-size:clamp(14px,2.3vw,28px);
+
+  font-size:clamp(15px,2vw,28px);
+
   color:white;
-  letter-spacing:1px;
+
 }
 
-/* ================= SECTION ================= */
+/* SECTION */
 
 .section-head{
+
   text-align:center;
+
   margin-bottom:28px;
+
 }
 
 .section-head h2{
+
   font-size:clamp(28px,5vw,52px);
+
   font-weight:900;
+
   margin-bottom:10px;
+
 }
 
 .section-head p{
-  font-size:clamp(14px,2vw,20px);
+
   color:var(--muted);
+
+  font-size:clamp(14px,2vw,18px);
+
 }
 
-/* ================= FLYING WISH ================= */
+/* FLYING WISH */
 
 .wish-cuucocanh{
+
   position:relative;
+
   width:100%;
+
   height:420px;
+
   overflow:hidden;
 
   border-radius:36px;
+
   border:1px solid var(--line);
 
   background:
   linear-gradient(
-    to bottom,
-    rgba(25,20,55,.85),
-    rgba(10,8,25,.95)
-  );
+  to bottom,
+  rgba(25,20,55,.85),
+  rgba(10,8,25,.95));
 
   backdrop-filter:blur(12px);
 
   box-shadow:var(--shadow);
+
 }
 
 .loading{
+
   position:absolute;
   inset:0;
+
   display:flex;
+
   align-items:center;
   justify-content:center;
-  color:rgba(255,255,255,.45);
+
+  color:rgba(255,255,255,.4);
+
   font-weight:700;
+
 }
 
 .flying-wish{
+
   position:absolute;
+
   bottom:-120px;
 
   min-width:160px;
@@ -220,64 +305,90 @@ body{
   border-radius:999px;
 
   background:
-  radial-gradient(circle at 30% 30%, #ffffff 0%, #f3e8ff 45%, #e9d5ff 100%);
+  radial-gradient(circle at 30% 30%,
+  #fff 0%,
+  #f3e8ff 45%,
+  #e9d5ff 100%);
 
   border:3px solid rgba(255,255,255,.7);
 
   box-shadow:
-    0 10px 30px rgba(168,85,247,.25),
-    inset 0 2px 10px rgba(255,255,255,.8);
+  0 10px 30px rgba(168,85,247,.25),
+  inset 0 2px 10px rgba(255,255,255,.8);
 
   animation-name:flyUp;
   animation-timing-function:linear;
   animation-fill-mode:forwards;
 
-  overflow:hidden;
 }
 
 .flying-wish::before,
 .flying-wish::after{
+
   content:"";
+
   position:absolute;
+
   background:#f3e8ff;
+
   border-radius:50%;
+
   z-index:-1;
+
 }
 
 .flying-wish::before{
+
   width:52px;
   height:52px;
+
   left:20px;
   top:-22px;
+
 }
 
 .flying-wish::after{
+
   width:34px;
   height:34px;
+
   right:24px;
   top:-14px;
+
 }
 
 .flying-wish strong{
+
   display:block;
+
   color:#7c3aed;
+
   font-size:14px;
-  font-weight:900;
+
   margin-bottom:6px;
+
 }
 
 .flying-wish span{
+
   color:#3b0764;
+
   font-size:13px;
+
   line-height:1.4;
 
   display:-webkit-box;
+
   -webkit-line-clamp:4;
+
   -webkit-box-orient:vertical;
+
   overflow:hidden;
+
 }
 
 @keyframes flyUp{
+
   0%{
     transform:translateY(0) scale(.7);
     opacity:0;
@@ -288,49 +399,65 @@ body{
   }
 
   50%{
-    transform:translateY(-320px) translateX(-20px) scale(1);
+    transform:
+    translateY(-320px)
+    translateX(-20px)
+    scale(1);
   }
 
   100%{
-    transform:translateY(-760px) translateX(40px) scale(1.15);
+    transform:
+    translateY(-760px)
+    translateX(40px)
+    scale(1.15);
+
     opacity:0;
   }
+
 }
 
-/* ================= WALL ================= */
+/* WALL */
 
 .wall{
   margin-top:100px;
 }
 
 .wish-grid{
+
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(320px,1fr));
+
   gap:26px;
+
 }
 
-/* ================= SHEEP CARD ================= */
+/* SHEEP CARD */
 
 .wish-card{
+
   position:relative;
 
   width:100%;
-  min-height:340px;
+
+  height:340px;
 
   background-image:url("./sheep.png");
+
   background-size:100% 100%;
+
   background-repeat:no-repeat;
+
   background-position:center;
 
-  padding-top:68px;
+  padding-top:70px;
   padding-left:150px;
   padding-right:80px;
   padding-bottom:50px;
 
-  display:flex;
-  flex-direction:column;
-
   transition:.35s;
+
 }
 
 .wish-card:hover{
@@ -338,46 +465,55 @@ body{
 }
 
 .wish-card strong{
+
   display:block;
 
   color:#ff3b3b;
 
   font-size:clamp(16px,2vw,22px);
-  font-weight:900;
 
-  margin-bottom:12px;
+  font-weight:900;
 
   line-height:1.2;
 
+  margin-bottom:12px;
+
   word-break:break-word;
+  overflow-wrap:break-word;
+
 }
 
 .wish-card p{
+
   color:#222;
 
   font-size:clamp(14px,1.8vw,21px);
+
   font-weight:700;
 
   line-height:1.45;
 
   white-space:pre-wrap;
+
   word-break:break-word;
   overflow-wrap:break-word;
 
-  width:100%;
   max-width:100%;
 
-  /* QUAN TRỌNG */
+  overflow:hidden;
+
   display:-webkit-box;
+
   -webkit-line-clamp:7;
+
   -webkit-box-orient:vertical;
 
-  overflow:hidden;
 }
 
-/* ================= BUTTON ================= */
+/* BUTTON */
 
 .floating-btn{
+
   position:fixed;
 
   right:24px;
@@ -390,51 +526,54 @@ body{
   cursor:pointer;
 
   display:flex;
+
   align-items:center;
   gap:12px;
 
-  padding:16px 26px;
+  padding:16px 24px;
 
   border-radius:999px;
 
   background:
   linear-gradient(135deg,#8b5cf6,#c084fc);
 
-  color:#fff;
+  color:white;
 
   font-size:15px;
+
   font-weight:800;
 
   box-shadow:
   0 12px 35px rgba(124,58,237,.42);
 
   transition:.35s ease;
+
 }
 
 .floating-btn:hover{
   transform:translateY(-4px) scale(1.02);
 }
 
-.floating-btn span{
-  font-size:22px;
-}
-
-/* ================= MODAL ================= */
+/* MODAL */
 
 .modal{
+
   position:fixed;
   inset:0;
+
   z-index:9999;
 
   background:rgba(0,0,0,.75);
 
   display:none;
+
   align-items:center;
   justify-content:center;
 
   padding:20px;
 
   backdrop-filter:blur(8px);
+
 }
 
 .modal.active{
@@ -442,9 +581,10 @@ body{
 }
 
 .modal-box{
+
   width:min(520px,100%);
 
-  background:var(--card2);
+  background:rgba(15,13,32,.92);
 
   border:1px solid var(--line);
 
@@ -454,37 +594,32 @@ body{
 
   position:relative;
 
-  animation:modalShow .35s ease;
-}
-
-@keyframes modalShow{
-  from{
-    opacity:0;
-    transform:translateY(20px) scale(.96);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
 }
 
 .close{
-  position:absolute;
-  top:18px;
-  right:20px;
 
-  border:none;
+  position:absolute;
+
+  right:20px;
+  top:16px;
+
   background:none;
+  border:none;
 
   color:white;
+
   font-size:30px;
 
   cursor:pointer;
+
 }
 
 .modal-box h3{
+
   font-size:34px;
+
   font-weight:900;
+
   margin-bottom:10px;
 
   background:
@@ -492,12 +627,17 @@ body{
 
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+
 }
 
 .sub{
+
   color:rgba(255,255,255,.72);
-  margin-bottom:28px;
+
+  margin-bottom:26px;
+
   font-size:14px;
+
 }
 
 .input-group{
@@ -505,15 +645,20 @@ body{
 }
 
 .input-group label{
+
   display:block;
+
   margin-bottom:8px;
+
   font-size:13px;
+
   color:rgba(255,255,255,.75);
-  font-weight:600;
+
 }
 
 .input-group input,
 .input-group textarea{
+
   width:100%;
 
   border:none;
@@ -530,20 +675,15 @@ body{
   color:white;
 
   font-family:inherit;
+
   font-size:15px;
 
-  transition:.3s;
-
   resize:none;
-}
 
-.input-group input:focus,
-.input-group textarea:focus{
-  border-color:rgba(167,139,250,.45);
-  box-shadow:0 0 0 4px rgba(124,58,237,.15);
 }
 
 .submit-btn{
+
   width:100%;
 
   border:none;
@@ -560,31 +700,29 @@ body{
   color:white;
 
   font-size:16px;
+
   font-weight:800;
 
-  margin-top:10px;
-
-  transition:.35s ease;
 }
 
-.submit-btn:hover{
-  transform:translateY(-3px) scale(1.02);
-}
-
-/* ================= FOOTER ================= */
+/* FOOTER */
 
 .footer{
+
   margin-top:90px;
+
   text-align:center;
 
   color:rgba(255,255,255,.45);
 
   font-size:13px;
+
 }
 
-/* ================= MUSIC BUTTON ================= */
+/* MUSIC */
 
 #musicBtn{
+
   position:fixed;
 
   left:24px;
@@ -596,6 +734,7 @@ body{
   height:58px;
 
   border:none;
+
   border-radius:50%;
 
   background:
@@ -607,16 +746,12 @@ body{
 
   cursor:pointer;
 
-  box-shadow:0 10px 30px rgba(124,58,237,.4);
+  box-shadow:
+  0 10px 30px rgba(124,58,237,.4);
 
-  transition:.3s;
 }
 
-#musicBtn:hover{
-  transform:scale(1.08);
-}
-
-/* ================= MOBILE ================= */
+/* MOBILE */
 
 @media(max-width:768px){
 
@@ -631,16 +766,17 @@ body{
 
   .wish-grid{
     grid-template-columns:1fr;
-    gap:20px;
   }
 
   .wish-card{
-    min-height:260px;
+
+    height:260px;
 
     padding-top:52px;
     padding-left:110px;
     padding-right:55px;
     padding-bottom:40px;
+
   }
 
   .wish-card p{
@@ -648,14 +784,11 @@ body{
   }
 
   .floating-btn{
-    padding:14px 20px;
-    font-size:13px;
-  }
 
-  #musicBtn{
-    width:52px;
-    height:52px;
-    font-size:20px;
+    padding:14px 18px;
+
+    font-size:13px;
+
   }
 
 }
@@ -667,143 +800,134 @@ body{
 
 <div class="bg"></div>
 <div class="noise"></div>
+
 <div class="glow one"></div>
 <div class="glow two"></div>
 
 <div class="container">
 
-  <!-- HERO -->
-  <section class="hero">
+<section class="hero">
 
-    <div>
+<div>
 
-      <h1>CAPTAIN BOY</h1>
+<h1>CAPTAIN BOY</h1>
 
-      <div class="big-title">
-        WISHING WALL
-      </div>
+<div class="big-title">
+WISHING WALL
+</div>
 
-      <p class="sub-title">
-        ✦ CAPTAIN BOY - TINH HÀ SAY HI ✦
-      </p>
-
-    </div>
-
-  </section>
-
-  <!-- SECTION -->
-  <section>
-
-    <div class="section-head">
-
-      <h2>
-        CỪU CÓ CÁNH WITH LOVE CAPTAIN BOY
-      </h2>
-
-      <p>
-        Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
-      </p>
-
-    </div>
-
-    <div class="wish-cuucocanh" id="wishCuucocanh">
-
-      <div class="loading">
-        Đang tải lời chúc...
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- WALL -->
-  <section class="wall">
-
-    <div class="section-head">
-
-      <h2>WALL OF LOVE</h2>
-
-      <p>
-        Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
-      </p>
-
-    </div>
-
-    <div class="wish-grid" id="wishGrid"></div>
-
-  </section>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
-  </div>
+<p class="sub-title">
+✦ CAPTAIN BOY - TINH HÀ SAY HI ✦
+</p>
 
 </div>
 
-<!-- BUTTON -->
+</section>
+
+<section>
+
+<div class="section-head">
+
+<h2>
+CỪU CÓ CÁNH WITH LOVE CAPTAIN BOY
+</h2>
+
+<p>
+Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
+</p>
+
+</div>
+
+<div class="wish-cuucocanh" id="wishCuucocanh">
+
+<div class="loading">
+Đang tải lời chúc...
+</div>
+
+</div>
+
+</section>
+
+<section class="wall">
+
+<div class="section-head">
+
+<h2>WALL OF LOVE</h2>
+
+<p>
+Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
+</p>
+
+</div>
+
+<div class="wish-grid" id="wishGrid"></div>
+
+</section>
+
+<div class="footer">
+PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
+</div>
+
+</div>
+
 <button class="floating-btn" onclick="toggleModal(true)">
-  <span>✨</span>
-  GỬI LỜI CHÚC
+✨ GỬI LỜI CHÚC
 </button>
 
-<!-- MODAL -->
 <div class="modal" id="wishModal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <button class="close" onclick="toggleModal(false)">
-      ×
-    </button>
+<button class="close" onclick="toggleModal(false)">
+×
+</button>
 
-    <h3>Gửi lời đến CAPTAIN BOY</h3>
+<h3>Gửi lời đến CAPTAIN BOY</h3>
 
-    <div class="sub">
-      Lời nhắn sẽ được hiển thị sau khi admin duyệt
-    </div>
+<div class="sub">
+Lời nhắn sẽ được hiển thị sau khi admin duyệt
+</div>
 
-    <form id="wishForm">
+<form id="wishForm">
 
-      <div class="input-group">
+<div class="input-group">
 
-        <label>Tên của bạn</label>
+<label>Tên của bạn</label>
 
-        <input
-          type="text"
-          id="userName"
-          maxlength="30"
-          placeholder="Nhập tên..."
-          required
-        >
-
-      </div>
-
-      <div class="input-group">
-
-        <label>Lời chúc</label>
-
-        <textarea
-          id="userMsg"
-          rows="5"
-          maxlength="180"
-          placeholder="Nhập lời chúc..."
-          required
-        ></textarea>
-
-      </div>
-
-      <button class="submit-btn" id="submitBtn" type="submit">
-        GỬI NGAY ✨
-      </button>
-
-    </form>
-
-  </div>
+<input
+type="text"
+id="userName"
+maxlength="30"
+placeholder="Nhập tên..."
+required>
 
 </div>
 
-<!-- MUSIC -->
+<div class="input-group">
+
+<label>Lời chúc</label>
+
+<textarea
+id="userMsg"
+rows="5"
+maxlength="180"
+placeholder="Nhập lời chúc..."
+required></textarea>
+
+</div>
+
+<button class="submit-btn" id="submitBtn" type="submit">
+GỬI NGAY ✨
+</button>
+
+</form>
+
+</div>
+
+</div>
+
 <audio id="bgMusic" loop>
-  <source src="./music.mp3" type="audio/mpeg">
+<source src="./music.mp3" type="audio/mpeg">
 </audio>
 
 <button id="musicBtn">🔊</button>
@@ -812,282 +936,274 @@ body{
 
 const CONFIG = {
 
-  releaseDate:"2026-06-01T20:00:00",
-
-  googleScriptUrl:
-  "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec"
+googleScriptUrl:
+"https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec"
 
 };
 
 let listApproved = [];
+
 let flyInterval = null;
 
-/* ================= MODAL ================= */
+/* MODAL */
 
 function toggleModal(show){
 
-  document
-  .getElementById("wishModal")
-  .classList.toggle("active", show);
+document
+.getElementById("wishModal")
+.classList.toggle("active",show);
 
 }
 
-window.addEventListener("keydown",(e)=>{
-
-  if(e.key === "Escape"){
-    toggleModal(false);
-  }
-
-});
-
-/* ================= FETCH ================= */
+/* FETCH */
 
 async function fetchWishes(){
 
-  try{
+try{
 
-    const response = await fetch(
-      CONFIG.googleScriptUrl + "?action=list"
-    );
+const response = await fetch(
+CONFIG.googleScriptUrl + "?action=list"
+);
 
-    const data = await response.json();
+const data = await response.json();
 
-    if(data.approved){
+if(data.approved){
 
-      listApproved = data.approved;
+listApproved = data.approved;
 
-      renderWall();
+renderWall();
 
-      startFlying();
-
-    }
-
-  }catch(error){
-
-    console.log(error);
-
-  }
+startFlying();
 
 }
 
-/* ================= WALL ================= */
+}catch(err){
+
+console.log(err);
+
+}
+
+}
+
+/* WALL */
 
 function renderWall(){
 
-  const grid = document.getElementById("wishGrid");
+const grid =
+document.getElementById("wishGrid");
 
-  if(!listApproved.length){
+if(!listApproved.length){
 
-    grid.innerHTML = `
-      <div class="wish-card">
+grid.innerHTML = `
+<div class="wish-card">
 
-        <strong>
-          From: CỪU CÓ CÁNH
-        </strong>
+<strong>
+From: CỪU CÓ CÁNH
+</strong>
 
-        <p>
-          Chưa có lời chúc nào ✨
-        </p>
+<p>
+Chưa có lời chúc nào ✨
+</p>
 
-      </div>
-    `;
+</div>
+`;
 
-    return;
-
-  }
-
-  grid.innerHTML = listApproved
-  .slice()
-  .reverse()
-  .map(item => `
-
-    <div class="wish-card">
-
-      <strong>
-        From: ${escapeHtml(item.name)}
-      </strong>
-
-      <p>
-${escapeHtml(item.message)}
-      </p>
-
-    </div>
-
-  `).join("");
+return;
 
 }
 
-/* ================= FLYING ================= */
+grid.innerHTML = listApproved
+.slice()
+.reverse()
+.map(item => `
+
+<div class="wish-card">
+
+<strong>
+From: ${escapeHtml(item.name)}
+</strong>
+
+<p>
+${escapeHtml(item.message)}
+</p>
+
+</div>
+
+`).join("");
+
+}
+
+/* FLYING */
 
 function startFlying(){
 
-  const area =
-  document.getElementById("wishCuucocanh");
+const area =
+document.getElementById("wishCuucocanh");
 
-  area.innerHTML = "";
+area.innerHTML = "";
 
-  if(!listApproved.length){
+if(!listApproved.length){
 
-    area.innerHTML = `
-      <div class="loading">
-        Chưa có lời nhắn nào ✨
-      </div>
-    `;
+area.innerHTML = `
+<div class="loading">
+Chưa có lời nhắn nào ✨
+</div>
+`;
 
-    return;
-
-  }
-
-  if(flyInterval){
-    clearInterval(flyInterval);
-  }
-
-  function createWish(){
-
-    const wish =
-    listApproved[
-      Math.floor(Math.random() * listApproved.length)
-    ];
-
-    const el =
-    document.createElement("div");
-
-    el.className = "flying-wish";
-
-    el.style.left =
-    Math.random() * 80 + "%";
-
-    el.style.animationDuration =
-    (7 + Math.random() * 4) + "s";
-
-    el.innerHTML = `
-      <strong>${escapeHtml(wish.name)}</strong>
-      <span>${escapeHtml(wish.message)}</span>
-    `;
-
-    area.appendChild(el);
-
-    setTimeout(()=>{
-      el.remove();
-    },12000);
-
-  }
-
-  for(let i=0;i<8;i++){
-    setTimeout(createWish, i * 1000);
-  }
-
-  flyInterval = setInterval(createWish, 2200);
+return;
 
 }
 
-/* ================= FORM ================= */
+if(flyInterval){
+clearInterval(flyInterval);
+}
+
+function createWish(){
+
+const wish =
+listApproved[
+Math.floor(Math.random() * listApproved.length)
+];
+
+const el =
+document.createElement("div");
+
+el.className = "flying-wish";
+
+el.style.left =
+Math.random() * 80 + "%";
+
+el.style.animationDuration =
+(7 + Math.random() * 4) + "s";
+
+el.innerHTML = `
+<strong>${escapeHtml(wish.name)}</strong>
+<span>${escapeHtml(wish.message)}</span>
+`;
+
+area.appendChild(el);
+
+setTimeout(()=>{
+el.remove();
+},12000);
+
+}
+
+for(let i=0;i<8;i++){
+setTimeout(createWish,i * 1000);
+}
+
+flyInterval = setInterval(createWish,2200);
+
+}
+
+/* FORM */
 
 document
 .getElementById("wishForm")
-.addEventListener("submit", async (e)=>{
+.addEventListener("submit",async(e)=>{
 
-  e.preventDefault();
+e.preventDefault();
 
-  const btn =
-  document.getElementById("submitBtn");
+const btn =
+document.getElementById("submitBtn");
 
-  const name =
-  document.getElementById("userName")
-  .value
-  .trim();
+const name =
+document.getElementById("userName")
+.value.trim();
 
-  const message =
-  document.getElementById("userMsg")
-  .value
-  .trim();
+const message =
+document.getElementById("userMsg")
+.value.trim();
 
-  if(!name || !message){
+if(!name || !message){
 
-    alert("Vui lòng nhập đầy đủ ✨");
-    return;
+alert("Vui lòng nhập đầy đủ ✨");
 
-  }
-
-  btn.disabled = true;
-  btn.innerText = "ĐANG GỬI...";
-
-  try{
-
-    const response = await fetch(
-      CONFIG.googleScriptUrl,
-      {
-        method:"POST",
-
-        headers:{
-          "Content-Type":"text/plain;charset=utf-8"
-        },
-
-        body:JSON.stringify({
-
-          action:"submit",
-
-          id:Date.now(),
-
-          name,
-
-          message,
-
-          createdAt:new Date().toISOString()
-
-        })
-
-      }
-    );
-
-    const data = await response.json();
-
-    if(data.ok){
-
-      alert("Đã gửi thành công ✨");
-
-      document
-      .getElementById("wishForm")
-      .reset();
-
-      toggleModal(false);
-
-    }else{
-
-      alert("Gửi thất bại 😭");
-
-    }
-
-  }catch(err){
-
-    console.log(err);
-
-    alert("Lỗi kết nối Apps Script");
-
-  }finally{
-
-    btn.disabled = false;
-
-    btn.innerText = "GỬI NGAY ✨";
-
-  }
-
-});
-
-/* ================= ESCAPE ================= */
-
-function escapeHtml(text){
-
-  const div =
-  document.createElement("div");
-
-  div.textContent = text;
-
-  return div.innerHTML;
+return;
 
 }
 
-/* ================= MUSIC ================= */
+btn.disabled = true;
+
+btn.innerText = "ĐANG GỬI...";
+
+try{
+
+const response = await fetch(
+CONFIG.googleScriptUrl,
+{
+method:"POST",
+
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
+},
+
+body:JSON.stringify({
+
+action:"submit",
+
+id:Date.now(),
+
+name,
+
+message,
+
+createdAt:new Date().toISOString()
+
+})
+
+}
+);
+
+const data = await response.json();
+
+if(data.ok){
+
+alert("Đã gửi thành công ✨");
+
+document
+.getElementById("wishForm")
+.reset();
+
+toggleModal(false);
+
+}else{
+
+alert("Gửi thất bại 😭");
+
+}
+
+}catch(err){
+
+console.log(err);
+
+alert("Lỗi kết nối Apps Script");
+
+}finally{
+
+btn.disabled = false;
+
+btn.innerText = "GỬI NGAY ✨";
+
+}
+
+});
+
+/* ESCAPE */
+
+function escapeHtml(text){
+
+const div =
+document.createElement("div");
+
+div.textContent = text;
+
+return div.innerHTML;
+
+}
+
+/* MUSIC */
 
 const music =
 document.getElementById("bgMusic");
@@ -1099,35 +1215,37 @@ music.volume = 0.5;
 
 document.addEventListener("click",()=>{
 
-  if(music.paused){
+if(music.paused){
 
-    music.play().catch(err=>{
-      console.log(err);
-    });
+music.play().catch(err=>{
+console.log(err);
+});
 
-  }
+}
 
 },{ once:true });
 
 musicBtn.addEventListener("click",(e)=>{
 
-  e.stopPropagation();
+e.stopPropagation();
 
-  if(music.paused){
+if(music.paused){
 
-    music.play();
-    musicBtn.innerHTML = "🔊";
+music.play();
 
-  }else{
+musicBtn.innerHTML = "🔊";
 
-    music.pause();
-    musicBtn.innerHTML = "🔇";
+}else{
 
-  }
+music.pause();
+
+musicBtn.innerHTML = "🔇";
+
+}
 
 });
 
-/* ================= INIT ================= */
+/* INIT */
 
 fetchWishes();
 
@@ -1137,3 +1255,4 @@ setInterval(fetchWishes,30000);
 
 </body>
 </html>
+```
