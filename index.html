@@ -369,12 +369,16 @@ body{
   padding:80px 0;
 }
 
+.hero-inner{
+  width:100%;
+}
+
 .hero h1{
   font-size:clamp(50px,8vw,120px);
 
   font-weight:900;
 
-  line-height:.95;
+  line-height:1;
 
   letter-spacing:3px;
 
@@ -388,17 +392,30 @@ body{
 
   text-shadow:
   0 0 30px rgba(124,58,237,.35);
+
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+
+.section-head{
+  width:100%;
 }
 
 .section-head h2{
   font-size:clamp(26px,4vw,46px);
   font-weight:900;
   margin-bottom:10px;
+
+  overflow-wrap:anywhere;
+  word-break:break-word;
 }
 
 .section-head p{
   color:var(--muted);
   font-size:15px;
+
+  overflow-wrap:anywhere;
+  word-break:break-word;
 }
 
 /* ================= CUU CO CANH ================= */
@@ -451,10 +468,10 @@ body{
   bottom:-120px;
   left:0;
 
-  min-width:170px;
-  max-width:280px;
+  min-width:140px;
+  max-width:min(280px,78vw);
 
-  padding:16px 22px;
+  padding:14px 18px;
 
   border-radius:999px;
 
@@ -480,6 +497,8 @@ body{
   animation-name:flyUp;
   animation-timing-function:linear;
   animation-fill-mode:forwards;
+
+  overflow:hidden;
 }
 
 .flying-wish::before,
@@ -511,12 +530,23 @@ body{
   color:#7c3aed;
   font-size:13px;
   font-weight:900;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .flying-wish span{
   color:#3b0764;
   font-size:13px;
   line-height:1.4;
+
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+
+  word-break:break-word;
 }
 
 @keyframes flyUp{
@@ -655,8 +685,8 @@ body{
 .floating-btn{
   position:fixed;
 
-  right:24px;
-  bottom:24px;
+  right:20px;
+  bottom:20px;
 
   z-index:100;
 
@@ -666,9 +696,9 @@ body{
 
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
 
-  padding:16px 24px;
+  padding:15px 22px;
 
   border-radius:999px;
 
@@ -692,6 +722,8 @@ body{
   0 12px 35px rgba(124,58,237,.42);
 
   transition:.35s ease;
+
+  max-width:calc(100vw - 40px);
 }
 
 .floating-btn:hover{
@@ -744,6 +776,9 @@ body{
 
   box-shadow:
   0 20px 60px rgba(0,0,0,.5);
+
+  max-height:90vh;
+  overflow-y:auto;
 }
 
 @keyframes modalShow{
@@ -909,6 +944,8 @@ body{
   color:rgba(255,255,255,.45);
 
   font-size:13px;
+
+  padding:0 10px;
 }
 
 /* ================= MUSIC ================= */
@@ -916,8 +953,8 @@ body{
 #musicBtn{
   position:fixed;
 
-  left:24px;
-  bottom:24px;
+  left:20px;
+  bottom:20px;
 
   z-index:9999;
 
@@ -954,62 +991,158 @@ body{
 
 @media(max-width:768px){
 
+  .container{
+    width:min(100%,94%);
+  }
+
   .hero{
     min-height:85vh;
     padding:50px 0;
   }
 
   .hero h1{
-    font-size:58px;
-    line-height:1;
+    font-size:clamp(42px,12vw,58px);
+    line-height:1.05;
+    letter-spacing:1px;
 
-    white-space:nowrap;
+    white-space:normal;
   }
 
   .section-head h2{
-    font-size:32px;
-    white-space:nowrap;
+    font-size:clamp(24px,7vw,34px);
+
+    white-space:normal;
+    line-height:1.15;
   }
 
   .section-head p{
     font-size:13px;
+
+    white-space:normal;
+    line-height:1.5;
   }
 
   .wish-grid{
     grid-template-columns:1fr;
-    gap:10px;
+    gap:14px;
   }
 
   .wish-card{
 
     max-width:100%;
 
-    height:240px;
+    height:230px;
 
     background-size:contain;
 
-    padding-top:54px;
-    padding-left:96px;
-    padding-right:72px;
+    padding-top:50px;
+    padding-left:88px;
+    padding-right:68px;
     padding-bottom:35px;
   }
 
   .wish-card strong{
-    font-size:15px;
+    font-size:14px;
   }
 
   .wish-card p{
-    max-width:190px;
+    max-width:170px;
 
-    font-size:12px;
+    font-size:11px;
 
-    line-height:1.35;
+    line-height:1.3;
 
     -webkit-line-clamp:5;
   }
 
   .floating-btn{
-    padding:14px 18px;
+    right:14px;
+    bottom:14px;
+
+    padding:12px 16px;
+
+    font-size:11px;
+
+    gap:8px;
+  }
+
+  .floating-btn span{
+    font-size:18px;
+  }
+
+  #musicBtn{
+    left:14px;
+    bottom:14px;
+
+    width:52px;
+    height:52px;
+
+    font-size:20px;
+  }
+
+  .modal{
+    padding:14px;
+  }
+
+  .modal-box{
+    padding:24px 18px;
+    border-radius:24px;
+  }
+
+  .modal-box h3{
+    font-size:24px;
+    padding-right:30px;
+  }
+
+  .wish-cuucocanh{
+    height:360px;
+  }
+
+  .flying-wish{
+    max-width:72vw;
+    padding:12px 14px;
+  }
+
+  .flying-wish strong{
+    font-size:11px;
+  }
+
+  .flying-wish span{
+    font-size:11px;
+    line-height:1.3;
+  }
+
+}
+
+@media(max-width:480px){
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .wish-card{
+    height:210px;
+
+    padding-top:45px;
+    padding-left:78px;
+    padding-right:58px;
+  }
+
+  .wish-card strong{
+    font-size:12px;
+  }
+
+  .wish-card p{
+    max-width:145px;
+    font-size:10px;
+    line-height:1.25;
+  }
+
+  .section-head h2{
+    font-size:22px;
+  }
+
+  .section-head p{
     font-size:12px;
   }
 
@@ -1022,20 +1155,16 @@ body{
 
 <div class="bg"></div>
 
-<!-- TINH HÀ -->
 <div class="stars" id="stars"></div>
 
-<!-- SAO CHẠY -->
 <div class="stars">
   <div class="shooting-star" style="top:10%; left:-20%; animation-delay:0s;"></div>
   <div class="shooting-star" style="top:35%; left:-30%; animation-delay:3s;"></div>
   <div class="shooting-star" style="top:60%; left:-25%; animation-delay:7s;"></div>
 </div>
 
-<!-- SAO RƠI -->
 <div class="stars" id="fallingStars"></div>
 
-<!-- MÂY -->
 <div class="clouds">
   <div class="cloud cloud1"></div>
   <div class="cloud cloud2"></div>
@@ -1048,8 +1177,6 @@ body{
 
 <div class="container">
 
-<!-- HERO -->
-
 <section class="hero">
 
 <div class="hero-inner">
@@ -1059,23 +1186,27 @@ body{
 <div class="section-head">
 
 <h2 style="
-font-size:clamp(42px,6vw,80px);
+font-size:clamp(34px,6vw,80px);
 font-weight:900;
 color:#f5d0fe;
 text-shadow:0 0 30px rgba(168,85,247,.5);
 margin-bottom:20px;
 text-align:center;
-white-space:nowrap;
+line-height:1.1;
+overflow-wrap:anywhere;
+word-break:break-word;
 ">
 WISHING WALL
 </h2>
 
 <p style="
-font-size:clamp(16px,2vw,26px);
+font-size:clamp(14px,2vw,26px);
 letter-spacing:1px;
 color:#ffffff;
 text-align:center;
-white-space:nowrap;
+line-height:1.5;
+overflow-wrap:anywhere;
+word-break:break-word;
 ">
 ✦ CAPTAIN BOY - TINH HÀ SAY HI ✦
 </p>
@@ -1084,8 +1215,6 @@ white-space:nowrap;
 
 </div>
 </section>
-
-<!-- CUU CO CANH -->
 
 <section class="cuucocanh-section">
 
@@ -1111,8 +1240,6 @@ Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
 
 </section>
 
-<!-- WALL -->
-
 <section class="wall">
 
 <div class="section-head">
@@ -1137,14 +1264,10 @@ PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
 
 </div>
 
-<!-- BUTTON -->
-
 <button class="floating-btn" onclick="toggleModal(true)">
 <span>+</span>
 GỬI LỜI CHÚC
 </button>
-
-<!-- MODAL -->
 
 <div class="modal" id="wishModal">
 
@@ -1198,8 +1321,6 @@ GỬI NGAY ✨
 
 </div>
 
-<!-- MUSIC -->
-
 <audio id="bgMusic" loop>
 <source src="./music.mp3" type="audio/mpeg">
 </audio>
@@ -1209,8 +1330,6 @@ GỬI NGAY ✨
 </button>
 
 <script>
-
-/* ================= CONFIG ================= */
 
 const CONFIG = {
 
@@ -1223,8 +1342,6 @@ googleScriptUrl:
 
 let listApproved = [];
 let flyInterval = null;
-
-/* ================= TINH HÀ ================= */
 
 const starsWrap =
 document.getElementById("stars");
@@ -1252,8 +1369,6 @@ starsWrap.appendChild(star);
 
 }
 
-/* ================= SAO RƠI ================= */
-
 const fallingWrap =
 document.getElementById("fallingStars");
 
@@ -1277,8 +1392,6 @@ fallingWrap.appendChild(fall);
 
 }
 
-/* ================= MODAL ================= */
-
 function toggleModal(show){
 
 document
@@ -1294,8 +1407,6 @@ toggleModal(false);
 }
 
 });
-
-/* ================= FETCH ================= */
 
 async function fetchWishes(){
 
@@ -1330,8 +1441,6 @@ error
 }
 
 }
-
-/* ================= WALL ================= */
 
 function renderWall(){
 
@@ -1382,8 +1491,6 @@ ${escapeHtml(item.message)}
 
 }
 
-/* ================= WISH BAY ================= */
-
 function startFlying(){
 
 const area =
@@ -1421,7 +1528,7 @@ document.createElement("div");
 el.className = "flying-wish";
 
 el.style.left =
-Math.random() * 82 + "%";
+Math.random() * 70 + "%";
 
 el.style.animationDuration =
 (7 + Math.random() * 4) + "s";
@@ -1449,8 +1556,6 @@ flyInterval =
 setInterval(createWish,2200);
 
 }
-
-/* ================= SUBMIT ================= */
 
 document
 .getElementById("wishForm")
@@ -1548,8 +1653,6 @@ btn.innerText = "GỬI NGAY ✨";
 
 });
 
-/* ================= ESCAPE ================= */
-
 function escapeHtml(text){
 
 const div =
@@ -1561,13 +1664,9 @@ return div.innerHTML;
 
 }
 
-/* ================= INIT ================= */
-
 fetchWishes();
 
 setInterval(fetchWishes,30000);
-
-/* ================= MUSIC ================= */
 
 const music =
 document.getElementById("bgMusic");
