@@ -377,11 +377,11 @@ body{
   display:grid;
 
   grid-template-columns:
-  repeat(auto-fit,minmax(300px,1fr));
+  repeat(auto-fit,minmax(340px,1fr));
 
-  gap:24px;
+  gap:10px;
 
-  margin-top:30px;
+  margin-top:24px;
 }
 
 /* SHEEP CARD */
@@ -390,8 +390,9 @@ body{
   position:relative;
 
   width:100%;
-  max-width:300px;
-  height:380px;
+
+  max-width:360px;
+  height:450px;
 
   margin:auto;
 
@@ -399,8 +400,7 @@ body{
   background-repeat:no-repeat;
   background-position:center;
 
-  /* SHEEP TO HƠN */
-  background-size:108%;
+  background-size:112%;
 
   overflow:hidden;
 }
@@ -437,14 +437,14 @@ body{
 
   color:#ff2d2d;
 
-  font-size:12px;
+  font-size:14px;
   font-weight:900;
 
   line-height:1.2;
 
-  margin-bottom:7px;
+  margin-bottom:8px;
 
-  min-height:30px;
+  min-height:34px;
 
   word-break:break-word;
   overflow-wrap:break-word;
@@ -465,10 +465,10 @@ body{
 
   color:#111;
 
-  font-size:10px;
+  font-size:11px;
   font-weight:700;
 
-  line-height:1.28;
+  line-height:1.35;
 
   text-align:center;
 
@@ -519,132 +519,6 @@ body{
   font-weight:800;
 }
 
-/* MODAL */
-
-.modal{
-  position:fixed;
-  inset:0;
-
-  z-index:999;
-
-  background:rgba(0,0,0,.75);
-
-  display:none;
-  align-items:center;
-  justify-content:center;
-
-  padding:20px;
-
-  backdrop-filter:blur(8px);
-}
-
-.modal.active{
-  display:flex;
-}
-
-.modal-box{
-  width:min(520px,100%);
-
-  background:rgba(15,13,32,.92);
-
-  border:1px solid var(--line);
-
-  border-radius:34px;
-
-  padding:34px;
-
-  position:relative;
-}
-
-.close{
-  position:absolute;
-
-  right:20px;
-  top:16px;
-
-  border:none;
-  background:none;
-
-  color:#fff;
-
-  font-size:30px;
-  cursor:pointer;
-}
-
-.modal-box h3{
-  font-size:32px;
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-.modal-box .sub{
-  color:rgba(255,255,255,.7);
-  margin-bottom:26px;
-  font-size:14px;
-}
-
-.input-group{
-  margin-bottom:18px;
-}
-
-.input-group label{
-  display:block;
-  margin-bottom:8px;
-
-  font-size:13px;
-  font-weight:600;
-
-  color:rgba(255,255,255,.75);
-}
-
-.input-group input,
-.input-group textarea{
-  width:100%;
-
-  border:none;
-  outline:none;
-
-  border-radius:18px;
-
-  padding:16px 18px;
-
-  background:
-  rgba(255,255,255,.05);
-
-  border:
-  1px solid rgba(255,255,255,.06);
-
-  color:#fff;
-
-  font-family:inherit;
-  font-size:15px;
-
-  resize:none;
-}
-
-.submit-btn{
-  width:100%;
-
-  border:none;
-  cursor:pointer;
-
-  padding:18px;
-
-  border-radius:20px;
-
-  background:
-  linear-gradient(
-  135deg,
-  #8b5cf6,
-  #c084fc
-  );
-
-  color:#fff;
-
-  font-size:15px;
-  font-weight:800;
-}
-
 /* FOOTER */
 
 .footer{
@@ -661,36 +535,6 @@ body{
   padding:0 12px;
 }
 
-/* MUSIC */
-
-#musicBtn{
-  position:fixed;
-
-  left:20px;
-  bottom:20px;
-
-  z-index:9999;
-
-  width:58px;
-  height:58px;
-
-  border:none;
-  border-radius:50%;
-
-  background:
-  linear-gradient(
-  135deg,
-  #8b5cf6,
-  #c084fc
-  );
-
-  color:#fff;
-
-  font-size:24px;
-
-  cursor:pointer;
-}
-
 /* MOBILE */
 
 @media(max-width:768px){
@@ -701,14 +545,14 @@ body{
 
   .wish-grid{
     grid-template-columns:repeat(2,1fr);
-    gap:10px;
+    gap:4px;
   }
 
   .wish-card{
-    max-width:235px;
-    height:300px;
+    max-width:270px;
+    height:340px;
 
-    background-size:108%;
+    background-size:112%;
   }
 
   .wish-content{
@@ -718,17 +562,13 @@ body{
   }
 
   .wish-content strong{
-    font-size:9px;
-    margin-bottom:5px;
-    min-height:22px;
-    line-height:1.15;
+    font-size:10px;
+    min-height:24px;
   }
 
   .wish-content p{
-    font-size:8px;
-    line-height:1.15;
-
-    -webkit-line-clamp:7;
+    font-size:8.5px;
+    line-height:1.18;
   }
 
   .footer{
@@ -788,30 +628,6 @@ color:#ffffff;
 
 </section>
 
-<section>
-
-<div class="section-head">
-
-<h2>
-CỪU CÓ CÁNH WITH LOVE CAPTAIN BOY
-</h2>
-
-<p>
-Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
-</p>
-
-</div>
-
-<div class="wish-cuucocanh" id="wishCuucocanh">
-
-<div class="loading">
-Đang tải lời chúc...
-</div>
-
-</div>
-
-</section>
-
 <section class="wall">
 
 <div class="section-head">
@@ -826,13 +642,29 @@ Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
 
 </div>
 
-<div class="wish-grid" id="wishGrid"></div>
+<div class="wish-grid">
 
-</section>
+<div class="wish-card">
+<div class="wish-content">
+<strong>From: CỪU CÓ CÁNH</strong>
+<p>Captain Boy mãi đỉnh ✨</p>
+</div>
+</div>
+
+<div class="wish-card">
+<div class="wish-content">
+<strong>From: FAN CB</strong>
+<p>Chúc CAPTAIN BOY luôn tỏa sáng trên mọi sân khấu ✨</p>
+</div>
+</div>
+
+</div>
 
 <div class="footer">
 PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
 </div>
+
+</section>
 
 </div>
 
