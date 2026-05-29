@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
-    <title>CAPTAIN BOY • CỪU CÓ CÁNH WISHES</title>
+    <title>CAPTAIN BOY • GALAXY WISHES</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,17 +14,25 @@
             --text: #ffffff; --card-t: #1a1a1a; --red: #ff3b3b;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* FIX FULL PHÔNG CHỮ */
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            font-family: 'Inter', sans-serif !important; 
+        }
+        
         html { scroll-behavior: smooth; }
+        
         body {
-            font-family: 'Inter', sans-serif; background: var(--bg);
-            color: var(--text); overflow-x: hidden; line-height: 1.4;
+            background: var(--bg);
+            color: var(--text); 
+            overflow-x: hidden; 
+            line-height: 1.4;
         }
 
-        /* --- VŨ TRỤ BACKGROUND (FIX LỖI CLICK) --- */
+        /* --- VŨ TRỤ BACKGROUND --- */
         .universe { 
             position: fixed; inset: 0; z-index: -10; 
-            background: #05030d; pointer-events: none; /* Không chặn click */
+            background: #05030d; pointer-events: none;
         }
         .nebula {
             position: absolute; inset: 0;
@@ -50,27 +58,25 @@
         .intro-hero {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
-            background: rgba(0,0,0,0.1); position: relative;
-            pointer-events: none; /* Cho phép click xuyên qua phần trống */
+            position: relative;
         }
-        .intro-hero h1, .intro-hero .wishing-wall, .intro-hero .sub-title {
-            pointer-events: auto; /* Chỉ cho phép click vào chữ nếu cần */
-        }
+        
         .intro-hero h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(45px, 12vw, 120px); font-weight: 900;
+            font-family: 'Montserrat', sans-serif !important;
+            font-size: clamp(40px, 12vw, 110px); font-weight: 900;
             line-height: 0.9; color: #fff; margin-bottom: 10px;
+            text-transform: uppercase;
         }
         .intro-hero .wishing-wall {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(28px, 8vw, 80px); font-weight: 900;
+            font-family: 'Montserrat', sans-serif !important;
+            font-size: clamp(26px, 8vw, 75px); font-weight: 900;
             background: linear-gradient(to bottom, #fff, var(--pl));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px var(--p));
+            filter: drop-shadow(0 0 15px var(--p));
         }
         .intro-hero .sub-title {
-            font-size: clamp(10px, 3.5vw, 22px); font-weight: 700;
-            letter-spacing: 2px; margin-top: 30px;
+            font-size: clamp(10px, 3.2vw, 20px); font-weight: 700;
+            letter-spacing: 2px; margin-top: 25px; opacity: 0.9;
         }
         .scroll-hint {
             position: absolute; bottom: 30px; font-size: 11px;
@@ -78,29 +84,37 @@
         }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
 
-        /* --- CONTAINER & PYRAMID (FIX LỖI CLICK) --- */
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 10px; position: relative; z-index: 1; }
+        /* --- CONTAINER & PYRAMID BOX (FIX LỖI CẮT NỀN) --- */
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 10px; position: relative; }
+        
         .pyramid-box {
             position: relative; width: 100%; height: 350px; margin: 40px 0;
-            background: rgba(255,255,255,0.03); border-radius: 25px;
-            border: 1px solid rgba(255,255,255,0.1); overflow: hidden;
-            clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+            background: rgba(255,255,255,0.04); border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1); 
+            overflow: hidden; /* Vẫn giữ overflow hidden nhưng bỏ clip-path */
             backdrop-filter: blur(10px);
-            pointer-events: none; /* Quan trọng: Không chặn click của Sheep Card bên dưới */
-        }
-        .fly-card {
-            position: absolute; background: rgba(255, 255, 255, 0.95);
-            padding: 10px 15px; border-radius: 12px; color: #111;
-            font-size: 10px; font-weight: 800; box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-            animation: pyramidTravel var(--dur) linear infinite;
-            max-width: 250px; white-space: normal;
+            pointer-events: none;
         }
 
-        /* --- GRID WALL --- */
+        .fly-card {
+            position: absolute; background: rgba(255, 255, 255, 0.95);
+            padding: 12px 18px; border-radius: 15px; color: #111;
+            font-size: 11px; font-weight: 700; box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            animation: pyramidTravel var(--dur) linear infinite;
+            max-width: 280px; white-space: normal;
+            border-left: 4px solid var(--p);
+        }
+        @keyframes pyramidTravel {
+            0% { bottom: -150px; left: var(--x); transform: scale(1); opacity: 0; }
+            15% { opacity: 1; }
+            100% { bottom: 500px; left: 50%; transform: scale(0.4); opacity: 0; }
+        }
+
+        /* --- GRID WALL (2 CỘT MOBILE) --- */
         .grid-wall {
             display: grid; grid-template-columns: repeat(2, 1fr); 
             gap: 12px; padding-bottom: 150px;
-            position: relative; z-index: 10; /* Đảm bảo nằm trên cùng để click được */
+            position: relative; z-index: 10;
         }
         @media (min-width: 768px) { .grid-wall { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
 
@@ -109,32 +123,30 @@
             background: url("./sheep.png") center/contain no-repeat;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer; transition: 0.3s;
-            z-index: 20; /* Ưu tiên cực cao */
-            pointer-events: auto; /* Luôn cho phép click */
         }
         .sheep-card:hover { transform: scale(1.05); }
 
         .card-inner {
             position: absolute; width: 72%; height: 58%; top: 25%;
             display: flex; flex-direction: column; text-align: center;
-            padding: 5px; overflow: hidden; pointer-events: none; /* Để click truyền vào sheep-card */
+            padding: 5px; overflow-y: auto; scrollbar-width: none;
         }
-        .card-inner b { color: var(--red); font-size: clamp(9px, 3vw, 13px); margin-bottom: 2px; font-weight: 900; }
+        .card-inner::-webkit-scrollbar { display: none; }
+        .card-inner b { color: var(--red); font-size: clamp(10px, 3vw, 14px); margin-bottom: 2px; font-weight: 900; }
         .card-inner span {
             color: var(--card-t); font-weight: 700; line-height: 1.2;
-            font-size: clamp(8px, 2.3vw, 11px);
-            display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;
+            font-size: clamp(8.5px, 2.3vw, 11px);
         }
 
-        /* --- MODAL DEEP READ --- */
+        /* --- MODAL --- */
         .read-modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
             display: none; align-items: center; justify-content: center;
-            z-index: 5000; padding: 20px; backdrop-filter: blur(20px);
+            z-index: 5000; padding: 20px; backdrop-filter: blur(15px);
         }
         .read-modal.active { display: flex; }
         .read-box {
-            background: #fff; width: 100%; max-width: 450px; padding: 35px;
+            background: #fff; width: 100%; max-width: 480px; padding: 35px;
             border-radius: 40px; color: #111; text-align: center;
         }
         .read-box h2 { font-size: 26px; color: var(--p); margin-bottom: 15px; font-weight: 900; }
@@ -145,12 +157,13 @@
             position: fixed; right: 15px; bottom: 25px;
             padding: 14px 22px; background: linear-gradient(135deg, var(--p), var(--pl));
             border: none; border-radius: 50px; color: #fff; font-weight: 900; z-index: 4000;
+            cursor: pointer; box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
         }
         #musicBtn {
             position: fixed; left: 15px; bottom: 25px;
             width: 45px; height: 45px; border-radius: 50%;
             background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            color: #fff; z-index: 4000;
+            color: #fff; z-index: 4000; cursor: pointer;
         }
 
         .modal-form {
@@ -164,10 +177,11 @@
         }
         .st-input {
             width: 100%; padding: 14px; margin: 10px 0; background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-family: 'Inter';
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff;
+            outline: none;
         }
 
-        footer { text-align: center; padding: 50px; font-size: 10px; opacity: 0.5; }
+        footer { text-align: center; padding: 60px; font-size: 10px; opacity: 0.5; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -178,13 +192,13 @@
         <div id="rainField"></div>
     </div>
 
+    <!-- HEADER INTRO -->
     <header class="intro-hero">
+        <div style="font-size: 10px; letter-spacing: 8px; opacity: 0.6; margin-bottom: 5px;">THE RETURN OF</div>
         <h1>CAPTAIN BOY</h1>
         <div class="wishing-wall">WISHING WALL</div>
-        <div class="sub-title">
-            ✦ CAPTAIN BOY - TINH HÀ SAY HI ✦
-        </div>
-        <div class="scroll-hint">Lướt xuống khám phá ↓</div>
+        <div class="sub-title">✦ CAPTAIN BOY - TINH HÀ SAY HI ✦</div>
+        <div class="scroll-hint">Vuốt xuống để khám phá ↓</div>
     </header>
 
     <div class="container" id="main">
@@ -192,9 +206,9 @@
         <div class="pyramid-box" id="flyingZone"></div>
 
         <section>
-            <div style="text-align: center; margin: 30px 0 20px;">
-                <h2 style="font-size: 28px; font-weight: 900;">WALL OF LOVE</h2>
-                <p style="opacity: 0.6; font-size: 12px;">Nhấn vào mỗi con cừu để đọc trọn tâm tình ✨</p>
+            <div style="text-align: center; margin: 40px 0 20px;">
+                <h2 style="font-size: 30px; font-weight: 900;">WALL OF LOVE</h2>
+                <p style="opacity: 0.6; font-size: 12px;">Nhấn vào con cừu để đọc trọn lời chúc ✨</p>
             </div>
             <div class="grid-wall" id="wishGrid"></div>
         </section>
@@ -205,23 +219,23 @@
     <button class="btn-float" onclick="setModal('wishModal', true)">+ GỬI LỜI CHÚC</button>
     <button id="musicBtn">🔊</button>
 
-    <!-- MODAL ĐỌC CHI TIẾT -->
+    <!-- XEM CHI TIẾT -->
     <div class="read-modal" id="readModal" onclick="setModal('readModal', false)">
         <div class="read-box" onclick="event.stopPropagation()">
             <h2 id="readName">From: Cừu</h2>
             <p id="readMsg">...</p>
-            <button onclick="setModal('readModal', false)" style="margin-top:25px; padding:12px 30px; border-radius:20px; border:none; background:var(--p); color:#fff; font-weight:900;">Gửi đến vũ trụ</button>
+            <button onclick="setModal('readModal', false)" style="margin-top:25px; padding:12px 30px; border-radius:20px; border:none; background:var(--p); color:#fff; font-weight:900; cursor:pointer">ĐÓNG</button>
         </div>
     </div>
 
-    <!-- FORM GỬI -->
+    <!-- GỬI LỜI CHÚC -->
     <div class="modal-form" id="wishModal">
         <div class="form-box">
-            <h2 style="margin-bottom:15px">Gửi Lời Chúc ✨</h2>
-            <input type="text" id="uName" class="st-input" placeholder="Tên của bạn..." maxlength="25">
-            <textarea id="uMsg" class="st-input" rows="4" placeholder="Lời chúc gửi đến CAPTAIN BOY..." maxlength="1000"></textarea>
-            <button onclick="submitWish()" id="sendBtn" style="width:100%; padding:16px; background:var(--p); border:none; border-radius:15px; color:#fff; font-weight:900;">GỬI NGAY</button>
-            <button onclick="setModal('wishModal', false)" style="width:100%; background:none; border:none; color:#666; margin-top:10px">Hủy</button>
+            <h2 style="margin-bottom:15px; font-weight:900">Gửi Tín Hiệu ✨</h2>
+            <input type="text" id="uName" class="st-input" placeholder="Tên của Cừu..." maxlength="25">
+            <textarea id="uMsg" class="st-input" rows="5" placeholder="Gửi lời chúc đến CAPTAIN BOY..." maxlength="1000"></textarea>
+            <button onclick="submitWish()" id="sendBtn" style="width:100%; padding:16px; background:var(--p); border:none; border-radius:15px; color:#fff; font-weight:900; cursor:pointer">GỬI NGAY ✨</button>
+            <button onclick="setModal('wishModal', false)" style="width:100%; background:none; border:none; color:#666; margin-top:10px; cursor:pointer">Hủy</button>
         </div>
     </div>
 
@@ -230,7 +244,7 @@
     <script>
         const API = "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
 
-        // Tinh hà
+        // Tinh hà & Mưa sao
         const sf = document.getElementById("starField");
         const rf = document.getElementById("rainField");
         for(let i=0; i<120; i++){
@@ -264,7 +278,7 @@
             grid.innerHTML = list.slice().reverse().map(i => `
                 <div class="sheep-card" onclick="openRead('${esc(i.name)}', '${esc(i.message)}')">
                     <div class="card-inner">
-                        <b>${esc(i.name)}</b>
+                        <b>From: ${esc(i.name)}</b>
                         <span>${esc(i.message)}</span>
                     </div>
                 </div>
@@ -285,24 +299,24 @@
                 const c = document.createElement("div");
                 c.className = "fly-card";
                 c.style.setProperty('--x', (Math.random()*60 + 20) + "%");
-                c.style.setProperty('--dur', (Math.random()*5 + 8) + "s");
+                c.style.setProperty('--dur', (Math.random()*6 + 10) + "s");
                 c.innerHTML = `<b>${esc(i.name)}:</b><br>${esc(i.message)}`;
                 zone.appendChild(c);
-                setTimeout(() => c.remove(), 10000);
-            }, 3500);
+                setTimeout(() => c.remove(), 15000);
+            }, 3000);
         }
 
         async function submitWish() {
             const n = document.getElementById("uName").value.trim();
             const m = document.getElementById("uMsg").value.trim();
-            if(!n || !m) return alert("Điền đủ yêu thương nhé!");
+            if(!n || !m) return alert("Cừu ơi hãy điền đủ thông tin nhé!");
             const btn = document.getElementById("sendBtn");
             btn.innerText = "ĐANG GỬI..."; btn.disabled = true;
             try {
                 await fetch(API, { method:"POST", body: JSON.stringify({action:"submit", name:n, message:m, id:Date.now()}) });
                 alert("Thành công! Lời chúc đã bay vào vũ trụ ✨");
                 setModal('wishModal', false); location.reload();
-            } catch(e) { alert("Lỗi!"); btn.disabled = false; btn.innerText = "GỬI NGAY"; }
+            } catch(e) { alert("Lỗi gửi!"); btn.disabled = false; btn.innerText = "GỬI NGAY ✨"; }
         }
 
         function setModal(id, s) { document.getElementById(id).classList.toggle("active", s); }
