@@ -6,7 +6,6 @@
 
 <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
@@ -17,15 +16,11 @@
   --bg:#05010f;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
   font-family:'Inter',sans-serif;
-  background:#05010f;
+  background:var(--bg);
   color:#fff;
   overflow-x:hidden;
 }
@@ -39,14 +34,6 @@ body{
     linear-gradient(rgba(5,1,15,.4),rgba(5,1,15,.8)),
     url("./nền.png");
   background-size:cover;
-  background-position:center;
-  animation:bgMove 35s ease-in-out infinite;
-}
-
-@keyframes bgMove{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.05);}
-  100%{transform:scale(1);}
 }
 
 /* GALAXY */
@@ -61,28 +48,16 @@ body{
 /* GLOW */
 .glow{
   position:fixed;
-  border-radius:50%;
+  width:400px;
+  height:400px;
   filter:blur(120px);
-  opacity:.22;
+  opacity:.2;
+  border-radius:50%;
   z-index:-35;
-  animation:glowMove 14s ease-in-out infinite;
 }
 
-.glow.one{
-  width:420px;
-  height:420px;
-  background:#7c3aed;
-  top:-120px;
-  left:-120px;
-}
-
-.glow.two{
-  width:360px;
-  height:360px;
-  background:#c084fc;
-  bottom:-120px;
-  right:-120px;
-}
+.glow.one{background:#7c3aed;top:-120px;left:-120px;}
+.glow.two{background:#c084fc;bottom:-120px;right:-120px;}
 
 /* NOISE */
 .noise{
@@ -91,8 +66,8 @@ body{
   opacity:.04;
   z-index:-20;
   background-image:
-    linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px);
+    linear-gradient(#fff2 1px,transparent 1px),
+    linear-gradient(90deg,#fff2 1px,transparent 1px);
   background-size:3px 3px;
 }
 
@@ -113,48 +88,46 @@ body{
 }
 
 .hero h1{
-  font-size:clamp(42px,10vw,150px);
+  font-size:clamp(40px,10vw,150px);
   font-weight:900;
-  white-space:nowrap;
   background:linear-gradient(#fff,#d8b4fe);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  white-space:nowrap;
 }
 
 .hero h2{
   font-size:clamp(22px,5vw,80px);
-  white-space:nowrap;
   color:#f5d0fe;
+  white-space:nowrap;
 }
 
-.hero p{
-  font-size:clamp(12px,2vw,24px);
-}
+.hero p{font-size:clamp(12px,2vw,22px);}
 
 /* SECTION */
 .section-head{
   text-align:center;
-  margin-bottom:30px;
+  margin-bottom:20px;
 }
 
 .section-head h2{
-  font-size:clamp(22px,3vw,46px);
+  font-size:clamp(22px,4vw,44px);
   font-weight:900;
 }
 
-/* FLYING AREA */
+/* FLY AREA */
 .wish-cuucocanh{
   position:relative;
-  height:430px;
+  height:420px;
   overflow:hidden;
   border-radius:36px;
   background:linear-gradient(rgba(20,14,45,.72),rgba(8,5,18,.9));
 }
 
-/* FLY WISH */
+/* FLYING WISH */
 .flying-wish{
   position:absolute;
-  bottom:-140px;
+  bottom:-120px;
   min-width:160px;
   max-width:260px;
   padding:14px 18px;
@@ -162,7 +135,6 @@ body{
   background:radial-gradient(#fff,#f3e8ff);
   color:#2d1b45;
   animation:flyUp linear forwards;
-  overflow:hidden;
 }
 
 .flying-wish strong{
@@ -177,19 +149,24 @@ body{
   overflow-wrap:anywhere;
 }
 
-/* WALL */
+/* SHEEP CARD (FIX FULL) */
 .wish-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:20px;
+  justify-items:center;
 }
 
-/* SHEEP CARD FIXED */
+/* 🔥 FIXED SHEEP CARD */
 .wish-card{
   position:relative;
-  height:320px;
+  width:100%;
+  max-width:520px;
+  height:340px;
+
   background:url("./sheep.png") center/100% 100% no-repeat;
-  padding:70px 80px 50px 150px;
+
+  padding:70px 90px 50px 150px;
 
   display:flex;
   flex-direction:column;
@@ -197,34 +174,99 @@ body{
 }
 
 .wish-card strong{
-  color:#ff3b3b;
   font-size:18px;
+  font-weight:900;
+  color:#ff3b3b;
   text-align:center;
+  margin-bottom:10px;
 }
 
+/* 🔥 FIX TEXT NOT OVERFLOW */
 .wish-card p{
   font-size:16px;
   color:#2d1b45;
 
-  max-width:100%;
   word-break:break-word;
   overflow-wrap:anywhere;
 
   line-height:1.4;
+
+  max-height:180px;
+  overflow:hidden;
+}
+
+/* BUTTONS */
+.floating-btn{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:999;
+  padding:14px 22px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#8b5cf6,#c084fc);
+  border:none;
+  color:#fff;
+  font-weight:800;
+  cursor:pointer;
+}
+
+#musicBtn{
+  position:fixed;
+  left:24px;
+  bottom:24px;
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  border:none;
+  background:linear-gradient(135deg,#8b5cf6,#c084fc);
+  color:#fff;
+  z-index:999;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.7);
+  z-index:9999;
+}
+
+.modal.active{display:flex;}
+
+.modal-box{
+  background:#120a25;
+  padding:30px;
+  border-radius:20px;
+  width:90%;
+  max-width:500px;
+}
+
+.input-group input,
+.input-group textarea{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+
+/* FOOTER */
+.footer{
+  margin-top:80px;
+  text-align:center;
+  opacity:.5;
+}
+
+/* ANIMATION */
+@keyframes flyUp{
+  0%{transform:translateY(0) scale(.7);opacity:0;}
+  100%{transform:translateY(-800px) scale(1.1);opacity:0;}
 }
 
 /* MOBILE FIX */
 @media(max-width:768px){
-
-  .hero h1{
-    font-size:34px;
-    white-space:normal;
-  }
-
-  .hero h2{
-    font-size:20px;
-    white-space:normal;
-  }
 
   .wish-card{
     height:240px;
@@ -235,12 +277,11 @@ body{
     font-size:12px;
   }
 
-}
+  .hero h1{
+    font-size:34px;
+    white-space:normal;
+  }
 
-/* ANIMATIONS */
-@keyframes flyUp{
-  0%{transform:translateY(0) scale(.7);opacity:0;}
-  100%{transform:translateY(-800px) scale(1.1);opacity:0;}
 }
 
 </style>
@@ -278,28 +319,47 @@ body{
   <div class="wish-grid" id="wishGrid"></div>
 </section>
 
+<div class="footer">
+PROJECT BY TEAM BOT • CAPTAIN BOY
+</div>
+
+</div>
+
+<button class="floating-btn" onclick="toggleModal(true)">GỬI LỜI CHÚC</button>
+<button id="musicBtn">🔊</button>
+
+<!-- MODAL -->
+<div class="modal" id="wishModal">
+  <div class="modal-box">
+    <h3>Gửi lời chúc</h3>
+    <form id="wishForm">
+      <input id="userName" placeholder="Tên">
+      <textarea id="userMsg" placeholder="Lời chúc"></textarea>
+      <button>GỬI</button>
+    </form>
+  </div>
 </div>
 
 <script>
 
 /* API */
-const API = "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
+const API="https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
 
-let list = [];
+let list=[];
 
+/* LOAD */
 async function fetchData(){
-  const res = await fetch(API + "?action=list");
-  const data = await res.json();
-  list = data.approved || [];
+  const res=await fetch(API+"?action=list");
+  const data=await res.json();
+  list=data.approved||[];
   render();
   fly();
 }
 
-/* RENDER WALL */
+/* RENDER CARD */
 function render(){
-  const box = document.getElementById("wishGrid");
-
-  box.innerHTML = list.map(i=>`
+  document.getElementById("wishGrid").innerHTML=
+  list.map(i=>`
     <div class="wish-card">
       <strong>${i.name}</strong>
       <p>${i.message}</p>
@@ -309,22 +369,22 @@ function render(){
 
 /* FLY */
 function fly(){
-  const box = document.getElementById("wishCuucocanh");
-  box.innerHTML = "";
+  const box=document.getElementById("wishCuucocanh");
+  box.innerHTML="";
 
   setInterval(()=>{
-    if(!list.length) return;
+    if(!list.length)return;
 
-    const w = list[Math.floor(Math.random()*list.length)];
+    const w=list[Math.floor(Math.random()*list.length)];
 
-    const el = document.createElement("div");
-    el.className = "flying-wish";
-    el.style.left = Math.random()*80 + "%";
-    el.innerHTML = `<strong>${w.name}</strong><span>${w.message}</span>`;
+    const el=document.createElement("div");
+    el.className="flying-wish";
+    el.style.left=Math.random()*80+"%";
+    el.innerHTML=`<strong>${w.name}</strong><span>${w.message}</span>`;
 
     box.appendChild(el);
+    setTimeout(()=>el.remove(),9000);
 
-    setTimeout(()=>el.remove(),10000);
   },2000);
 }
 
