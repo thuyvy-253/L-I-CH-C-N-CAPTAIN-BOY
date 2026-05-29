@@ -2,22 +2,25 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- FONT ĐẸP HƠN -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
+  --bg:#060510;
   --primary:#8b5cf6;
   --primary2:#c084fc;
+  --text:#ffffff;
 }
+
+/* RESET */
 
 *{
   margin:0;
@@ -31,27 +34,31 @@ html{
 
 body{
   font-family:'Inter',sans-serif;
-  background:#050510;
-  color:#fff;
+  background:#060510;
+  color:white;
   overflow-x:hidden;
   min-height:100vh;
 }
 
 /* =========================
-BACKGROUND GALAXY
+GALAXY BACKGROUND
 ========================= */
 
 .bg{
   position:fixed;
   inset:0;
-  z-index:-10;
+  z-index:-30;
 
   background:
-    linear-gradient(
-      rgba(5,5,16,.45),
-      rgba(5,5,16,.78)
-    ),
-    url("./nền.png");
+  radial-gradient(circle at top,
+  rgba(139,92,246,.22),
+  transparent 35%),
+
+  radial-gradient(circle at bottom,
+  rgba(192,132,252,.15),
+  transparent 40%),
+
+  url("./nền.png");
 
   background-size:cover;
   background-position:center;
@@ -65,7 +72,7 @@ BACKGROUND GALAXY
     transform:scale(1);
   }
   50%{
-    transform:scale(1.05);
+    transform:scale(1.04);
   }
   100%{
     transform:scale(1);
@@ -73,7 +80,25 @@ BACKGROUND GALAXY
 }
 
 /* =========================
-GALAXY LAYER
+NOISE
+========================= */
+
+.noise{
+  position:fixed;
+  inset:0;
+  z-index:-25;
+
+  opacity:.05;
+
+  background-image:
+  linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+
+  background-size:3px 3px;
+}
+
+/* =========================
+GALAXY CANVAS
 ========================= */
 
 #galaxy{
@@ -81,7 +106,7 @@ GALAXY LAYER
   inset:0;
   width:100%;
   height:100%;
-  z-index:-8;
+  z-index:-20;
 }
 
 /* =========================
@@ -90,36 +115,40 @@ PURPLE GLOW
 
 .glow{
   position:fixed;
+
+  width:500px;
+  height:500px;
+
   border-radius:50%;
+
   filter:blur(120px);
-  opacity:.28;
-  z-index:-7;
-  animation:floatGlow 12s ease-in-out infinite;
+
+  opacity:.18;
+
+  z-index:-15;
+
+  animation:glowMove 12s ease-in-out infinite;
 }
 
 .glow.one{
-  width:420px;
-  height:420px;
+  top:-150px;
+  left:-120px;
   background:#7c3aed;
-  top:-120px;
-  left:-100px;
 }
 
 .glow.two{
-  width:350px;
-  height:350px;
+  bottom:-150px;
+  right:-120px;
   background:#c084fc;
-  bottom:-120px;
-  right:-80px;
   animation-delay:4s;
 }
 
-@keyframes floatGlow{
+@keyframes glowMove{
   0%,100%{
-    transform:translateY(0);
+    transform:translateY(0) scale(1);
   }
   50%{
-    transform:translateY(40px);
+    transform:translateY(40px) scale(1.08);
   }
 }
 
@@ -134,36 +163,37 @@ METEOR
   height:160px;
 
   background:
-    linear-gradient(
-      to bottom,
-      rgba(255,255,255,1),
-      rgba(255,255,255,0)
-    );
+  linear-gradient(
+    to bottom,
+    rgba(255,255,255,1),
+    rgba(255,255,255,0)
+  );
 
   transform:rotate(45deg);
 
-  filter:
-    drop-shadow(0 0 18px #fff);
+  filter:drop-shadow(0 0 15px white);
 
-  z-index:-5;
+  pointer-events:none;
 
-  animation:meteorFly linear forwards;
+  z-index:-10;
+
+  animation:meteor linear forwards;
 }
 
-@keyframes meteorFly{
+@keyframes meteor{
 
   from{
     transform:
-      translate(0,0)
-      rotate(45deg);
+    translate(0,0)
+    rotate(45deg);
 
     opacity:1;
   }
 
   to{
     transform:
-      translate(-1000px,1000px)
-      rotate(45deg);
+    translate(-1200px,1200px)
+    rotate(45deg);
 
     opacity:0;
   }
@@ -171,25 +201,32 @@ METEOR
 }
 
 /* =========================
-PARTICLE
+FLOAT PARTICLE
 ========================= */
 
 .particle{
   position:fixed;
-  border-radius:50%;
-  background:white;
-  pointer-events:none;
-  z-index:-6;
 
-  animation:particleFloat linear forwards;
+  width:4px;
+  height:4px;
+
+  border-radius:50%;
+
+  background:white;
+
+  opacity:.8;
+
+  pointer-events:none;
+
+  animation:floatUp linear forwards;
 }
 
-@keyframes particleFloat{
+@keyframes floatUp{
 
   from{
     transform:
-      translateY(0)
-      scale(.5);
+    translateY(0)
+    scale(.5);
 
     opacity:0;
   }
@@ -200,8 +237,8 @@ PARTICLE
 
   to{
     transform:
-      translateY(-120vh)
-      scale(1.8);
+    translateY(-120vh)
+    scale(1.8);
 
     opacity:0;
   }
@@ -213,7 +250,7 @@ CONTAINER
 ========================= */
 
 .container{
-  width:min(1200px,92%);
+  width:min(1180px,92%);
   margin:auto;
   padding-bottom:120px;
 }
@@ -238,62 +275,52 @@ HERO
   width:100%;
 }
 
-/* CHỮ KHÔNG BỊ ĐẨY XUỐNG */
 .hero h1{
 
-  font-family:'Orbitron',sans-serif;
+  font-family:
+  "Montserrat",
+  sans-serif;
 
-  font-size:clamp(60px,9vw,140px);
+  font-size:120px;
 
   font-weight:900;
 
-  line-height:1;
+  line-height:.95;
 
-  letter-spacing:4px;
+  letter-spacing:2px;
 
-  margin-bottom:18px;
-
-  white-space:nowrap;
+  margin-bottom:16px;
 
   background:
-    linear-gradient(
-      to bottom,
-      #ffffff,
-      #d8b4fe
-    );
+  linear-gradient(
+    to bottom,
+    #ffffff,
+    #d8b4fe
+  );
 
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 
   text-shadow:
-    0 0 30px rgba(168,85,247,.45);
+  0 0 30px rgba(168,85,247,.45);
 }
 
 .hero h2{
-
-  font-size:clamp(34px,5vw,72px);
+  font-size:72px;
 
   font-weight:900;
 
   color:#f5d0fe;
 
-  margin-bottom:18px;
-
-  white-space:nowrap;
+  margin-bottom:20px;
 
   text-shadow:
-    0 0 25px rgba(192,132,252,.45);
+  0 0 20px rgba(192,132,252,.35);
 }
 
 .hero p{
-
-  font-size:clamp(16px,2vw,28px);
-
-  color:#fff;
-
-  white-space:nowrap;
-
-  letter-spacing:1px;
+  font-size:28px;
+  color:white;
 }
 
 /* =========================
@@ -302,21 +329,21 @@ SECTION HEAD
 
 .section-head{
   text-align:center;
-  margin-bottom:28px;
+  margin-bottom:32px;
 }
 
 .section-head h2{
-  font-size:clamp(24px,3vw,44px);
-  margin-bottom:10px;
+  font-size:42px;
   font-weight:900;
+  margin-bottom:10px;
 }
 
 .section-head p{
-  color:rgba(255,255,255,.72);
+  color:rgba(255,255,255,.75);
 }
 
 /* =========================
-FLYING SECTION
+FLYING WISH
 ========================= */
 
 .wish-cuucocanh{
@@ -330,19 +357,15 @@ FLYING SECTION
   border-radius:36px;
 
   background:
-    linear-gradient(
-      rgba(18,12,40,.55),
-      rgba(10,8,25,.82)
-    );
+  linear-gradient(
+    rgba(20,15,45,.75),
+    rgba(10,8,25,.92)
+  );
 
   border:1px solid rgba(255,255,255,.08);
 
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(10px);
 }
-
-/* =========================
-FLYING WISH
-========================= */
 
 .flying-wish{
   position:absolute;
@@ -350,28 +373,25 @@ FLYING WISH
   bottom:-120px;
 
   min-width:180px;
-  max-width:300px;
+  max-width:320px;
 
-  padding:18px 24px;
+  padding:18px 26px;
 
   border-radius:999px;
 
   background:
-    radial-gradient(circle at top,
-    #fff,
-    #f3e8ff 70%);
+  radial-gradient(circle at top,
+  #fff,
+  #f3e8ff 70%);
 
   color:#2d1b45;
 
   box-shadow:
-    0 10px 30px rgba(168,85,247,.35);
+  0 10px 30px rgba(168,85,247,.35);
 
   animation-name:flyUp;
   animation-timing-function:linear;
   animation-fill-mode:forwards;
-
-  filter:
-    drop-shadow(0 0 16px rgba(255,255,255,.4));
 }
 
 .flying-wish::before{
@@ -379,17 +399,15 @@ FLYING WISH
 
   position:absolute;
 
-  width:50px;
-  height:50px;
+  width:46px;
+  height:46px;
 
   border-radius:50%;
 
   background:#f3e8ff;
 
-  left:20px;
-  top:-20px;
-
-  z-index:-1;
+  left:18px;
+  top:-16px;
 }
 
 .flying-wish::after{
@@ -397,23 +415,24 @@ FLYING WISH
 
   position:absolute;
 
-  width:35px;
-  height:35px;
+  width:30px;
+  height:30px;
 
   border-radius:50%;
 
   background:#f3e8ff;
 
-  right:25px;
-  top:-12px;
-
-  z-index:-1;
+  right:24px;
+  top:-10px;
 }
 
 .flying-wish strong{
   display:block;
+
   color:#7c3aed;
+
   margin-bottom:6px;
+
   font-size:14px;
 }
 
@@ -426,8 +445,8 @@ FLYING WISH
 
   0%{
     transform:
-      translateY(0)
-      scale(.7);
+    translateY(0)
+    scale(.7);
 
     opacity:0;
   }
@@ -438,9 +457,9 @@ FLYING WISH
 
   100%{
     transform:
-      translateY(-850px)
-      translateX(40px)
-      scale(1.1);
+    translateY(-850px)
+    translateX(40px)
+    scale(1.1);
 
     opacity:0;
   }
@@ -459,11 +478,11 @@ WALL
   display:grid;
 
   grid-template-columns:
-    repeat(auto-fit,minmax(420px,520px));
+  repeat(auto-fit,minmax(320px,520px));
 
   justify-content:center;
 
-  gap:36px;
+  gap:38px;
 }
 
 /* =========================
@@ -491,41 +510,34 @@ SHEEP CARD
 
   overflow:hidden;
 
-  transition:.35s ease;
-
   display:flex;
   flex-direction:column;
 }
 
-.wish-card:hover{
-  transform:translateY(-6px) scale(1.02);
-}
-
 .wish-card strong{
-  display:block;
 
-  color:#ff4b4b;
+  color:#ff3b3b;
 
   font-size:22px;
   font-weight:900;
 
-  margin-bottom:16px;
+  margin-bottom:14px;
 
   text-align:center;
 }
 
 .wish-card p{
-  color:#2d1b45;
 
-  font-size:20px;
-  font-weight:800;
+  color:#222;
+
+  font-size:22px;
+  font-weight:700;
 
   line-height:1.45;
 
   white-space:pre-wrap;
-  word-break:break-word;
 
-  max-width:250px;
+  max-width:260px;
 }
 
 /* =========================
@@ -543,16 +555,16 @@ BUTTON
   border:none;
   cursor:pointer;
 
-  padding:16px 28px;
+  padding:18px 28px;
 
   border-radius:999px;
 
   background:
-    linear-gradient(
-      135deg,
-      #8b5cf6,
-      #c084fc
-    );
+  linear-gradient(
+    135deg,
+    #8b5cf6,
+    #c084fc
+  );
 
   color:white;
 
@@ -562,13 +574,7 @@ BUTTON
   font-family:'Inter',sans-serif;
 
   box-shadow:
-    0 12px 35px rgba(124,58,237,.42);
-
-  transition:.3s;
-}
-
-.floating-btn:hover{
-  transform:translateY(-4px);
+  0 12px 35px rgba(124,58,237,.42);
 }
 
 /* =========================
@@ -602,20 +608,18 @@ MODAL
 
   background:rgba(17,13,35,.96);
 
-  border-radius:32px;
+  border-radius:30px;
 
   padding:34px;
 
   position:relative;
-
-  border:1px solid rgba(255,255,255,.08);
 }
 
 .close{
   position:absolute;
 
-  right:18px;
-  top:10px;
+  right:20px;
+  top:14px;
 
   border:none;
   background:none;
@@ -634,7 +638,7 @@ MODAL
 
 .sub{
   color:rgba(255,255,255,.7);
-  margin-bottom:24px;
+  margin-bottom:28px;
 }
 
 .input-group{
@@ -644,12 +648,10 @@ MODAL
 .input-group label{
   display:block;
   margin-bottom:8px;
-  font-size:14px;
 }
 
 .input-group input,
 .input-group textarea{
-
   width:100%;
 
   border:none;
@@ -665,13 +667,12 @@ MODAL
 
   font-size:15px;
 
-  font-family:'Inter',sans-serif;
-
   resize:none;
+
+  font-family:'Inter',sans-serif;
 }
 
 .submit-btn{
-
   width:100%;
 
   border:none;
@@ -682,18 +683,16 @@ MODAL
   border-radius:20px;
 
   background:
-    linear-gradient(
-      135deg,
-      #8b5cf6,
-      #c084fc
-    );
+  linear-gradient(
+    135deg,
+    #8b5cf6,
+    #c084fc
+  );
 
   color:white;
 
   font-size:16px;
   font-weight:800;
-
-  font-family:'Inter',sans-serif;
 }
 
 /* =========================
@@ -715,11 +714,11 @@ MUSIC
   border-radius:50%;
 
   background:
-    linear-gradient(
-      135deg,
-      #8b5cf6,
-      #c084fc
-    );
+  linear-gradient(
+    135deg,
+    #8b5cf6,
+    #c084fc
+  );
 
   color:white;
 
@@ -734,60 +733,65 @@ FOOTER
 
 .footer{
   margin-top:90px;
+
   text-align:center;
+
   color:rgba(255,255,255,.5);
+
   font-size:14px;
 }
 
 /* =========================
-MOBILE FIX
+MOBILE FIX PERFECT
 ========================= */
 
-@media(max-width:768px){
+@media (max-width:768px){
 
+  html,
   body{
     overflow-x:hidden;
   }
 
   .container{
     width:100%;
-    padding-left:14px;
-    padding-right:14px;
+    padding-left:18px;
+    padding-right:18px;
   }
 
-  /* FIX CHÍNH */
   .hero{
-
     min-height:100vh;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    padding-top:20px;
-    padding-bottom:20px;
+    padding:0;
   }
 
   .hero-inner{
-    transform:translateY(-20px);
+    transform:translateY(-12px);
   }
 
-  /* KHÔNG CHO BỊ CHE */
   .hero h1{
 
-    font-size:48px;
+    font-size:56px;
 
-    letter-spacing:2px;
+    line-height:1;
 
-    line-height:1.05;
+    margin-bottom:10px;
 
     white-space:nowrap;
 
-    margin-bottom:14px;
+    padding-top:12px;
+  }
+
+  .hero h1::after{
+    content:"";
+    display:block;
+    height:10px;
   }
 
   .hero h2{
-
     font-size:34px;
 
     white-space:nowrap;
@@ -796,58 +800,55 @@ MOBILE FIX
   }
 
   .hero p{
-
     font-size:15px;
 
     white-space:nowrap;
   }
 
-  /* CHỈ THẤY HERO KHI MỞ */
-  .wall{
-    margin-top:80px;
+  .section-head h2{
+    font-size:28px;
+  }
+
+  .section-head p{
+    font-size:14px;
   }
 
   .wish-cuucocanh{
-    height:280px;
+    height:300px;
     border-radius:24px;
   }
 
   .wish-grid{
     grid-template-columns:1fr;
-    gap:22px;
+    gap:18px;
   }
 
-  /* CARD CỪU */
   .wish-card{
 
-    max-width:100%;
+    max-width:390px;
 
-    height:245px;
+    height:255px;
 
-    padding-top:52px;
+    margin:auto;
+
+    padding-top:54px;
     padding-left:118px;
-    padding-right:52px;
-    padding-bottom:45px;
+    padding-right:46px;
+    padding-bottom:42px;
   }
 
   .wish-card strong{
-
     font-size:16px;
-
     margin-bottom:10px;
   }
 
   .wish-card p{
-
     font-size:14px;
-
-    max-width:160px;
-
     line-height:1.35;
+    max-width:185px;
   }
 
   .floating-btn{
-
     right:14px;
     bottom:14px;
 
@@ -857,7 +858,6 @@ MOBILE FIX
   }
 
   #musicBtn{
-
     width:50px;
     height:50px;
 
@@ -875,11 +875,12 @@ MOBILE FIX
 <body>
 
 <div class="bg"></div>
-
-<canvas id="galaxy"></canvas>
+<div class="noise"></div>
 
 <div class="glow one"></div>
 <div class="glow two"></div>
+
+<canvas id="galaxy"></canvas>
 
 <div class="container">
 
@@ -889,10 +890,10 @@ MOBILE FIX
 
 <h1>CAPTAIN BOY</h1>
 
-<h2>TINH HÀ SAY HI</h2>
+<h2>WISHING WALL</h2>
 
 <p>
-✦ WISHING WALL ✦
+✦ CAPTAIN BOY - TINH HÀ SAY HI ✦
 </p>
 
 </div>
@@ -904,11 +905,11 @@ MOBILE FIX
 <div class="section-head">
 
 <h2>
-CỪU CÓ CÁNH WITH LOVE
+CỪU CÓ CÁNH WITH LOVE CAPTAIN BOY
 </h2>
 
 <p>
-Lời yêu thương dành cho CAPTAIN BOY ✦
+Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
 </p>
 
 </div>
@@ -924,7 +925,7 @@ Lời yêu thương dành cho CAPTAIN BOY ✦
 <h2>WALL OF LOVE</h2>
 
 <p>
-Lời yêu thương từ Cừu Có Cánh ✦
+Lời yêu thương từ Cừu Có CÁNH dành cho CAPTAIN BOY ✦
 </p>
 
 </div>
@@ -934,7 +935,7 @@ Lời yêu thương từ Cừu Có Cánh ✦
 </section>
 
 <div class="footer">
-PROJECT BY TEAM BOT • CAPTAIN BOY
+PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
 </div>
 
 </div>
@@ -1060,7 +1061,7 @@ console.log(err);
 }
 
 /* =========================
-RENDER WALL
+RENDER
 ========================= */
 
 function renderWall(){
