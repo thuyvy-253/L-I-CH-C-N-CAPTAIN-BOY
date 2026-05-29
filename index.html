@@ -379,7 +379,12 @@ z-index:-1;
     .wall{
       margin-top:90px;
     }
-
+.wall .section-head{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
     .wish-grid{
       display:grid;
       grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
@@ -401,7 +406,6 @@ z-index:-1;
   margin-top:30px;
 }
 /* CARD */
-
 .wish-card{
   position:relative;
 
@@ -412,12 +416,11 @@ z-index:-1;
 
   margin:auto;
 
-  /* QUAN TRỌNG */
+  background-image:url("./sheep.png");
+  background-repeat:no-repeat;
   background-size:100% 100%;
-
   background-position:center;
 
-  /* canh text chuẩn */
   padding-top:72px;
   padding-left:165px;
   padding-right:95px;
@@ -432,11 +435,6 @@ z-index:-1;
 
   transition:.35s;
 }
-
-.wish-card:hover{
-  transform:translateY(-8px) scale(1.02);
-}
-
 /* FROM */
 
 .wish-card strong{
@@ -719,7 +717,11 @@ z-index:-1;
   .hero h1{
     font-size:62px;
   }
-
+.section-head{
+  text-align:center;
+  width:100%;
+  margin:auto;
+}
   .section-head h2{
     font-size:28px !important;
   }
