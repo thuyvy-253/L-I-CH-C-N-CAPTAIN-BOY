@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=0.32">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -392,7 +392,7 @@ z-index:-1;
   display:grid;
 
   grid-template-columns:
-  repeat(auto-fit,520px);
+  repeat(auto-fit,minmax(320px,520px));
 
   justify-content:center;
 
@@ -407,7 +407,11 @@ z-index:-1;
   position:relative;
 
   width:100%;
+  max-width:520px;
+
   height:340px;
+
+  margin:auto;
 
   background-image:url("./sheep.png");
   background-repeat:no-repeat;
@@ -476,23 +480,6 @@ z-index:-1;
 }
 
 /* =========================
-MOBILE DESKTOP STYLE
-========================= */
-
-@media(max-width:768px){
-
-  html,
-  body{
-    width:1200px;
-    overflow-x:auto;
-  }
-
-  body{
-    zoom:0.33;
-  }
-
-}
-
 
   /* ===== BUTTON ===== */
 
@@ -724,7 +711,77 @@ MOBILE DESKTOP STYLE
       color:rgba(255,255,255,.45);
       font-size:13px;
     }
+@media(max-width:768px){
 
+  .container{
+    width:94%;
+  }
+
+  .hero{
+    min-height:auto;
+    padding:120px 0 70px;
+  }
+
+  .hero h1{
+    font-size:62px;
+  }
+
+  .section-head h2{
+    font-size:28px !important;
+  }
+
+  .section-head p{
+    font-size:14px !important;
+  }
+
+  .wish-cuucocanh{
+    height:300px;
+    border-radius:24px;
+  }
+
+  .wish-grid{
+    grid-template-columns:1fr;
+    gap:22px;
+  }
+
+  .wish-card{
+    max-width:100%;
+    height:240px;
+
+    padding-top:50px;
+    padding-left:110px;
+    padding-right:45px;
+    padding-bottom:40px;
+  }
+
+  .wish-card strong{
+    font-size:16px;
+    margin-bottom:10px;
+  }
+
+  .wish-card p{
+    font-size:15px;
+    max-width:170px;
+    line-height:1.35;
+  }
+
+  .floating-btn{
+    right:16px;
+    bottom:16px;
+
+    padding:14px 18px;
+    font-size:13px;
+  }
+
+  #musicBtn{
+    width:48px;
+    height:48px;
+    left:16px;
+    bottom:16px;
+    font-size:20px;
+  }
+
+}
 
   </style>
 </head>
