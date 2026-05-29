@@ -613,6 +613,7 @@ body{
 /* SHEEP CARD */
 
 .wish-card{
+
   position:relative;
 
   width:100%;
@@ -628,15 +629,16 @@ body{
   background-position:center;
   background-size:contain;
 
-  padding-top:58px;
-  padding-left:115px;
-  padding-right:82px;
-  padding-bottom:45px;
+  padding-top:55px;
+  padding-left:95px;
+  padding-right:75px;
+  padding-bottom:42px;
 
   overflow:hidden;
 
   display:flex;
   flex-direction:column;
+  align-items:center;
 
   transition:.35s;
 }
@@ -670,25 +672,31 @@ body{
 .wish-card p{
 
   width:100%;
-  max-width:240px;
+  max-width:220px;
+
+  margin:0 auto;
 
   color:#222;
 
-  font-size:15px;
+  font-size:13px;
   font-weight:700;
 
-  line-height:1.45;
+  line-height:1.35;
+
+  text-align:center;
 
   overflow:hidden;
 
-  display:-webkit-box;
-
-  -webkit-line-clamp:5;
-  -webkit-box-orient:vertical;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
   word-break:break-word;
+  overflow-wrap:anywhere;
 
   white-space:pre-wrap;
+
+  flex:1;
 }
 
 /* ================= BUTTON ================= */
@@ -1058,15 +1066,15 @@ body{
     font-size:14px;
   }
 
-  .wish-card p{
-    max-width:170px;
+.wish-card p{
+  max-width:150px;
 
-    font-size:11px;
+  font-size:10px;
 
-    line-height:1.3;
+  line-height:1.25;
 
-    -webkit-line-clamp:5;
-  }
+  text-align:center;
+}
 
   .floating-btn{
     right:14px;
