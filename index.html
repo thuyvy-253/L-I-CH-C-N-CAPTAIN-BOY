@@ -1186,54 +1186,66 @@ body{
 
 /* SMALL PHONE */
 
-@media(max-width:480px){
+.wish-card{
 
-  .hero h1{
-    font-size:42px;
-  }
+  max-width:185px;
 
-  .section-head h2{
-    font-size:22px;
-  }
+  height:165px;
 
-  .section-head p{
-    font-size:12px;
-  }
+  padding-top:28px;
+  padding-left:42px;
+  padding-right:32px;
+  padding-bottom:18px;
 
-  .wish-grid{
-    grid-template-columns:
-    repeat(2,minmax(0,1fr));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+}
 
-    gap:8px;
-  }
+.wish-card strong{
 
-  .wish-card{
+  width:100%;
+  max-width:90px;
 
-    max-width:185px;
+  margin:0 auto 2px;
 
-    height:165px;
+  color:#ff3b3b;
 
-    padding-top:28px;
-    padding-left:42px;
-    padding-right:32px;
-    padding-bottom:18px;
-  }
+  font-size:8px;
+  font-weight:900;
 
-  .wish-card strong{
-    font-size:9px;
-    margin-bottom:6px;
-  }
+  line-height:1;
 
-  .wish-card p{
+  text-align:center;
 
-    max-width:82px;
+  position:relative;
+  top:8px;
 
-    font-size:8px;
-    line-height:1.2;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 
-    -webkit-line-clamp:5;
-  }
+.wish-card p{
 
+  max-width:82px;
+
+  font-size:8px;
+  line-height:1.15;
+
+  margin-top:6px;
+
+  text-align:center;
+
+  -webkit-line-clamp:5;
+
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+
+  word-break:break-word;
+  overflow-wrap:anywhere;
 }
 
 
