@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
@@ -14,7 +14,7 @@
 :root{
   --primary:#8b5cf6;
   --primary2:#c084fc;
-  --bg:#050510;
+  --bg:#05010f;
 }
 
 *{
@@ -30,7 +30,7 @@ html{
 body{
   font-family:'Inter',sans-serif;
   background:var(--bg);
-  color:white;
+  color:#fff;
   overflow-x:hidden;
   min-height:100vh;
 }
@@ -42,46 +42,100 @@ BACKGROUND
 .bg{
   position:fixed;
   inset:0;
-  z-index:-5;
+  z-index:-50;
 
   background:
-    linear-gradient(rgba(6,5,16,.45),rgba(6,5,16,.78)),
+    linear-gradient(
+      rgba(5,1,15,.45),
+      rgba(5,1,15,.78)
+    ),
     url("./nền.png");
 
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
+
+  animation:bgMove 35s linear infinite;
+}
+
+@keyframes bgMove{
+  0%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.05);
+  }
+  100%{
+    transform:scale(1);
+  }
 }
 
 /* =========================
-STARS
+GALAXY
 ========================= */
 
-.stars{
+#galaxy{
   position:fixed;
   inset:0;
-  z-index:-4;
-  overflow:hidden;
+  width:100%;
+  height:100%;
+  z-index:-40;
 }
 
-.star{
-  position:absolute;
-  width:2px;
-  height:2px;
-  background:white;
+/* =========================
+PURPLE GLOW
+========================= */
+
+.glow{
+  position:fixed;
   border-radius:50%;
-  animation:twinkle 3s infinite ease-in-out;
+  filter:blur(120px);
+  opacity:.22;
+  z-index:-30;
+  animation:glowMove 16s ease-in-out infinite;
 }
 
-@keyframes twinkle{
+.glow.one{
+  width:420px;
+  height:420px;
+  background:#7c3aed;
+  top:-100px;
+  left:-100px;
+}
+
+.glow.two{
+  width:360px;
+  height:360px;
+  background:#c084fc;
+  bottom:-120px;
+  right:-120px;
+  animation-delay:4s;
+}
+
+@keyframes glowMove{
   0%,100%{
-    opacity:.2;
-    transform:scale(.8);
+    transform:translateY(0px) scale(1);
   }
   50%{
-    opacity:1;
-    transform:scale(1.4);
+    transform:translateY(50px) scale(1.15);
   }
+}
+
+/* =========================
+NOISE
+========================= */
+
+.noise{
+  position:fixed;
+  inset:0;
+  z-index:-20;
+  opacity:.04;
+
+  background-image:
+    linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px);
+
+  background-size:3px 3px;
 }
 
 /* =========================
@@ -90,8 +144,9 @@ METEOR
 
 .meteor{
   position:fixed;
-  width:2px;
-  height:140px;
+
+  width:3px;
+  height:180px;
 
   background:
     linear-gradient(
@@ -100,13 +155,15 @@ METEOR
       rgba(255,255,255,0)
     );
 
+  border-radius:999px;
+
   transform:rotate(45deg);
 
-  z-index:-3;
+  filter:
+    drop-shadow(0 0 15px #fff)
+    drop-shadow(0 0 30px #c084fc);
 
-  opacity:.8;
-
-  filter:drop-shadow(0 0 10px white);
+  z-index:-10;
 
   pointer-events:none;
 
@@ -118,15 +175,17 @@ METEOR
   from{
     transform:
       translate(0,0)
-      rotate(45deg);
+      rotate(45deg)
+      scale(1);
 
     opacity:1;
   }
 
   to{
     transform:
-      translate(-900px,900px)
-      rotate(45deg);
+      translate(-1200px,1200px)
+      rotate(45deg)
+      scale(.3);
 
     opacity:0;
   }
@@ -134,24 +193,16 @@ METEOR
 }
 
 /* =========================
-GALAXY PARTICLES
+PARTICLES
 ========================= */
 
 .particle{
   position:fixed;
-
-  width:4px;
-  height:4px;
-
   border-radius:50%;
-
   background:white;
-
-  opacity:.8;
-
   pointer-events:none;
-
-  z-index:-2;
+  z-index:-5;
+  opacity:.8;
 
   animation:floatUp linear forwards;
 }
@@ -161,7 +212,7 @@ GALAXY PARTICLES
   from{
     transform:
       translateY(0)
-      scale(.5);
+      scale(.4);
 
     opacity:0;
   }
@@ -181,11 +232,11 @@ GALAXY PARTICLES
 }
 
 /* =========================
-CONTAINER
+LAYOUT
 ========================= */
 
 .container{
-  width:min(1180px,92%);
+  width:min(1200px,92%);
   margin:auto;
   padding-bottom:120px;
 }
@@ -209,18 +260,19 @@ HERO
 }
 
 .hero h1{
-  font-size:clamp(80px,10vw,150px);
+  font-size:clamp(78px,10vw,170px);
 
   font-weight:900;
-
   line-height:.9;
 
   margin-bottom:18px;
 
+  letter-spacing:2px;
+
   background:
     linear-gradient(
       to bottom,
-      #ffffff,
+      #fff,
       #d8b4fe
     );
 
@@ -228,11 +280,11 @@ HERO
   -webkit-text-fill-color:transparent;
 
   text-shadow:
-    0 0 30px rgba(168,85,247,.4);
+    0 0 40px rgba(192,132,252,.45);
 }
 
 .hero h2{
-  font-size:clamp(40px,5vw,78px);
+  font-size:clamp(42px,5vw,92px);
 
   font-weight:900;
 
@@ -241,56 +293,61 @@ HERO
   margin-bottom:18px;
 
   text-shadow:
-    0 0 20px rgba(192,132,252,.35);
+    0 0 30px rgba(192,132,252,.4);
 }
 
 .hero p{
-  font-size:clamp(18px,2vw,28px);
-  color:white;
+  font-size:clamp(18px,2vw,30px);
+  color:#fff;
+  letter-spacing:1px;
 }
 
 /* =========================
-SECTION HEAD
+SECTION
 ========================= */
 
 .section-head{
   text-align:center;
-  margin-bottom:28px;
+  margin-bottom:30px;
 }
 
 .section-head h2{
-  font-size:clamp(26px,3vw,44px);
-  margin-bottom:10px;
+  font-size:clamp(28px,3vw,48px);
+  font-weight:900;
+  margin-bottom:12px;
 }
 
 .section-head p{
-  color:rgba(255,255,255,.7);
-  font-size:15px;
+  color:rgba(255,255,255,.72);
+  font-size:16px;
 }
 
 /* =========================
-FLY SECTION
+FLYING AREA
 ========================= */
 
 .wish-cuucocanh{
   position:relative;
 
   width:100%;
-  height:420px;
+  height:430px;
 
   overflow:hidden;
 
   border-radius:36px;
 
-  border:1px solid rgba(255,255,255,.08);
-
   background:
     linear-gradient(
-      rgba(20,15,45,.7),
-      rgba(10,8,25,.92)
+      rgba(20,14,45,.72),
+      rgba(8,5,18,.9)
     );
 
+  border:1px solid rgba(255,255,255,.08);
+
   backdrop-filter:blur(10px);
+
+  box-shadow:
+    0 15px 40px rgba(124,58,237,.2);
 }
 
 /* =========================
@@ -300,9 +357,9 @@ FLYING WISH
 .flying-wish{
   position:absolute;
 
-  bottom:-120px;
+  bottom:-140px;
 
-  min-width:180px;
+  min-width:190px;
   max-width:300px;
 
   padding:18px 24px;
@@ -310,12 +367,16 @@ FLYING WISH
   border-radius:999px;
 
   background:
-    radial-gradient(circle at top,#fff,#f3e8ff 70%);
+    radial-gradient(circle at top,
+    #fff,
+    #f3e8ff 70%);
+
+  border:2px solid rgba(255,255,255,.8);
 
   color:#2d1b45;
 
   box-shadow:
-    0 10px 30px rgba(168,85,247,.35);
+    0 10px 35px rgba(168,85,247,.35);
 
   animation-name:flyUp;
   animation-timing-function:linear;
@@ -324,27 +385,29 @@ FLYING WISH
 
 .flying-wish::before{
   content:"";
+
   position:absolute;
 
-  width:46px;
-  height:46px;
+  width:45px;
+  height:45px;
 
   border-radius:50%;
 
   background:#f3e8ff;
 
   top:-18px;
-  left:18px;
+  left:20px;
 
   z-index:-1;
 }
 
 .flying-wish::after{
   content:"";
+
   position:absolute;
 
-  width:30px;
-  height:30px;
+  width:28px;
+  height:28px;
 
   border-radius:50%;
 
@@ -364,11 +427,12 @@ FLYING WISH
   margin-bottom:6px;
 
   font-size:14px;
+  font-weight:900;
 }
 
 .flying-wish span{
   font-size:14px;
-  line-height:1.5;
+  line-height:1.45;
 }
 
 @keyframes flyUp{
@@ -385,11 +449,18 @@ FLYING WISH
     opacity:1;
   }
 
+  50%{
+    transform:
+      translateY(-350px)
+      translateX(-20px)
+      scale(1);
+  }
+
   100%{
     transform:
-      translateY(-780px)
-      translateX(40px)
-      scale(1.1);
+      translateY(-850px)
+      translateX(50px)
+      scale(1.12);
 
     opacity:0;
   }
@@ -401,18 +472,18 @@ WALL
 ========================= */
 
 .wall{
-  margin-top:90px;
+  margin-top:100px;
 }
 
 .wish-grid{
   display:grid;
 
   grid-template-columns:
-    repeat(auto-fit,minmax(320px,520px));
+    repeat(auto-fit,minmax(420px,520px));
 
   justify-content:center;
 
-  gap:34px;
+  gap:40px;
 }
 
 /* =========================
@@ -427,8 +498,6 @@ SHEEP CARD
 
   height:340px;
 
-  margin:auto;
-
   background-image:url("./sheep.png");
 
   background-repeat:no-repeat;
@@ -437,72 +506,64 @@ SHEEP CARD
 
   padding-top:72px;
   padding-left:165px;
-  padding-right:95px;
-  padding-bottom:60px;
+  padding-right:90px;
+  padding-bottom:55px;
 
   overflow:hidden;
 
-  transition:.35s ease;
+  transition:.35s;
 
   display:flex;
   flex-direction:column;
 }
 
 .wish-card:hover{
-  transform:translateY(-5px);
+  transform:translateY(-6px) scale(1.02);
 }
 
 .wish-card strong{
-  display:block;
-
-  color:#ff3b3b;
+  color:#ff4545;
 
   font-size:22px;
   font-weight:900;
 
-  line-height:1.2;
-
   margin-bottom:14px;
 
   text-align:center;
+
+  width:100%;
 }
 
 .wish-card p{
-  color:#222;
+  color:#2d1b45;
 
-  font-size:22px;
-  font-weight:700;
+  font-size:20px;
+  font-weight:800;
 
   line-height:1.45;
 
   white-space:pre-wrap;
   word-break:break-word;
 
-  max-width:250px;
-
-  overflow-y:auto;
+  max-width:240px;
 }
 
 /* =========================
-BUTTON
+BUTTONS
 ========================= */
 
 .floating-btn{
   position:fixed;
 
-  right:22px;
-  bottom:22px;
+  right:24px;
+  bottom:24px;
 
-  z-index:100;
+  z-index:999;
 
   border:none;
   cursor:pointer;
 
-  display:flex;
-  align-items:center;
-  gap:10px;
-
-  padding:16px 24px;
+  padding:16px 28px;
 
   border-radius:999px;
 
@@ -530,6 +591,34 @@ BUTTON
   transform:translateY(-4px);
 }
 
+#musicBtn{
+  position:fixed;
+
+  left:24px;
+  bottom:24px;
+
+  z-index:999;
+
+  width:58px;
+  height:58px;
+
+  border:none;
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #c084fc
+    );
+
+  color:white;
+
+  font-size:24px;
+
+  cursor:pointer;
+}
+
 /* =========================
 MODAL
 ========================= */
@@ -538,9 +627,9 @@ MODAL
   position:fixed;
   inset:0;
 
-  z-index:999;
+  z-index:9999;
 
-  background:rgba(0,0,0,.7);
+  background:rgba(0,0,0,.72);
 
   display:none;
 
@@ -559,9 +648,11 @@ MODAL
 .modal-box{
   width:min(520px,100%);
 
-  background:rgba(17,13,35,.96);
+  background:rgba(14,10,30,.95);
 
   border-radius:30px;
+
+  border:1px solid rgba(255,255,255,.08);
 
   padding:34px;
 
@@ -571,8 +662,8 @@ MODAL
 .close{
   position:absolute;
 
-  right:20px;
   top:14px;
+  right:18px;
 
   border:none;
   background:none;
@@ -586,12 +677,14 @@ MODAL
 
 .modal-box h3{
   font-size:34px;
-  margin-bottom:10px;
+  margin-bottom:12px;
+
+  font-weight:900;
 }
 
 .sub{
-  color:rgba(255,255,255,.7);
-  margin-bottom:28px;
+  color:rgba(255,255,255,.68);
+  margin-bottom:24px;
 }
 
 .input-group{
@@ -601,6 +694,8 @@ MODAL
 .input-group label{
   display:block;
   margin-bottom:8px;
+
+  font-size:14px;
 }
 
 .input-group input,
@@ -614,14 +709,15 @@ MODAL
 
   padding:16px 18px;
 
-  background:rgba(255,255,255,.06);
+  background:rgba(255,255,255,.05);
 
   color:white;
 
-  font-size:15px;
-
   font-family:'Inter',sans-serif;
+  font-size:15px;
+}
 
+.input-group textarea{
   resize:none;
 }
 
@@ -651,38 +747,6 @@ MODAL
 }
 
 /* =========================
-MUSIC
-========================= */
-
-#musicBtn{
-  position:fixed;
-
-  left:22px;
-  bottom:22px;
-
-  z-index:999;
-
-  width:58px;
-  height:58px;
-
-  border:none;
-  border-radius:50%;
-
-  background:
-    linear-gradient(
-      135deg,
-      #8b5cf6,
-      #c084fc
-    );
-
-  color:white;
-
-  font-size:22px;
-
-  cursor:pointer;
-}
-
-/* =========================
 FOOTER
 ========================= */
 
@@ -691,9 +755,9 @@ FOOTER
 
   text-align:center;
 
-  color:rgba(255,255,255,.5);
+  color:rgba(255,255,255,.45);
 
-  font-size:14px;
+  font-size:13px;
 }
 
 /* =========================
@@ -702,44 +766,48 @@ MOBILE
 
 @media(max-width:768px){
 
+  .container{
+    width:94%;
+  }
+
   .hero{
     min-height:100vh;
     padding-top:0;
     padding-bottom:0;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
   }
 
   .hero h1{
     font-size:58px;
+    line-height:1;
+    white-space:nowrap;
   }
 
   .hero h2{
     font-size:34px;
+    white-space:nowrap;
   }
 
   .hero p{
     font-size:16px;
+    white-space:nowrap;
   }
 
   .section-head h2{
-    font-size:24px;
+    font-size:28px;
   }
 
   .section-head p{
-    font-size:13px;
+    font-size:14px;
   }
 
   .wish-cuucocanh{
     height:300px;
-    border-radius:24px;
+    border-radius:26px;
   }
 
   .wish-grid{
     grid-template-columns:1fr;
-    gap:20px;
+    gap:24px;
   }
 
   .wish-card{
@@ -747,26 +815,26 @@ MOBILE
 
     height:240px;
 
-    padding-top:50px;
+    padding-top:48px;
     padding-left:112px;
-    padding-right:46px;
+    padding-right:48px;
     padding-bottom:40px;
   }
 
   .wish-card strong{
     font-size:15px;
-    margin-bottom:8px;
+    margin-bottom:10px;
   }
 
   .wish-card p{
-    font-size:15px;
+    font-size:14px;
+    max-width:150px;
     line-height:1.35;
-    max-width:160px;
   }
 
   .floating-btn{
-    right:14px;
-    bottom:14px;
+    right:16px;
+    bottom:16px;
 
     padding:14px 18px;
 
@@ -777,10 +845,18 @@ MOBILE
     width:50px;
     height:50px;
 
-    left:14px;
-    bottom:14px;
+    left:16px;
+    bottom:16px;
 
-    font-size:18px;
+    font-size:20px;
+  }
+
+  .modal-box{
+    padding:26px;
+  }
+
+  .modal-box h3{
+    font-size:26px;
   }
 
 }
@@ -792,7 +868,12 @@ MOBILE
 
 <div class="bg"></div>
 
-<div class="stars" id="stars"></div>
+<canvas id="galaxy"></canvas>
+
+<div class="glow one"></div>
+<div class="glow two"></div>
+
+<div class="noise"></div>
 
 <div class="container">
 
@@ -802,10 +883,10 @@ MOBILE
 
 <h1>CAPTAIN BOY</h1>
 
-<h2>WISHING WALL</h2>
+<h2>TINH HÀ SAY HI</h2>
 
 <p>
-✦ CAPTAIN BOY - TINH HÀ SAY HI ✦
+✦ WISHING WALL ✦
 </p>
 
 </div>
@@ -817,11 +898,11 @@ MOBILE
 <div class="section-head">
 
 <h2>
-CỪU CÓ CÁNH WITH LOVE CAPTAIN BOY
+CỪU CÓ CÁNH WITH LOVE
 </h2>
 
 <p>
-Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
+Lời yêu thương dành cho CAPTAIN BOY ✦
 </p>
 
 </div>
@@ -837,7 +918,7 @@ Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
 <h2>WALL OF LOVE</h2>
 
 <p>
-Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
+Những lời nhắn đáng yêu từ Cừu Có Cánh ✦
 </p>
 
 </div>
@@ -847,7 +928,7 @@ Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
 </section>
 
 <div class="footer">
-PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
+PROJECT BY TEAM BOT • CAPTAIN BOY
 </div>
 
 </div>
@@ -855,6 +936,8 @@ PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
 <button class="floating-btn" onclick="toggleModal(true)">
 ✨ GỬI LỜI CHÚC
 </button>
+
+<button id="musicBtn">🔊</button>
 
 <div class="modal" id="wishModal">
 
@@ -867,13 +950,12 @@ PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
 <h3>Gửi lời đến CAPTAIN BOY</h3>
 
 <div class="sub">
-Lời nhắn sẽ được hiển thị sau khi admin duyệt
+Lời nhắn sẽ được hiển thị sau khi admin duyệt ✨
 </div>
 
 <form id="wishForm">
 
 <div class="input-group">
-
 <label>Tên của bạn</label>
 
 <input
@@ -881,11 +963,9 @@ type="text"
 id="userName"
 maxlength="30"
 required>
-
 </div>
 
 <div class="input-group">
-
 <label>Lời chúc</label>
 
 <textarea
@@ -893,7 +973,6 @@ id="userMsg"
 rows="5"
 maxlength="180"
 required></textarea>
-
 </div>
 
 <button class="submit-btn" id="submitBtn" type="submit">
@@ -909,8 +988,6 @@ GỬI NGAY ✨
 <audio id="bgMusic" loop>
 <source src="./music.mp3" type="audio/mpeg">
 </audio>
-
-<button id="musicBtn">🔊</button>
 
 <script>
 
@@ -1016,7 +1093,7 @@ ${escapeHtml(item.message)}
 }
 
 /* =========================
-FLYING
+FLYING WISH
 ========================= */
 
 function startFlying(){
@@ -1178,34 +1255,113 @@ return div.innerHTML;
 }
 
 /* =========================
-STARS
+GALAXY
 ========================= */
 
-const starsBox =
-document.getElementById("stars");
+const canvas =
+document.getElementById("galaxy");
 
-for(let i=0;i<120;i++){
+const ctx =
+canvas.getContext("2d");
 
-const star =
-document.createElement("div");
+let stars = [];
 
-star.className = "star";
+function resizeGalaxy(){
 
-star.style.left =
-Math.random()*100 + "%";
+canvas.width =
+window.innerWidth;
 
-star.style.top =
-Math.random()*100 + "%";
-
-star.style.animationDelay =
-Math.random()*5 + "s";
-
-star.style.opacity =
-Math.random();
-
-starsBox.appendChild(star);
+canvas.height =
+window.innerHeight;
 
 }
+
+resizeGalaxy();
+
+window.addEventListener(
+"resize",
+resizeGalaxy
+);
+
+function createStars(){
+
+stars = [];
+
+for(let i=0;i<320;i++){
+
+stars.push({
+
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+
+radius:Math.random()*2.5,
+
+opacity:Math.random(),
+
+speed:Math.random()*0.25,
+
+glow:Math.random()*25
+
+});
+
+}
+
+}
+
+createStars();
+
+function animateGalaxy(){
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+stars.forEach(star=>{
+
+ctx.beginPath();
+
+ctx.arc(
+star.x,
+star.y,
+star.radius,
+0,
+Math.PI*2
+);
+
+ctx.fillStyle =
+`rgba(255,255,255,${star.opacity})`;
+
+ctx.shadowBlur =
+star.glow;
+
+ctx.shadowColor =
+"#c084fc";
+
+ctx.fill();
+
+star.y += star.speed;
+
+if(star.y > canvas.height){
+
+star.y = 0;
+
+star.x =
+Math.random()*canvas.width;
+
+}
+
+});
+
+requestAnimationFrame(
+animateGalaxy
+);
+
+}
+
+animateGalaxy();
 
 /* =========================
 PARTICLES
@@ -1257,10 +1413,10 @@ document.createElement("div");
 meteor.className = "meteor";
 
 meteor.style.top =
-Math.random()*40 + "vh";
+Math.random()*35 + "vh";
 
 meteor.style.left =
-(75 + Math.random()*20) + "vw";
+(80 + Math.random()*20) + "vw";
 
 meteor.style.animationDuration =
 (1 + Math.random()*1.2) + "s";
@@ -1273,7 +1429,7 @@ meteor.remove();
 
 }
 
-setInterval(createMeteor,2500);
+setInterval(createMeteor,1800);
 
 /* =========================
 MUSIC
