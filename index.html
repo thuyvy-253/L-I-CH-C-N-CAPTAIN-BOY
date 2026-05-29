@@ -263,10 +263,16 @@ HERO
 }
 
 .hero p{
-  font-size:28px;
+  font-size:clamp(14px,2.8vw,28px);
   color:white;
-}
 
+  white-space:nowrap;
+
+  overflow:hidden;
+  text-overflow:ellipsis;
+
+  max-width:100%;
+}
 /* =========================
 SECTION HEAD
 ========================= */
