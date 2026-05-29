@@ -359,14 +359,14 @@ body{
 /* HERO */
 
 .hero{
-  min-height:100vh;
+  min-height:115vh; /* tăng chiều cao để mở điện thoại chưa thấy section dưới */
 
   display:flex;
   align-items:center;
   justify-content:center;
 
   text-align:center;
-  padding:80px 0;
+  padding:80px 0 140px;
 }
 
 .hero-inner{
@@ -397,8 +397,11 @@ body{
   word-break:break-word;
 }
 
+/* FIX CENTER */
+
 .section-head{
   width:100%;
+  text-align:center;
 }
 
 .section-head h2{
@@ -408,11 +411,19 @@ body{
 
   overflow-wrap:anywhere;
   word-break:break-word;
+
+  text-align:center;
 }
 
 .section-head p{
   color:var(--muted);
   font-size:15px;
+
+  overflow-wrap:anywhere;
+  word-break:break-word;
+
+  text-align:center;
+}
 
   overflow-wrap:anywhere;
   word-break:break-word;
@@ -585,7 +596,7 @@ body{
 /* ================= WALL ================= */
 
 .wall{
-  margin-top:90px;
+  margin-top:120px; /* tạo khoảng cách nhiều hơn */
 }
 
 .wish-grid{
@@ -995,11 +1006,13 @@ body{
     width:min(100%,94%);
   }
 
-  .hero{
-    min-height:85vh;
-    padding:50px 0;
-  }
-
+.hero{
+  min-height:105vh;
+  padding:70px 0 160px;
+}
+.wall{
+  margin-top:100px;
+}
   .hero h1{
     font-size:clamp(42px,12vw,58px);
     line-height:1.05;
