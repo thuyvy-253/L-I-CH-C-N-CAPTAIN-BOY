@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -17,6 +18,7 @@
             --shadow: 0 0 25px rgba(124, 58, 237, 0.6);
         }
 
+        /* RESET & FONT FIX */
         * {
             margin: 0;
             padding: 0;
@@ -32,26 +34,26 @@
             line-height: 1.5;
         }
 
-        /* Đảm bảo phông chữ đồng nhất cho cả Form */
-        input, textarea, button, select {
+        /* Ép phông chữ cho Form để không bị lỗi */
+        input, textarea, button {
             font-family: 'Inter', sans-serif !important;
+            outline: none;
         }
 
-        /* --- BACKGROUND & GALAXY EFFECTS --- */
+        /* --- UNIVERSE BACKGROUND --- */
         .universe {
             position: fixed;
             inset: 0;
             z-index: -10;
             background: radial-gradient(circle at center, #1b1448 0%, #05030d 100%);
-            overflow: hidden;
         }
 
         .nebula {
             position: absolute;
             inset: 0;
             background: url("./nền.png") center/cover no-repeat;
-            opacity: 0.4;
-            filter: saturate(1.3);
+            opacity: 0.45;
+            filter: saturate(1.4);
         }
 
         .star {
@@ -69,18 +71,18 @@
         .shooting-star {
             position: absolute;
             width: 2px;
-            height: 120px;
+            height: 100px;
             background: linear-gradient(to bottom, #fff, transparent);
             transform: rotate(45deg);
             opacity: 0;
-            animation: shoot 7s linear infinite;
+            animation: shoot 8s linear infinite;
         }
 
         @keyframes shoot {
-            0% { transform: translate(-150px, -150px) rotate(45deg); opacity: 0; }
-            5% { opacity: 1; }
-            15% { transform: translate(600px, 600px) rotate(45deg); opacity: 0; }
-            100% { transform: translate(600px, 600px) rotate(45deg); opacity: 0; }
+            0% { transform: translate(-100px, -100px) rotate(45deg); opacity: 0; }
+            10% { opacity: 1; }
+            20% { transform: translate(500px, 500px) rotate(45deg); opacity: 0; }
+            100% { transform: translate(500px, 500px) rotate(45deg); opacity: 0; }
         }
 
         /* --- HERO SECTION --- */
@@ -95,90 +97,76 @@
         }
 
         .hero .sub-top {
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 5px;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             opacity: 0.8;
             color: var(--primary-light);
         }
 
         .hero h1 {
-            font-size: clamp(48px, 14vw, 130px);
+            font-size: clamp(40px, 12vw, 120px);
             font-weight: 900;
-            line-height: 0.85;
+            line-height: 0.9;
             margin-bottom: 10px;
             background: linear-gradient(to bottom, #fff, var(--primary-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(255,255,255,0.25));
         }
 
         .hero .wishing-wall {
-            font-size: clamp(32px, 9vw, 75px);
+            font-size: clamp(26px, 8vw, 65px);
             font-weight: 800;
             margin-bottom: 30px;
             text-shadow: var(--shadow);
         }
 
+        /* FIX 1 DÒNG DUY NHẤT TRÊN MOBILE */
         .hero .sub-bottom {
-            font-size: clamp(14px, 4vw, 24px);
+            font-size: clamp(10px, 3.5vw, 22px); /* Tự co giãn để không bị rớt dòng */
             letter-spacing: 2px;
             font-weight: 600;
-        }
-
-        /* --- FLYING AREA --- */
-        .flying-zone {
-            position: relative;
+            white-space: nowrap; /* Ép buộc 1 hàng */
             width: 100%;
-            height: 380px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            margin: 40px 0;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
+            display: block;
         }
 
-        .bubble {
-            position: absolute;
-            background: rgba(255,255,255,0.9);
-            padding: 10px 16px;
-            border-radius: 25px;
-            color: #111;
-            font-size: 12px;
-            font-weight: 700;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            animation: float linear infinite;
-            white-space: nowrap;
-        }
-
-        @keyframes float {
-            from { transform: translateY(450px); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            to { transform: translateY(-120px); opacity: 0; }
-        }
-
-        /* --- GRID WALL (2-3 CỘT MOBILE) --- */
+        /* --- CONTAINER --- */
         .container {
             width: 100%;
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
         }
 
+        /* --- GRID WALL (2-3 CỘT MOBILE) --- */
         .grid-wall {
             display: grid;
-            /* Phóng to ô Grid để card bự hơn */
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 15px;
             padding-bottom: 120px;
         }
 
         @media (min-width: 768px) {
-            .grid-wall { grid-template-columns: repeat(4, 1fr); gap: 30px; }
+            .grid-wall { grid-template-columns: repeat(3, 1fr); gap: 30px; }
         }
 
-        /* --- MỞ RỘNG SHEEP CARD --- */
+        /* --- SHEEP CARD ĐÃ MỞ RỘNG --- */
         .sheep-card {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1.1 / 1;
+            background: url("./sheep.png") center/contain no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-inner {
+            position: absolute;
+            width: 68%; /* Mở rộng vùng chứa */
+            height: 62%; /* Mở rộng vùng chứa */
+            top: 25%;
+            display: flex;
+            flex-direction: column;
