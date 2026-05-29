@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
@@ -22,8 +22,7 @@
   --text:#ffffff;
   --muted:rgba(255,255,255,.72);
 
-  --shadow:
-  0 10px 40px rgba(124,58,237,.28);
+  --shadow:0 10px 40px rgba(124,58,237,.28);
 }
 
 *{
@@ -85,9 +84,7 @@ body{
   background:#fff;
   border-radius:50%;
   opacity:.9;
-
-  animation:
-  twinkle 3s infinite ease-in-out;
+  animation:twinkle 3s infinite ease-in-out;
 }
 
 @keyframes twinkle{
@@ -117,7 +114,6 @@ body{
   );
 
   border-radius:999px;
-
   opacity:.7;
 
   transform:rotate(-25deg);
@@ -137,8 +133,7 @@ body{
   background:#fff;
   border-radius:50%;
 
-  box-shadow:
-  0 0 20px #fff;
+  box-shadow:0 0 20px #fff;
 }
 
 @keyframes shoot{
@@ -178,9 +173,7 @@ body{
 .cloud{
   position:absolute;
   background:rgba(255,255,255,.08);
-
   border-radius:999px;
-
   filter:blur(2px);
 }
 
@@ -261,8 +254,7 @@ body{
   background:#fff;
   border-radius:50%;
 
-  box-shadow:
-  0 0 14px #fff;
+  box-shadow:0 0 14px #fff;
 
   animation:falling 10s linear infinite;
 }
@@ -289,6 +281,20 @@ body{
     opacity:0;
   }
 
+}
+
+.noise{
+  position:fixed;
+  inset:0;
+  z-index:-3;
+
+  opacity:.04;
+
+  background-image:
+  linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+
+  background-size:3px 3px;
 }
 
 /* ================= GLOW ================= */
@@ -355,10 +361,6 @@ body{
   padding:80px 0 140px;
 }
 
-.hero-inner{
-  width:100%;
-}
-
 .hero h1{
   font-size:clamp(50px,8vw,120px);
 
@@ -381,7 +383,6 @@ body{
 }
 
 .section-head{
-  width:100%;
   text-align:center;
 }
 
@@ -472,6 +473,8 @@ body{
   animation-name:flyUp;
   animation-timing-function:linear;
   animation-fill-mode:forwards;
+
+  overflow:hidden;
 }
 
 .flying-wish strong{
@@ -536,7 +539,7 @@ body{
   margin-top:30px;
 }
 
-/* ================= SHEEP CARD FIX ================= */
+/* ================= SHEEP CARD ================= */
 
 .wish-card{
   position:relative;
@@ -561,9 +564,9 @@ body{
 
   text-align:center;
 
-  padding-top:82px;
-  padding-left:68px;
-  padding-right:68px;
+  padding:70px 78px 80px;
+
+  gap:8px;
 
   overflow:hidden;
 }
@@ -574,10 +577,10 @@ body{
   font-size:13px;
   font-weight:900;
 
-  line-height:1.3;
-
   width:100%;
   max-width:170px;
+
+  line-height:1.3;
 
   word-break:break-word;
 }
@@ -588,10 +591,10 @@ body{
   font-size:12px;
   font-weight:700;
 
-  line-height:1.4;
+  line-height:1.45;
 
   width:100%;
-  max-width:170px;
+  max-width:175px;
 
   word-break:break-word;
 
@@ -613,7 +616,6 @@ body{
   z-index:100;
 
   border:none;
-  outline:none;
   cursor:pointer;
 
   display:flex;
@@ -632,8 +634,6 @@ body{
   );
 
   color:#fff;
-
-  font-family:'Inter',sans-serif;
 
   font-size:14px;
   font-weight:800;
@@ -657,6 +657,8 @@ body{
   justify-content:center;
 
   padding:20px;
+
+  backdrop-filter:blur(8px);
 }
 
 .modal.active{
@@ -692,29 +694,13 @@ body{
   cursor:pointer;
 }
 
-.modal-box h3{
-  font-size:32px;
-  font-weight:900;
-  margin-bottom:10px;
-}
-
-.modal-box .sub{
-  color:rgba(255,255,255,.7);
-  margin-bottom:26px;
-}
-
 .input-group{
   margin-bottom:18px;
 }
 
-.input-group label{
-  display:block;
-  margin-bottom:8px;
-  font-size:13px;
-}
-
 .input-group input,
 .input-group textarea{
+
   width:100%;
 
   border:none;
@@ -727,9 +713,11 @@ body{
   background:
   rgba(255,255,255,.05);
 
+  border:
+  1px solid rgba(255,255,255,.06);
+
   color:#fff;
 
-  font-family:inherit;
   font-size:15px;
 }
 
@@ -754,15 +742,6 @@ body{
 
   font-size:15px;
   font-weight:800;
-}
-
-/* ================= FOOTER ================= */
-
-.footer{
-  margin-top:90px;
-  text-align:center;
-  color:rgba(255,255,255,.45);
-  font-size:13px;
 }
 
 /* ================= MUSIC ================= */
@@ -791,16 +770,13 @@ body{
   color:#fff;
 
   font-size:24px;
+
   cursor:pointer;
 }
 
 /* ================= MOBILE ================= */
 
 @media(max-width:768px){
-
-  .hero{
-    min-height:105vh;
-  }
 
   .hero h1{
     font-size:58px;
@@ -810,24 +786,47 @@ body{
     grid-template-columns:
     repeat(2,minmax(0,1fr));
 
-    gap:8px;
+    gap:10px;
   }
 
   .wish-card{
-    max-width:185px;
+    max-width:190px;
 
-    padding-top:48px;
-    padding-left:34px;
-    padding-right:34px;
+    aspect-ratio:1/1;
+
+    padding:44px 34px 52px;
+
+    gap:4px;
+
+    background-size:contain;
   }
 
   .wish-card strong{
     font-size:10px;
+
+    max-width:100px;
+
+    line-height:1.2;
+
+    overflow:hidden;
+
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
   }
 
   .wish-card p{
-    font-size:9px;
-    line-height:1.2;
+    font-size:8px;
+
+    line-height:1.25;
+
+    max-width:105px;
+
+    overflow:hidden;
+
+    display:-webkit-box;
+    -webkit-line-clamp:6;
+    -webkit-box-orient:vertical;
   }
 
 }
@@ -847,10 +846,14 @@ body{
   <div class="shooting-star" style="top:60%; left:-25%; animation-delay:7s;"></div>
 </div>
 
+<div class="stars" id="fallingStars"></div>
+
 <div class="clouds">
   <div class="cloud cloud1"></div>
   <div class="cloud cloud2"></div>
 </div>
+
+<div class="noise"></div>
 
 <div class="glow one"></div>
 <div class="glow two"></div>
@@ -875,14 +878,17 @@ margin-bottom:20px;
 WISHING WALL
 </h2>
 
-<p>
+<p style="
+font-size:clamp(14px,2vw,26px);
+letter-spacing:1px;
+color:#ffffff;
+">
 ✦ CAPTAIN BOY - TINH HÀ SAY HI ✦
 </p>
 
 </div>
 
 </div>
-
 </section>
 
 <section class="cuucocanh-section">
@@ -927,14 +933,11 @@ Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
 
 </section>
 
-<div class="footer">
-PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
-</div>
-
 </div>
 
 <button class="floating-btn" onclick="toggleModal(true)">
-+ GỬI LỜI CHÚC
+<span>+</span>
+GỬI LỜI CHÚC
 </button>
 
 <div class="modal" id="wishModal">
@@ -947,32 +950,28 @@ PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
 
 <h3>Gửi lời đến CAPTAIN BOY</h3>
 
-<div class="sub">
-Lời nhắn sẽ được hiển thị sau khi admin duyệt
-</div>
+<br>
 
 <form id="wishForm">
 
 <div class="input-group">
 
-<label>Tên của bạn</label>
-
 <input
 type="text"
 id="userName"
 maxlength="30"
+placeholder="Tên của bạn..."
 required>
 
 </div>
 
 <div class="input-group">
 
-<label>Lời chúc</label>
-
 <textarea
 id="userMsg"
 rows="5"
 maxlength="180"
+placeholder="Lời chúc..."
 required></textarea>
 
 </div>
@@ -1007,8 +1006,6 @@ googleScriptUrl:
 let listApproved = [];
 let flyInterval = null;
 
-/* STARS */
-
 const starsWrap =
 document.getElementById("stars");
 
@@ -1028,14 +1025,32 @@ Math.random() * 100 + "%";
 star.style.animationDelay =
 Math.random() * 5 + "s";
 
-star.style.opacity =
-Math.random();
-
 starsWrap.appendChild(star);
 
 }
 
-/* MODAL */
+const fallingWrap =
+document.getElementById("fallingStars");
+
+for(let i=0;i<18;i++){
+
+const fall =
+document.createElement("div");
+
+fall.className = "falling-star";
+
+fall.style.left =
+Math.random() * 100 + "%";
+
+fall.style.animationDelay =
+Math.random() * 12 + "s";
+
+fall.style.animationDuration =
+(7 + Math.random() * 8) + "s";
+
+fallingWrap.appendChild(fall);
+
+}
 
 function toggleModal(show){
 
@@ -1044,8 +1059,6 @@ document
 .classList.toggle("active", show);
 
 }
-
-/* FETCH */
 
 async function fetchWishes(){
 
@@ -1072,31 +1085,16 @@ startFlying();
 
 }catch(error){
 
-console.log(error);
+console.error(error);
 
 }
 
 }
-
-/* WALL */
 
 function renderWall(){
 
 const grid =
 document.getElementById("wishGrid");
-
-if(!listApproved.length){
-
-grid.innerHTML = `
-<div class="wish-card">
-<strong>From: CỪU CÓ CÁNH</strong>
-<p>Chưa có lời chúc nào ✨</p>
-</div>
-`;
-
-return;
-
-}
 
 grid.innerHTML =
 listApproved
@@ -1120,25 +1118,12 @@ ${escapeHtml(item.message)}
 
 }
 
-/* FLY */
-
 function startFlying(){
 
 const area =
 document.getElementById("wishCuucocanh");
 
 area.innerHTML = "";
-
-if(!listApproved.length){
-
-area.innerHTML = `
-<div class="loading">
-Chưa có lời nhắn nào ✨
-</div>
-`;
-
-return;
-}
 
 if(flyInterval){
 clearInterval(flyInterval);
@@ -1178,15 +1163,15 @@ el.remove();
 }
 
 for(let i=0;i<8;i++){
+
 setTimeout(createWish, i * 1200);
+
 }
 
 flyInterval =
 setInterval(createWish,2200);
 
 }
-
-/* SUBMIT */
 
 document
 .getElementById("wishForm")
@@ -1262,13 +1247,12 @@ alert("Lỗi kết nối");
 }finally{
 
 btn.disabled = false;
+
 btn.innerText = "GỬI NGAY ✨";
 
 }
 
 });
-
-/* ESCAPE */
 
 function escapeHtml(text){
 
@@ -1281,13 +1265,9 @@ return div.innerHTML;
 
 }
 
-/* RUN */
-
 fetchWishes();
 
 setInterval(fetchWishes,30000);
-
-/* MUSIC */
 
 const music =
 document.getElementById("bgMusic");
@@ -1300,7 +1280,9 @@ music.volume = 0.5;
 document.addEventListener("click",()=>{
 
 if(music.paused){
-music.play();
+
+music.play().catch(()=>{});
+
 }
 
 },{ once:true });
@@ -1312,11 +1294,13 @@ e.stopPropagation();
 if(music.paused){
 
 music.play();
+
 musicBtn.innerHTML = "🔊";
 
 }else{
 
 music.pause();
+
 musicBtn.innerHTML = "🔇";
 
 }
