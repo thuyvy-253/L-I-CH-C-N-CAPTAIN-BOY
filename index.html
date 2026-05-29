@@ -170,3 +170,210 @@
             top: 25%;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .card-inner b {
+            color: #ff3b3b;
+            font-size: clamp(10px, 3vw, 15px);
+            margin-bottom: 4px;
+            display: block;
+            font-weight: 900;
+        }
+
+        .card-inner span {
+            color: var(--card-text);
+            font-weight: 700;
+            /* Phông chữ tự nhỏ lại nếu nội dung quá dài (để chứa được 100 chữ) */
+            font-size: clamp(8px, 2.3vw, 12px); 
+            line-height: 1.2;
+            display: -webkit-box;
+            -webkit-line-clamp: 12; /* Tăng số dòng lên 12 */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            word-break: break-word;
+        }
+
+        /* --- ĐIỀU KHIỂN & MODAL --- */
+        .btn-float {
+            position: fixed;
+            right: 15px; bottom: 25px;
+            padding: 14px 22px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border: none; border-radius: 50px;
+            color: #fff; font-weight: 800; font-size: 13px;
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+            z-index: 100;
+            cursor: pointer;
+        }
+
+        #musicBtn {
+            position: fixed;
+            left: 15px; bottom: 25px;
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; z-index: 100;
+            cursor: pointer;
+        }
+
+        .modal {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.9);
+            display: none; align-items: center; justify-content: center;
+            padding: 20px; z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .modal.active { display: flex; }
+        
+        .modal-box {
+            background: #111026; width: 100%; max-width: 450px;
+            padding: 30px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .input-box {
+            width: 100%; padding: 15px; margin: 12px 0;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px; color: #fff; font-size: 15px;
+        }
+
+        .submit-btn {
+            width: 100%; padding: 18px; margin-top: 15px;
+            background: var(--primary); font-weight: 900; border: none;
+            border-radius: 15px; color: #fff; cursor: pointer;
+        }
+
+        footer { text-align: center; padding: 40px 20px; font-size: 10px; opacity: 0.5; }
+
+    </style>
+</head>
+<body>
+
+    <div class="universe">
+        <div class="nebula"></div>
+        <div id="starField"></div>
+        <div class="shooting-star" style="top:15%; left:10%; animation-delay: 2s;"></div>
+        <div class="shooting-star" style="top:40%; left:65%; animation-delay: 5s;"></div>
+    </div>
+
+    <header class="hero">
+        <div class="sub-top">THE RETURN OF</div>
+        <h1>CAPTAIN BOY</h1>
+        <div class="wishing-wall">WISHING WALL</div>
+        <div class="sub-bottom">
+            ✦ CAPTAIN BOY - TINH HÀ SAY HI ✦
+        </div>
+    </header>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 32px; font-weight: 900;">WALL OF LOVE</h2>
+            <p style="opacity: 0.6; font-size: 13px;">Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦</p>
+        </div>
+
+        <div class="grid-wall" id="wishGrid"></div>
+
+        <footer>
+            PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
+        </footer>
+    </div>
+
+    <button class="btn-float" onclick="setModal(true)">+ GỬI LỜI CHÚC</button>
+    <button id="musicBtn">🔊</button>
+
+    <!-- FORM GỬI LỜI CHÚC -->
+    <div class="modal" id="wishModal">
+        <div class="modal-box">
+            <h2 style="margin-bottom:10px; font-weight:900">Gửi lời chúc ✨</h2>
+            <p style="font-size:13px; opacity:0.6; margin-bottom:20px">Hãy dành những lời chân thành nhất cho Captain nhé!</p>
+            
+            <form id="wishForm">
+                <input type="text" id="uName" class="input-box" placeholder="Tên của bạn..." required maxlength="25">
+                <textarea id="uMsg" class="input-box" rows="5" placeholder="Bạn muốn nhắn gì? (Tối đa 300 ký tự)..." required maxlength="300"></textarea>
+                <button type="submit" id="sendBtn" class="submit-btn">GỬI NGAY ✨</button>
+                <button type="button" onclick="setModal(false)" style="width:100%; background:none; border:none; color:#666; margin-top:15px; cursor:pointer">Hủy bỏ</button>
+            </form>
+        </div>
+    </div>
+
+    <audio id="bgm" loop src="./music.mp3"></audio>
+
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
+
+        // Tinh hà
+        const field = document.getElementById("starField");
+        for(let i=0; i<120; i++){
+            const s = document.createElement("div");
+            s.className = "star";
+            const sz = Math.random() * 2.5;
+            s.style.width = s.style.height = sz + "px";
+            s.style.left = Math.random() * 100 + "%";
+            s.style.top = Math.random() * 100 + "%";
+            s.style.setProperty('--t', (Math.random() * 3 + 2) + "s");
+            field.appendChild(s);
+        }
+
+        function setModal(s) { document.getElementById("wishModal").classList.toggle("active", s); }
+
+        async function loadWishes() {
+            try {
+                const res = await fetch(SCRIPT_URL + "?action=list");
+                const data = await res.json();
+                if(data.approved) {
+                    renderGrid(data.approved);
+                }
+            } catch(e) { console.error("Lỗi tải data"); }
+        }
+
+        function renderGrid(list) {
+            const grid = document.getElementById("wishGrid");
+            grid.innerHTML = list.slice().reverse().map(i => `
+                <div class="sheep-card">
+                    <div class="card-inner">
+                        <b>${esc(i.name)}</b>
+                        <span>${esc(i.message)}</span>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        document.getElementById("wishForm").onsubmit = async (e) => {
+            e.preventDefault();
+            const name = document.getElementById("uName").value.trim();
+            const msg = document.getElementById("uMsg").value.trim();
+            const btn = document.getElementById("sendBtn");
+
+            btn.disabled = true; btn.innerText = "ĐANG GỬI...";
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: "POST",
+                    body: JSON.stringify({action: "submit", name, message: msg, id: Date.now()})
+                });
+                alert("Gửi thành công! Chờ duyệt nhé ✨");
+                setModal(false);
+                location.reload();
+            } catch(e) { 
+                alert("Lỗi khi gửi!"); 
+                btn.disabled = false; btn.innerText = "GỬI NGAY ✨";
+            }
+        };
+
+        function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+        const bgm = document.getElementById("bgm");
+        const mBtn = document.getElementById("musicBtn");
+        mBtn.onclick = () => {
+            if(bgm.paused) { bgm.play(); mBtn.innerHTML = "🔊"; }
+            else { bgm.pause(); mBtn.innerHTML = "🔇"; }
+        }
+
+        loadWishes();
+    </script>
+</body>
+</html>
