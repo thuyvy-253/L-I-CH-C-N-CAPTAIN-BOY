@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
@@ -16,13 +16,13 @@
   --primary2:#c084fc;
   --bg:#05030d;
 
-  --card:rgba(18,15,38,.75);
   --line:rgba(255,255,255,.08);
 
   --text:#ffffff;
   --muted:rgba(255,255,255,.72);
 
-  --shadow:0 10px 40px rgba(124,58,237,.28);
+  --shadow:
+  0 10px 40px rgba(124,58,237,.28);
 }
 
 *{
@@ -37,14 +37,14 @@ html{
 
 body{
   font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--text);
+  background:#05030d;
+  color:#fff;
   overflow-x:hidden;
   min-height:100vh;
   line-height:1.6;
 }
 
-/* ================= BACKGROUND ================= */
+/* BACKGROUND */
 
 .bg{
   position:fixed;
@@ -67,7 +67,7 @@ body{
   background-repeat:no-repeat;
 }
 
-/* ================= STARS ================= */
+/* STARS */
 
 .stars{
   position:fixed;
@@ -99,7 +99,7 @@ body{
   }
 }
 
-/* ================= SHOOTING STAR ================= */
+/* SHOOTING STAR */
 
 .shooting-star{
   position:absolute;
@@ -114,6 +114,7 @@ body{
   );
 
   border-radius:999px;
+
   opacity:.7;
 
   transform:rotate(-25deg);
@@ -160,7 +161,7 @@ body{
 
 }
 
-/* ================= CLOUD ================= */
+/* CLOUD */
 
 .clouds{
   position:fixed;
@@ -243,61 +244,7 @@ body{
   }
 }
 
-/* ================= FALLING STAR ================= */
-
-.falling-star{
-  position:absolute;
-
-  width:3px;
-  height:3px;
-
-  background:#fff;
-  border-radius:50%;
-
-  box-shadow:0 0 14px #fff;
-
-  animation:falling 10s linear infinite;
-}
-
-@keyframes falling{
-
-  0%{
-    transform:
-    translateY(-100px)
-    translateX(0);
-
-    opacity:0;
-  }
-
-  10%{
-    opacity:1;
-  }
-
-  100%{
-    transform:
-    translateY(120vh)
-    translateX(180px);
-
-    opacity:0;
-  }
-
-}
-
-.noise{
-  position:fixed;
-  inset:0;
-  z-index:-3;
-
-  opacity:.04;
-
-  background-image:
-  linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
-
-  background-size:3px 3px;
-}
-
-/* ================= GLOW ================= */
+/* GLOW */
 
 .glow{
   position:fixed;
@@ -340,7 +287,7 @@ body{
 
 }
 
-/* ================= LAYOUT ================= */
+/* LAYOUT */
 
 .container{
   width:min(1180px,92%);
@@ -348,7 +295,7 @@ body{
   padding-bottom:120px;
 }
 
-/* ================= HERO ================= */
+/* HERO */
 
 .hero{
   min-height:115vh;
@@ -359,6 +306,10 @@ body{
 
   text-align:center;
   padding:80px 0 140px;
+}
+
+.hero-inner{
+  width:100%;
 }
 
 .hero h1{
@@ -383,6 +334,7 @@ body{
 }
 
 .section-head{
+  width:100%;
   text-align:center;
 }
 
@@ -397,7 +349,7 @@ body{
   font-size:15px;
 }
 
-/* ================= WISH AREA ================= */
+/* WISH AREA */
 
 .cuucocanh-section{
   margin-top:10px;
@@ -439,7 +391,7 @@ body{
   font-weight:700;
 }
 
-/* ================= FLYING WISH ================= */
+/* FLYING WISH */
 
 .flying-wish{
   position:absolute;
@@ -473,8 +425,6 @@ body{
   animation-name:flyUp;
   animation-timing-function:linear;
   animation-fill-mode:forwards;
-
-  overflow:hidden;
 }
 
 .flying-wish strong{
@@ -487,6 +437,12 @@ body{
   color:#3b0764;
   font-size:13px;
   line-height:1.4;
+
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+
+  overflow:hidden;
 }
 
 @keyframes flyUp{
@@ -494,7 +450,6 @@ body{
   0%{
     transform:
     translateY(0)
-    translateX(0)
     scale(.7);
 
     opacity:0;
@@ -504,17 +459,9 @@ body{
     opacity:1;
   }
 
-  50%{
-    transform:
-    translateY(-320px)
-    translateX(-20px)
-    scale(1);
-  }
-
   100%{
     transform:
     translateY(-760px)
-    translateX(40px)
     scale(1.12);
 
     opacity:0;
@@ -522,7 +469,7 @@ body{
 
 }
 
-/* ================= WALL ================= */
+/* WALL */
 
 .wall{
   margin-top:120px;
@@ -539,7 +486,7 @@ body{
   margin-top:30px;
 }
 
-/* ================= SHEEP CARD ================= */
+/* SHEEP CARD */
 
 .wish-card{
   position:relative;
@@ -547,7 +494,7 @@ body{
   width:100%;
   max-width:360px;
 
-  aspect-ratio:1/1;
+  aspect-ratio:1 / 1.18;
 
   margin:auto;
 
@@ -564,9 +511,7 @@ body{
 
   text-align:center;
 
-  padding:70px 78px 80px;
-
-  gap:8px;
+  padding:92px 68px 78px;
 
   overflow:hidden;
 }
@@ -574,15 +519,23 @@ body{
 .wish-card strong{
   color:#ff3b3b;
 
-  font-size:13px;
+  font-size:14px;
   font-weight:900;
+
+  line-height:1.35;
 
   width:100%;
   max-width:170px;
 
-  line-height:1.3;
+  margin-bottom:10px;
 
   word-break:break-word;
+
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+
+  overflow:hidden;
 }
 
 .wish-card p{
@@ -605,7 +558,7 @@ body{
   overflow:hidden;
 }
 
-/* ================= BUTTON ================= */
+/* BUTTON */
 
 .floating-btn{
   position:fixed;
@@ -616,6 +569,7 @@ body{
   z-index:100;
 
   border:none;
+  outline:none;
   cursor:pointer;
 
   display:flex;
@@ -642,7 +596,7 @@ body{
   0 12px 35px rgba(124,58,237,.42);
 }
 
-/* ================= MODAL ================= */
+/* MODAL */
 
 .modal{
   position:fixed;
@@ -744,7 +698,19 @@ body{
   font-weight:800;
 }
 
-/* ================= MUSIC ================= */
+/* FOOTER */
+
+.footer{
+  margin-top:90px;
+
+  text-align:center;
+
+  color:rgba(255,255,255,.45);
+
+  font-size:13px;
+}
+
+/* MUSIC */
 
 #musicBtn{
   position:fixed;
@@ -774,7 +740,7 @@ body{
   cursor:pointer;
 }
 
-/* ================= MOBILE ================= */
+/* MOBILE */
 
 @media(max-width:768px){
 
@@ -792,41 +758,51 @@ body{
   .wish-card{
     max-width:190px;
 
-    aspect-ratio:1/1;
+    padding:72px 34px 48px;
+  }
 
-    padding:44px 34px 52px;
+  .wish-card strong{
+    font-size:11px;
+    max-width:110px;
+  }
 
-    gap:4px;
+  .wish-card p{
+    font-size:9px;
 
-    background-size:contain;
+    line-height:1.28;
+
+    max-width:112px;
+
+    -webkit-line-clamp:6;
+  }
+
+}
+
+@media(max-width:480px){
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .wish-card{
+    max-width:175px;
+
+    padding:66px 30px 42px;
   }
 
   .wish-card strong{
     font-size:10px;
-
     max-width:100px;
-
-    line-height:1.2;
-
-    overflow:hidden;
-
-    display:-webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient:vertical;
   }
 
   .wish-card p{
-    font-size:8px;
+    font-size:8.5px;
 
-    line-height:1.25;
+    line-height:1.22;
 
-    max-width:105px;
+    max-width:102px;
 
-    overflow:hidden;
-
-    display:-webkit-box;
-    -webkit-line-clamp:6;
-    -webkit-box-orient:vertical;
+    -webkit-line-clamp:5;
   }
 
 }
@@ -846,14 +822,10 @@ body{
   <div class="shooting-star" style="top:60%; left:-25%; animation-delay:7s;"></div>
 </div>
 
-<div class="stars" id="fallingStars"></div>
-
 <div class="clouds">
   <div class="cloud cloud1"></div>
   <div class="cloud cloud2"></div>
 </div>
-
-<div class="noise"></div>
 
 <div class="glow one"></div>
 <div class="glow two"></div>
@@ -933,6 +905,10 @@ Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
 
 </section>
 
+<div class="footer">
+PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
+</div>
+
 </div>
 
 <button class="floating-btn" onclick="toggleModal(true)">
@@ -971,7 +947,7 @@ required>
 id="userMsg"
 rows="5"
 maxlength="180"
-placeholder="Lời chúc..."
+placeholder="Nhập lời chúc..."
 required></textarea>
 
 </div>
@@ -1006,6 +982,8 @@ googleScriptUrl:
 let listApproved = [];
 let flyInterval = null;
 
+/* STARS */
+
 const starsWrap =
 document.getElementById("stars");
 
@@ -1029,28 +1007,7 @@ starsWrap.appendChild(star);
 
 }
 
-const fallingWrap =
-document.getElementById("fallingStars");
-
-for(let i=0;i<18;i++){
-
-const fall =
-document.createElement("div");
-
-fall.className = "falling-star";
-
-fall.style.left =
-Math.random() * 100 + "%";
-
-fall.style.animationDelay =
-Math.random() * 12 + "s";
-
-fall.style.animationDuration =
-(7 + Math.random() * 8) + "s";
-
-fallingWrap.appendChild(fall);
-
-}
+/* MODAL */
 
 function toggleModal(show){
 
@@ -1059,6 +1016,8 @@ document
 .classList.toggle("active", show);
 
 }
+
+/* FETCH */
 
 async function fetchWishes(){
 
@@ -1091,10 +1050,25 @@ console.error(error);
 
 }
 
+/* RENDER WALL */
+
 function renderWall(){
 
 const grid =
 document.getElementById("wishGrid");
+
+if(!listApproved.length){
+
+grid.innerHTML = `
+<div class="wish-card">
+<strong>From: CỪU CÓ CÁNH</strong>
+<p>Chưa có lời chúc nào ✨</p>
+</div>
+`;
+
+return;
+
+}
 
 grid.innerHTML =
 listApproved
@@ -1117,6 +1091,8 @@ ${escapeHtml(item.message)}
 `).join("");
 
 }
+
+/* FLY */
 
 function startFlying(){
 
@@ -1163,15 +1139,15 @@ el.remove();
 }
 
 for(let i=0;i<8;i++){
-
 setTimeout(createWish, i * 1200);
-
 }
 
 flyInterval =
 setInterval(createWish,2200);
 
 }
+
+/* SUBMIT */
 
 document
 .getElementById("wishForm")
@@ -1254,6 +1230,8 @@ btn.innerText = "GỬI NGAY ✨";
 
 });
 
+/* ESCAPE */
+
 function escapeHtml(text){
 
 const div =
@@ -1265,9 +1243,13 @@ return div.innerHTML;
 
 }
 
+/* INIT */
+
 fetchWishes();
 
 setInterval(fetchWishes,30000);
+
+/* MUSIC */
 
 const music =
 document.getElementById("bgMusic");
@@ -1294,13 +1276,11 @@ e.stopPropagation();
 if(music.paused){
 
 music.play();
-
 musicBtn.innerHTML = "🔊";
 
 }else{
 
 music.pause();
-
 musicBtn.innerHTML = "🔇";
 
 }
