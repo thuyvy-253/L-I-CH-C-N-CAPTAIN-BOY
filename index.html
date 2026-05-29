@@ -1041,25 +1041,24 @@ body{
 
   /* GIỐNG DESKTOP */
 
-  .wish-grid{
-    grid-template-columns:1fr;
-    gap:26px;
-    justify-items:center;
-  }
+.wish-grid{
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  justify-items:center;
+}
 
-  .wish-card{
+.wish-card{
+  width:100%;
+  max-width:260px;
 
-    width:100%;
-    max-width:520px;
-
-    height:270px;
+ height:180px;
 
     background-size:contain;
 
-    padding-top:58px;
-    padding-left:115px;
-    padding-right:82px;
-    padding-bottom:45px;
+padding-top:36px;
+padding-left:58px;
+padding-right:42px;
+padding-bottom:24px;
 
     display:flex;
     flex-direction:column;
@@ -1067,7 +1066,7 @@ body{
   }
 
   .wish-card strong{
-    font-size:18px;
+    font-size:px;
     margin-bottom:12px;
     text-align:center;
   }
@@ -1075,12 +1074,12 @@ body{
   .wish-card p{
 
     width:100%;
-    max-width:230px;
+    max-width:95px;
 
     margin:0 auto;
 
-    font-size:14px;
-    line-height:1.4;
+    font-size:8px;
+    line-height:1.2;
 
     text-align:center;
 
