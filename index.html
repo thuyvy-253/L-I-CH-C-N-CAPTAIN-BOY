@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
@@ -15,13 +15,10 @@
   --primary:#7c3aed;
   --primary2:#c084fc;
   --bg:#05030d;
-
   --card:rgba(18,15,38,.75);
   --line:rgba(255,255,255,.08);
-
   --text:#ffffff;
   --muted:rgba(255,255,255,.72);
-
   --shadow:0 10px 40px rgba(124,58,237,.28);
 }
 
@@ -44,20 +41,20 @@ body{
   line-height:1.6;
 }
 
-/* ================= BACKGROUND ================= */
+/* BACKGROUND */
 
 .bg{
   position:fixed;
   inset:0;
-  z-index:-6;
+  z-index:-5;
 
   background:
   radial-gradient(circle at top,
-  rgba(124,58,237,.25),
+  rgba(124,58,237,.28),
   transparent 35%),
 
   radial-gradient(circle at bottom,
-  rgba(168,85,247,.12),
+  rgba(168,85,247,.14),
   transparent 35%),
 
   url("./nền.png");
@@ -67,12 +64,12 @@ body{
   background-repeat:no-repeat;
 }
 
-/* ================= STARS ================= */
+/* STARS */
 
 .stars{
   position:fixed;
   inset:0;
-  z-index:-5;
+  z-index:-4;
   overflow:hidden;
   pointer-events:none;
 }
@@ -81,9 +78,9 @@ body{
   position:absolute;
   width:2px;
   height:2px;
-  background:#fff;
   border-radius:50%;
-  opacity:.9;
+  background:#fff;
+
   animation:twinkle 3s infinite ease-in-out;
 }
 
@@ -95,11 +92,11 @@ body{
 
   50%{
     opacity:1;
-    transform:scale(1.8);
+    transform:scale(1.7);
   }
 }
 
-/* ================= SHOOTING STAR ================= */
+/* SHOOTING */
 
 .shooting-star{
   position:absolute;
@@ -114,6 +111,7 @@ body{
   );
 
   border-radius:999px;
+
   opacity:.7;
 
   transform:rotate(-25deg);
@@ -160,147 +158,7 @@ body{
 
 }
 
-/* ================= FALLING STAR ================= */
-
-.falling-star{
-  position:absolute;
-
-  width:3px;
-  height:3px;
-
-  background:#fff;
-  border-radius:50%;
-
-  box-shadow:0 0 14px #fff;
-
-  animation:falling 10s linear infinite;
-}
-
-@keyframes falling{
-
-  0%{
-    transform:
-    translateY(-100px)
-    translateX(0);
-
-    opacity:0;
-  }
-
-  10%{
-    opacity:1;
-  }
-
-  100%{
-    transform:
-    translateY(120vh)
-    translateX(180px);
-
-    opacity:0;
-  }
-
-}
-
-/* ================= CLOUD ================= */
-
-.clouds{
-  position:fixed;
-  inset:0;
-  z-index:-4;
-  overflow:hidden;
-  pointer-events:none;
-}
-
-.cloud{
-  position:absolute;
-  background:rgba(255,255,255,.08);
-
-  border-radius:999px;
-  filter:blur(2px);
-}
-
-.cloud::before,
-.cloud::after{
-  content:"";
-  position:absolute;
-  background:inherit;
-  border-radius:50%;
-}
-
-.cloud1{
-  width:240px;
-  height:70px;
-
-  top:15%;
-  left:-300px;
-
-  animation:cloudMove 50s linear infinite;
-}
-
-.cloud1::before{
-  width:90px;
-  height:90px;
-  left:30px;
-  top:-30px;
-}
-
-.cloud1::after{
-  width:120px;
-  height:120px;
-  right:25px;
-  top:-45px;
-}
-
-.cloud2{
-  width:180px;
-  height:60px;
-
-  top:50%;
-  left:-240px;
-
-  animation:cloudMove 70s linear infinite;
-}
-
-.cloud2::before{
-  width:70px;
-  height:70px;
-  left:25px;
-  top:-20px;
-}
-
-.cloud2::after{
-  width:90px;
-  height:90px;
-  right:20px;
-  top:-30px;
-}
-
-@keyframes cloudMove{
-  from{
-    transform:translateX(0);
-  }
-
-  to{
-    transform:translateX(1800px);
-  }
-}
-
-/* ================= NOISE ================= */
-
-.noise{
-  position:fixed;
-  inset:0;
-  z-index:-3;
-
-  opacity:.04;
-
-  background-image:
-  linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
-
-  background-size:3px 3px;
-}
-
-/* ================= GLOW ================= */
+/* GLOW */
 
 .glow{
   position:fixed;
@@ -308,8 +166,8 @@ body{
   height:520px;
   border-radius:50%;
   filter:blur(120px);
-  opacity:.15;
-  z-index:-2;
+  opacity:.16;
+  z-index:-3;
 
   animation:floatGlow 12s ease-in-out infinite;
 }
@@ -343,7 +201,7 @@ body{
 
 }
 
-/* ================= LAYOUT ================= */
+/* CONTAINER */
 
 .container{
   width:min(1180px,92%);
@@ -351,7 +209,7 @@ body{
   padding-bottom:120px;
 }
 
-/* ================= HERO ================= */
+/* HERO */
 
 .hero{
   min-height:110vh;
@@ -361,20 +219,16 @@ body{
   justify-content:center;
 
   text-align:center;
+
   padding:80px 0 140px;
 }
 
-.hero-inner{
-  width:100%;
-}
-
 .hero h1{
-  font-size:clamp(50px,8vw,120px);
-
+  font-size:clamp(52px,8vw,120px);
   font-weight:900;
   line-height:1;
-
   letter-spacing:3px;
+
   margin-bottom:20px;
 
   background:
@@ -383,35 +237,26 @@ body{
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 
-  text-shadow:0 0 30px rgba(124,58,237,.35);
-
-  overflow-wrap:anywhere;
-  word-break:break-word;
+  text-shadow:
+  0 0 30px rgba(124,58,237,.35);
 }
 
 .section-head{
-  width:100%;
   text-align:center;
 }
 
 .section-head h2{
-  font-size:clamp(26px,4vw,46px);
+  font-size:clamp(28px,4vw,46px);
   font-weight:900;
   margin-bottom:10px;
-
-  overflow-wrap:anywhere;
-  word-break:break-word;
 }
 
 .section-head p{
-  color:var(--muted);
+  color:rgba(255,255,255,.75);
   font-size:15px;
-
-  overflow-wrap:anywhere;
-  word-break:break-word;
 }
 
-/* ================= WISH AREA ================= */
+/* WISH AREA */
 
 .cuucocanh-section{
   margin-top:10px;
@@ -427,7 +272,7 @@ body{
 
   border-radius:36px;
 
-  border:1px solid var(--line);
+  border:1px solid rgba(255,255,255,.08);
 
   background:
   linear-gradient(
@@ -453,7 +298,7 @@ body{
   font-weight:700;
 }
 
-/* ================= FLYING WISH ================= */
+/* FLYING */
 
 .flying-wish{
   position:absolute;
@@ -506,6 +351,7 @@ body{
   0%{
     transform:
     translateY(0)
+    translateX(0)
     scale(.7);
 
     opacity:0;
@@ -518,12 +364,14 @@ body{
   50%{
     transform:
     translateY(-320px)
+    translateX(-20px)
     scale(1);
   }
 
   100%{
     transform:
     translateY(-760px)
+    translateX(40px)
     scale(1.12);
 
     opacity:0;
@@ -531,7 +379,7 @@ body{
 
 }
 
-/* ================= WALL ================= */
+/* WALL */
 
 .wall{
   margin-top:120px;
@@ -543,19 +391,19 @@ body{
   grid-template-columns:
   repeat(auto-fit,minmax(320px,1fr));
 
-  gap:28px;
+  gap:26px;
 
   margin-top:30px;
 }
 
-/* ================= SHEEP CARD ================= */
+/* SHEEP CARD */
 
 .wish-card{
   position:relative;
 
   width:100%;
   max-width:380px;
-  aspect-ratio:1/1;
+  height:360px;
 
   margin:auto;
 
@@ -571,13 +419,15 @@ body{
   overflow:hidden;
 }
 
-.card-inner{
+/* CONTENT */
+
+.wish-content{
   position:absolute;
 
   width:58%;
-  height:52%;
+  height:46%;
 
-  top:29%;
+  top:31%;
   left:50%;
 
   transform:translateX(-50%);
@@ -594,7 +444,9 @@ body{
 
 /* FROM */
 
-.card-from{
+.wish-content strong{
+  display:block;
+
   width:100%;
 
   text-align:center;
@@ -604,22 +456,16 @@ body{
   font-size:13px;
   font-weight:900;
 
+  margin-bottom:8px;
+
   line-height:1.3;
-
-  margin-bottom:12px;
-
-  overflow:hidden;
-
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
 
   word-break:break-word;
 }
 
 /* MESSAGE */
 
-.card-message{
+.wish-content p{
   width:100%;
 
   color:#111;
@@ -627,20 +473,21 @@ body{
   font-size:12px;
   font-weight:700;
 
-  line-height:1.45;
+  line-height:1.4;
 
   text-align:center;
 
-  overflow:hidden;
+  word-break:break-word;
+  overflow-wrap:break-word;
 
   display:-webkit-box;
-  -webkit-line-clamp:8;
   -webkit-box-orient:vertical;
+  -webkit-line-clamp:7;
 
-  word-break:break-word;
+  overflow:hidden;
 }
 
-/* ================= BUTTON ================= */
+/* BUTTON */
 
 .floating-btn{
   position:fixed;
@@ -651,7 +498,6 @@ body{
   z-index:100;
 
   border:none;
-  outline:none;
   cursor:pointer;
 
   display:flex;
@@ -676,25 +522,11 @@ body{
   font-size:14px;
   font-weight:800;
 
-  letter-spacing:1px;
-
   box-shadow:
   0 12px 35px rgba(124,58,237,.42);
-
-  transition:.35s ease;
 }
 
-.floating-btn:hover{
-  transform:
-  translateY(-4px)
-  scale(1.02);
-}
-
-.floating-btn span{
-  font-size:22px;
-}
-
-/* ================= MODAL ================= */
+/* MODAL */
 
 .modal{
   position:fixed;
@@ -722,41 +554,17 @@ body{
 
   background:rgba(15,13,32,.92);
 
-  border:1px solid var(--line);
+  border:1px solid rgba(255,255,255,.08);
 
   border-radius:34px;
 
   padding:34px;
 
   position:relative;
-
-  animation:modalShow .35s ease;
-
-  box-shadow:
-  0 20px 60px rgba(0,0,0,.5);
-}
-
-@keyframes modalShow{
-
-  from{
-    opacity:0;
-    transform:
-    translateY(20px)
-    scale(.96);
-  }
-
-  to{
-    opacity:1;
-    transform:
-    translateY(0)
-    scale(1);
-  }
-
 }
 
 .close{
   position:absolute;
-
   right:20px;
   top:16px;
 
@@ -772,17 +580,12 @@ body{
 .modal-box h3{
   font-size:32px;
   font-weight:900;
-
-  line-height:1.1;
-
   margin-bottom:10px;
 }
 
 .modal-box .sub{
   color:rgba(255,255,255,.7);
-
   margin-bottom:26px;
-
   font-size:14px;
 }
 
@@ -792,19 +595,14 @@ body{
 
 .input-group label{
   display:block;
-
   margin-bottom:8px;
-
   font-size:13px;
-
   color:rgba(255,255,255,.75);
-
   font-weight:600;
 }
 
 .input-group input,
 .input-group textarea{
-
   width:100%;
 
   border:none;
@@ -832,7 +630,6 @@ body{
   width:100%;
 
   border:none;
-  outline:none;
   cursor:pointer;
 
   padding:18px;
@@ -848,17 +645,11 @@ body{
 
   color:#fff;
 
-  font-family:'Inter',sans-serif;
-
   font-size:15px;
   font-weight:800;
-
-  letter-spacing:1px;
-
-  margin-top:10px;
 }
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 
 .footer{
   margin-top:90px;
@@ -869,10 +660,10 @@ body{
 
   font-size:12px;
 
-  padding:0 14px;
+  padding:0 10px;
 }
 
-/* ================= MUSIC ================= */
+/* MUSIC */
 
 #musicBtn{
   position:fixed;
@@ -902,96 +693,47 @@ body{
   cursor:pointer;
 }
 
-/* ================= MOBILE ================= */
+/* MOBILE */
 
 @media(max-width:768px){
 
-  .container{
-    width:min(1180px,96%);
-  }
-
-  .hero{
-    min-height:100vh;
-    padding:70px 0 140px;
-  }
-
   .hero h1{
-    font-size:58px;
-    line-height:1.05;
+    font-size:56px;
   }
 
   .wish-grid{
-    grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
-    gap:8px;
+    grid-template-columns:repeat(2,1fr);
+    gap:6px;
   }
 
   .wish-card{
-    max-width:100%;
+    max-width:190px;
+    height:230px;
   }
 
-  .card-inner{
-    width:58%;
-    height:50%;
+  .wish-content{
+    width:60%;
+    height:42%;
 
-    top:31%;
+    top:33%;
   }
 
-  .card-from{
-    font-size:10px;
-    margin-bottom:8px;
-
-    -webkit-line-clamp:2;
-  }
-
-  .card-message{
+  .wish-content strong{
     font-size:9px;
-    line-height:1.3;
+    margin-bottom:5px;
+    line-height:1.2;
+  }
 
-    -webkit-line-clamp:8;
+  .wish-content p{
+    font-size:8px;
+    line-height:1.22;
+
+    -webkit-line-clamp:7;
   }
 
   .footer{
     font-size:10px;
-    line-height:1.5;
-  }
-
-}
-
-@media(max-width:480px){
-
-  .hero h1{
-    font-size:42px;
-  }
-
-  .section-head h2{
-    font-size:24px;
-  }
-
-  .section-head p{
-    font-size:12px;
-  }
-
-  .wish-grid{
-    gap:4px;
-  }
-
-  .card-inner{
-    width:60%;
-    height:50%;
-
-    top:31%;
-  }
-
-  .card-from{
-    font-size:9px;
-    margin-bottom:6px;
-  }
-
-  .card-message{
-    font-size:8px;
-    line-height:1.25;
+    line-height:1.4;
   }
 
 }
@@ -1011,15 +753,6 @@ body{
   <div class="shooting-star" style="top:60%; left:-25%; animation-delay:7s;"></div>
 </div>
 
-<div class="stars" id="fallingStars"></div>
-
-<div class="clouds">
-  <div class="cloud cloud1"></div>
-  <div class="cloud cloud2"></div>
-</div>
-
-<div class="noise"></div>
-
 <div class="glow one"></div>
 <div class="glow two"></div>
 
@@ -1027,7 +760,7 @@ body{
 
 <section class="hero">
 
-<div class="hero-inner">
+<div>
 
 <h1>CAPTAIN BOY</h1>
 
@@ -1037,9 +770,7 @@ body{
 font-size:clamp(34px,6vw,80px);
 font-weight:900;
 color:#f5d0fe;
-text-shadow:0 0 30px rgba(168,85,247,.5);
 margin-bottom:20px;
-line-height:1.1;
 ">
 WISHING WALL
 </h2>
@@ -1048,7 +779,6 @@ WISHING WALL
 font-size:clamp(14px,2vw,26px);
 letter-spacing:1px;
 color:#ffffff;
-line-height:1.5;
 ">
 ✦ CAPTAIN BOY - TINH HÀ SAY HI ✦
 </p>
@@ -1056,6 +786,7 @@ line-height:1.5;
 </div>
 
 </div>
+
 </section>
 
 <section class="cuucocanh-section">
@@ -1135,7 +866,6 @@ Lời nhắn sẽ được hiển thị sau khi admin duyệt
 type="text"
 id="userName"
 maxlength="30"
-placeholder="Nhập tên của Cừu..."
 required>
 
 </div>
@@ -1148,7 +878,6 @@ required>
 id="userMsg"
 rows="5"
 maxlength="180"
-placeholder="Cừu Có Cánh dành lời đến CAPTAIN BOY..."
 required></textarea>
 
 </div>
@@ -1204,35 +933,7 @@ Math.random() * 100 + "%";
 star.style.animationDelay =
 Math.random() * 5 + "s";
 
-star.style.opacity =
-Math.random();
-
 starsWrap.appendChild(star);
-
-}
-
-/* FALLING STARS */
-
-const fallingWrap =
-document.getElementById("fallingStars");
-
-for(let i=0;i<18;i++){
-
-const fall =
-document.createElement("div");
-
-fall.className = "falling-star";
-
-fall.style.left =
-Math.random() * 100 + "%";
-
-fall.style.animationDelay =
-Math.random() * 12 + "s";
-
-fall.style.animationDuration =
-(7 + Math.random() * 8) + "s";
-
-fallingWrap.appendChild(fall);
 
 }
 
@@ -1245,14 +946,6 @@ document
 .classList.toggle("active", show);
 
 }
-
-window.addEventListener("keydown",(e)=>{
-
-if(e.key === "Escape"){
-toggleModal(false);
-}
-
-});
 
 /* FETCH */
 
@@ -1281,10 +974,7 @@ startFlying();
 
 }catch(error){
 
-console.error(
-"Lỗi tải dữ liệu:",
-error
-);
+console.error(error);
 
 }
 
@@ -1300,23 +990,12 @@ document.getElementById("wishGrid");
 if(!listApproved.length){
 
 grid.innerHTML = `
-
 <div class="wish-card">
-
-<div class="card-inner">
-
-<div class="card-from">
-From: CỪU CÓ CÁNH
+<div class="wish-content">
+<strong>From: CỪU CÓ CÁNH</strong>
+<p>Chưa có lời chúc nào ✨</p>
 </div>
-
-<div class="card-message">
-Chưa có lời chúc nào ✨
 </div>
-
-</div>
-
-</div>
-
 `;
 
 return;
@@ -1331,15 +1010,15 @@ listApproved
 
 <div class="wish-card">
 
-<div class="card-inner">
+<div class="wish-content">
 
-<div class="card-from">
+<strong>
 From: ${escapeHtml(item.name)}
-</div>
+</strong>
 
-<div class="card-message">
+<p>
 ${escapeHtml(item.message)}
-</div>
+</p>
 
 </div>
 
@@ -1438,11 +1117,9 @@ document.getElementById("userMsg")
 
 if(!name || !message){
 
-alert(
-"Vui lòng nhập đầy đủ thông tin ✨"
-);
-
+alert("Vui lòng nhập đầy đủ ✨");
 return;
+
 }
 
 btn.disabled = true;
@@ -1484,7 +1161,7 @@ await response.json();
 if(data.ok){
 
 alert(
-"Đã gửi thành công ✨ Lời chúc đang chờ duyệt."
+"Đã gửi thành công ✨"
 );
 
 document
@@ -1503,7 +1180,7 @@ alert("Gửi thất bại 😭");
 
 console.error(err);
 
-alert("Lỗi kết nối Apps Script");
+alert("Lỗi kết nối");
 
 }finally{
 
@@ -1528,7 +1205,7 @@ return div.innerHTML;
 
 }
 
-/* START */
+/* LOAD */
 
 fetchWishes();
 
@@ -1548,9 +1225,7 @@ document.addEventListener("click",()=>{
 
 if(music.paused){
 
-music.play().catch(err=>{
-console.log(err);
-});
+music.play().catch(()=>{});
 
 }
 
@@ -1563,13 +1238,11 @@ e.stopPropagation();
 if(music.paused){
 
 music.play();
-
 musicBtn.innerHTML = "🔊";
 
 }else{
 
 music.pause();
-
 musicBtn.innerHTML = "🔇";
 
 }
