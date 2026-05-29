@@ -1,261 +1,1614 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
+<title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --primary:#7c3aed;
-      --primary2:#a78bfa;
-      --bg:#060510;
-      --text:#f5f3ff;
-      --muted:rgba(255,255,255,.7);
-    }
+<style>
 
-    *{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#7c3aed;
+  --primary2:#c084fc;
+  --bg:#05030d;
 
-    body{
-      font-family:'Inter',sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      overflow-x:hidden;
-    }
+  --card:rgba(18,15,38,.75);
+  --line:rgba(255,255,255,.08);
 
-    /* ===== BACKGROUND ===== */
-    .bg{
-      position:fixed;
-      inset:0;
-      z-index:-5;
-      background:
-        radial-gradient(circle at top,#7c3aed33,transparent 40%),
-        radial-gradient(circle at bottom,#a78bfa22,transparent 40%),
-        url("./nền.png");
-      background-size:cover;
-      background-position:center;
-    }
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.72);
 
-    /* ===== STARS ===== */
-    .stars{
-      position:fixed;
-      inset:0;
-      z-index:-4;
-      background:transparent;
-      overflow:hidden;
-    }
+  --shadow:
+  0 10px 40px rgba(124,58,237,.28);
+}
 
-    .stars span{
-      position:absolute;
-      width:3px;
-      height:3px;
-      background:white;
-      border-radius:50%;
-      opacity:.6;
-      animation:fall linear infinite;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    @keyframes fall{
-      0%{transform:translateY(-10vh);opacity:0}
-      10%{opacity:1}
-      100%{transform:translateY(110vh);opacity:0}
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    /* ===== CLOUDS ===== */
-    .cloud{
-      position:fixed;
-      width:180px;
-      height:60px;
-      background:rgba(255,255,255,.08);
-      border-radius:50px;
-      filter:blur(1px);
-      z-index:-3;
-      animation:float 20s infinite linear;
-    }
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  min-height:100vh;
+  line-height:1.6;
+}
 
-    .cloud:before,
-    .cloud:after{
-      content:"";
-      position:absolute;
-      background:rgba(255,255,255,.08);
-      border-radius:50%;
-    }
+/* ================= BACKGROUND ================= */
 
-    .cloud:before{width:70px;height:70px;left:20px;top:-30px}
-    .cloud:after{width:90px;height:90px;right:20px;top:-40px}
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:-6;
 
-    @keyframes float{
-      0%{transform:translateX(-200px)}
-      100%{transform:translateX(120vw)}
-    }
+  background:
+  radial-gradient(circle at top,
+  rgba(124,58,237,.25),
+  transparent 35%),
 
-    /* ===== CONTAINER ===== */
-    .container{
-      width:100%;
-      max-width:1180px;
-      margin:auto;
-      padding:20px;
-    }
+  radial-gradient(circle at bottom,
+  rgba(168,85,247,.12),
+  transparent 35%),
 
-    /* ===== HERO ===== */
-    .hero{
-      text-align:center;
-      padding:80px 10px 40px;
-    }
+  url("./nền.png");
 
-    h1{
-      font-size:clamp(32px,6vw,110px);
-      font-weight:900;
-      white-space:nowrap;   /* KHÔNG XUỐNG DÒNG */
-      overflow:hidden;
-    }
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
 
-    h2{
-      font-size:clamp(22px,4vw,50px);
-      font-weight:900;
-    }
+/* TINH HÀ */
 
-    /* ===== WALL ===== */
-    .wish-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:20px;
-      margin-top:30px;
-    }
+.stars{
+  position:fixed;
+  inset:0;
+  z-index:-5;
+  overflow:hidden;
+  pointer-events:none;
+}
 
-    /* ===== SHEEP CARD FIX ===== */
-    .wish-card{
-      position:relative;
-      height:260px; /* nhỏ lại */
-      background:url("./sheep.png") no-repeat center/100% 100%;
-      padding:60px 70px 40px 120px;
-      overflow:hidden;
-    }
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:#fff;
+  border-radius:50%;
+  opacity:.9;
 
-    .wish-card strong{
-      font-size:14px;
-      color:#ff3b3b;
-      font-weight:900;
-      text-align:center;
-      display:block;
-      white-space:nowrap;
-    }
+  animation:
+  twinkle 3s infinite ease-in-out;
+}
 
-    .wish-card p{
-      font-size:14px; /* nhỏ lại để không tràn */
-      color:#222;
-      font-weight:600;
-      max-width:100%;
-      overflow:hidden;
-      display:-webkit-box;
-      -webkit-line-clamp:4;
-      -webkit-box-orient:vertical;
-    }
+@keyframes twinkle{
+  0%,100%{
+    opacity:.2;
+    transform:scale(1);
+  }
 
-    /* ===== CUU CO CANH ===== */
-    .wish-cuucocanh{
-      height:380px;
-      border-radius:30px;
-      position:relative;
-      overflow:hidden;
-      background:linear-gradient(#1a1440,#0b0818);
-    }
+  50%{
+    opacity:1;
+    transform:scale(1.8);
+  }
+}
 
-    .flying-wish{
-      position:absolute;
-      bottom:-120px;
-      padding:12px 18px;
-      border-radius:999px;
-      background:white;
-      animation:flyUp linear forwards;
-    }
+/* SAO CHẠY */
 
-    @keyframes flyUp{
-      0%{transform:translateY(0);opacity:0}
-      10%{opacity:1}
-      100%{transform:translateY(-700px);opacity:0}
-    }
+.shooting-star{
+  position:absolute;
+  width:180px;
+  height:2px;
 
-    /* ===== MOBILE FIX ===== */
-    @media(max-width:768px){
-      h1{font-size:28px !important;white-space:nowrap}
-      .wish-card{height:220px}
-    }
+  background:
+  linear-gradient(
+  90deg,
+  rgba(255,255,255,1),
+  rgba(255,255,255,0)
+  );
 
-    /* ===== BUTTON ===== */
-    .floating-btn{
-      position:fixed;
-      right:20px;
-      bottom:20px;
-      padding:14px 20px;
-      border-radius:999px;
-      background:linear-gradient(135deg,#8b5cf6,#c084fc);
-      color:white;
-      font-weight:800;
-      border:none;
-      z-index:1000;
-    }
+  border-radius:999px;
 
-  </style>
+  opacity:.7;
+
+  transform:rotate(-25deg);
+
+  animation:shoot 6s linear infinite;
+}
+
+.shooting-star::before{
+  content:"";
+  position:absolute;
+  right:0;
+  top:-2px;
+
+  width:6px;
+  height:6px;
+
+  background:#fff;
+  border-radius:50%;
+
+  box-shadow:
+  0 0 20px #fff;
+}
+
+@keyframes shoot{
+
+  0%{
+    transform:
+    translate(-300px,-200px)
+    rotate(-25deg);
+
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  100%{
+    transform:
+    translate(1500px,700px)
+    rotate(-25deg);
+
+    opacity:0;
+  }
+
+}
+
+/* MÂY */
+
+.clouds{
+  position:fixed;
+  inset:0;
+  z-index:-4;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.cloud{
+  position:absolute;
+  background:rgba(255,255,255,.08);
+
+  border-radius:999px;
+
+  filter:blur(2px);
+}
+
+.cloud::before,
+.cloud::after{
+  content:"";
+  position:absolute;
+  background:inherit;
+  border-radius:50%;
+}
+
+.cloud1{
+  width:240px;
+  height:70px;
+
+  top:15%;
+  left:-300px;
+
+  animation:cloudMove 50s linear infinite;
+}
+
+.cloud1::before{
+  width:90px;
+  height:90px;
+  left:30px;
+  top:-30px;
+}
+
+.cloud1::after{
+  width:120px;
+  height:120px;
+  right:25px;
+  top:-45px;
+}
+
+.cloud2{
+  width:180px;
+  height:60px;
+
+  top:50%;
+  left:-240px;
+
+  animation:cloudMove 70s linear infinite;
+}
+
+.cloud2::before{
+  width:70px;
+  height:70px;
+  left:25px;
+  top:-20px;
+}
+
+.cloud2::after{
+  width:90px;
+  height:90px;
+  right:20px;
+  top:-30px;
+}
+
+@keyframes cloudMove{
+  from{
+    transform:translateX(0);
+  }
+
+  to{
+    transform:translateX(1800px);
+  }
+}
+
+/* SAO RƠI */
+
+.falling-star{
+  position:absolute;
+
+  width:3px;
+  height:3px;
+
+  background:#fff;
+  border-radius:50%;
+
+  box-shadow:
+  0 0 14px #fff;
+
+  animation:falling 10s linear infinite;
+}
+
+@keyframes falling{
+
+  0%{
+    transform:
+    translateY(-100px)
+    translateX(0);
+
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  100%{
+    transform:
+    translateY(120vh)
+    translateX(180px);
+
+    opacity:0;
+  }
+
+}
+
+.noise{
+  position:fixed;
+  inset:0;
+  z-index:-3;
+
+  opacity:.04;
+
+  background-image:
+  linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+
+  background-size:3px 3px;
+}
+
+/* GLOW */
+
+.glow{
+  position:fixed;
+  width:520px;
+  height:520px;
+  border-radius:50%;
+  filter:blur(120px);
+  opacity:.15;
+  z-index:-2;
+
+  animation:floatGlow 12s ease-in-out infinite;
+}
+
+.glow.one{
+  top:-140px;
+  left:-120px;
+  background:#7c3aed;
+}
+
+.glow.two{
+  bottom:-180px;
+  right:-120px;
+  background:#c084fc;
+  animation-delay:4s;
+}
+
+@keyframes floatGlow{
+
+  0%,100%{
+    transform:
+    translateY(0)
+    scale(1);
+  }
+
+  50%{
+    transform:
+    translateY(30px)
+    scale(1.08);
+  }
+
+}
+
+/* ================= LAYOUT ================= */
+
+.container{
+  width:min(1180px,92%);
+  margin:auto;
+  padding-bottom:120px;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+  padding:80px 0;
+}
+
+.hero h1{
+  font-size:clamp(50px,8vw,120px);
+
+  font-weight:900;
+
+  line-height:.95;
+
+  letter-spacing:3px;
+
+  margin-bottom:20px;
+
+  background:
+  linear-gradient(to bottom,#fff,#d8b4fe);
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  text-shadow:
+  0 0 30px rgba(124,58,237,.35);
+}
+
+.section-head h2{
+  font-size:clamp(26px,4vw,46px);
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.section-head p{
+  color:var(--muted);
+  font-size:15px;
+}
+
+/* ================= CUU CO CANH ================= */
+
+.cuucocanh-section{
+  margin-top:10px;
+}
+
+.wish-cuucocanh{
+  position:relative;
+
+  width:100%;
+  height:420px;
+
+  overflow:hidden;
+
+  border-radius:36px;
+
+  border:1px solid var(--line);
+
+  background:
+  linear-gradient(
+  to bottom,
+  rgba(25,20,55,.82),
+  rgba(10,8,25,.92)
+  );
+
+  backdrop-filter:blur(12px);
+
+  box-shadow:var(--shadow);
+}
+
+.loading{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:rgba(255,255,255,.5);
+  font-weight:700;
+}
+
+/* WISH BAY */
+
+.flying-wish{
+  position:absolute;
+
+  bottom:-120px;
+  left:0;
+
+  min-width:170px;
+  max-width:280px;
+
+  padding:16px 22px;
+
+  border-radius:999px;
+
+  background:
+  radial-gradient(circle at 30% 30%,
+  #ffffff 0%,
+  #f3e8ff 50%,
+  #e9d5ff 100%);
+
+  border:3px solid rgba(255,255,255,.7);
+
+  box-shadow:
+  0 10px 30px rgba(168,85,247,.25),
+  inset 0 2px 10px rgba(255,255,255,.8);
+
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+
+  filter:
+  drop-shadow(0 0 18px rgba(255,255,255,.3));
+
+  animation-name:flyUp;
+  animation-timing-function:linear;
+  animation-fill-mode:forwards;
+}
+
+.flying-wish::before,
+.flying-wish::after{
+  content:"";
+  position:absolute;
+  background:#f3e8ff;
+  border-radius:50%;
+  z-index:-1;
+}
+
+.flying-wish::before{
+  width:52px;
+  height:52px;
+
+  left:18px;
+  top:-22px;
+}
+
+.flying-wish::after{
+  width:34px;
+  height:34px;
+
+  right:22px;
+  top:-12px;
+}
+
+.flying-wish strong{
+  color:#7c3aed;
+  font-size:13px;
+  font-weight:900;
+}
+
+.flying-wish span{
+  color:#3b0764;
+  font-size:13px;
+  line-height:1.4;
+}
+
+@keyframes flyUp{
+
+  0%{
+    transform:
+    translateY(0)
+    translateX(0)
+    scale(.7);
+
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  50%{
+    transform:
+    translateY(-320px)
+    translateX(-20px)
+    scale(1);
+  }
+
+  100%{
+    transform:
+    translateY(-760px)
+    translateX(40px)
+    scale(1.12);
+
+    opacity:0;
+  }
+
+}
+
+/* ================= WALL ================= */
+
+.wall{
+  margin-top:90px;
+}
+
+.wish-grid{
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(320px,1fr));
+
+  gap:28px;
+
+  margin-top:30px;
+}
+
+/* SHEEP CARD */
+
+.wish-card{
+  position:relative;
+
+  width:100%;
+  max-width:520px;
+
+  height:270px;
+
+  margin:auto;
+
+  background-image:url("./sheep.png");
+
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+
+  padding-top:58px;
+  padding-left:115px;
+  padding-right:82px;
+  padding-bottom:45px;
+
+  overflow:hidden;
+
+  display:flex;
+  flex-direction:column;
+
+  transition:.35s;
+}
+
+.wish-card:hover{
+  transform:
+  translateY(-6px)
+  scale(1.02);
+}
+
+.wish-card strong{
+
+  width:100%;
+
+  color:#ff3b3b;
+
+  font-size:18px;
+  font-weight:900;
+
+  line-height:1.2;
+
+  margin-bottom:10px;
+
+  text-align:center;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.wish-card p{
+
+  width:100%;
+  max-width:240px;
+
+  color:#222;
+
+  font-size:15px;
+  font-weight:700;
+
+  line-height:1.45;
+
+  overflow:hidden;
+
+  display:-webkit-box;
+
+  -webkit-line-clamp:5;
+  -webkit-box-orient:vertical;
+
+  word-break:break-word;
+
+  white-space:pre-wrap;
+}
+
+/* ================= BUTTON ================= */
+
+.floating-btn{
+  position:fixed;
+
+  right:24px;
+  bottom:24px;
+
+  z-index:100;
+
+  border:none;
+  outline:none;
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:16px 24px;
+
+  border-radius:999px;
+
+  background:
+  linear-gradient(
+  135deg,
+  #8b5cf6,
+  #c084fc
+  );
+
+  color:#fff;
+
+  font-family:'Inter',sans-serif;
+
+  font-size:14px;
+  font-weight:800;
+
+  letter-spacing:1px;
+
+  box-shadow:
+  0 12px 35px rgba(124,58,237,.42);
+
+  transition:.35s ease;
+}
+
+.floating-btn:hover{
+  transform:
+  translateY(-4px)
+  scale(1.02);
+}
+
+.floating-btn span{
+  font-size:22px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+
+  z-index:999;
+
+  background:rgba(0,0,0,.75);
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  backdrop-filter:blur(8px);
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-box{
+  width:min(520px,100%);
+
+  background:rgba(15,13,32,.92);
+
+  border:1px solid var(--line);
+
+  border-radius:34px;
+
+  padding:34px;
+
+  position:relative;
+
+  animation:modalShow .35s ease;
+
+  box-shadow:
+  0 20px 60px rgba(0,0,0,.5);
+}
+
+@keyframes modalShow{
+
+  from{
+    opacity:0;
+    transform:
+    translateY(20px)
+    scale(.96);
+  }
+
+  to{
+    opacity:1;
+    transform:
+    translateY(0)
+    scale(1);
+  }
+
+}
+
+.close{
+  position:absolute;
+
+  right:20px;
+  top:16px;
+
+  border:none;
+  background:none;
+
+  color:#fff;
+
+  font-size:30px;
+  cursor:pointer;
+}
+
+.modal-box h3{
+  font-size:32px;
+  font-weight:900;
+
+  line-height:1.1;
+
+  margin-bottom:10px;
+
+  background:
+  linear-gradient(
+  to right,
+  #fff,
+  #d8b4fe
+  );
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.modal-box .sub{
+  color:rgba(255,255,255,.7);
+
+  margin-bottom:26px;
+
+  font-size:14px;
+}
+
+.input-group{
+  margin-bottom:18px;
+}
+
+.input-group label{
+  display:block;
+
+  margin-bottom:8px;
+
+  font-size:13px;
+
+  color:rgba(255,255,255,.75);
+
+  font-weight:600;
+}
+
+.input-group input,
+.input-group textarea{
+
+  width:100%;
+
+  border:none;
+  outline:none;
+
+  border-radius:18px;
+
+  padding:16px 18px;
+
+  background:
+  rgba(255,255,255,.05);
+
+  border:
+  1px solid rgba(255,255,255,.06);
+
+  color:#fff;
+
+  font-family:inherit;
+  font-size:15px;
+
+  resize:none;
+}
+
+.input-group input:focus,
+.input-group textarea:focus{
+
+  border-color:
+  rgba(167,139,250,.45);
+
+  box-shadow:
+  0 0 0 4px rgba(124,58,237,.15);
+}
+
+.submit-btn{
+  width:100%;
+
+  border:none;
+  outline:none;
+  cursor:pointer;
+
+  padding:18px;
+
+  border-radius:20px;
+
+  background:
+  linear-gradient(
+  135deg,
+  #8b5cf6,
+  #c084fc
+  );
+
+  color:#fff;
+
+  font-family:'Inter',sans-serif;
+
+  font-size:15px;
+  font-weight:800;
+
+  letter-spacing:1px;
+
+  box-shadow:
+  0 10px 30px rgba(168,85,247,.35);
+
+  margin-top:10px;
+
+  transition:.35s;
+}
+
+.submit-btn:hover{
+  transform:
+  translateY(-3px)
+  scale(1.02);
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+  margin-top:90px;
+
+  text-align:center;
+
+  color:rgba(255,255,255,.45);
+
+  font-size:13px;
+}
+
+/* ================= MUSIC ================= */
+
+#musicBtn{
+  position:fixed;
+
+  left:24px;
+  bottom:24px;
+
+  z-index:9999;
+
+  width:58px;
+  height:58px;
+
+  border:none;
+  border-radius:50%;
+
+  background:
+  linear-gradient(
+  135deg,
+  #8b5cf6,
+  #c084fc
+  );
+
+  color:#fff;
+
+  font-size:24px;
+
+  cursor:pointer;
+
+  box-shadow:
+  0 10px 30px rgba(124,58,237,.4);
+
+  transition:.3s;
+}
+
+#musicBtn:hover{
+  transform:scale(1.08);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+  .hero{
+    min-height:85vh;
+    padding:50px 0;
+  }
+
+  .hero h1{
+    font-size:58px;
+    line-height:1;
+
+    white-space:nowrap;
+  }
+
+  .section-head h2{
+    font-size:32px;
+    white-space:nowrap;
+  }
+
+  .section-head p{
+    font-size:13px;
+  }
+
+  .wish-grid{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  .wish-card{
+
+    max-width:100%;
+
+    height:240px;
+
+    background-size:contain;
+
+    padding-top:54px;
+    padding-left:96px;
+    padding-right:72px;
+    padding-bottom:35px;
+  }
+
+  .wish-card strong{
+    font-size:15px;
+  }
+
+  .wish-card p{
+    max-width:190px;
+
+    font-size:12px;
+
+    line-height:1.35;
+
+    -webkit-line-clamp:5;
+  }
+
+  .floating-btn{
+    padding:14px 18px;
+    font-size:12px;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="bg"></div>
 
-<!-- STARS -->
+<!-- TINH HÀ -->
 <div class="stars" id="stars"></div>
 
-<!-- CLOUDS -->
-<div class="cloud" style="top:10%;animation-duration:25s"></div>
-<div class="cloud" style="top:30%;animation-duration:35s"></div>
-<div class="cloud" style="top:60%;animation-duration:30s"></div>
+<!-- SAO CHẠY -->
+<div class="stars">
+  <div class="shooting-star" style="top:10%; left:-20%; animation-delay:0s;"></div>
+  <div class="shooting-star" style="top:35%; left:-30%; animation-delay:3s;"></div>
+  <div class="shooting-star" style="top:60%; left:-25%; animation-delay:7s;"></div>
+</div>
+
+<!-- SAO RƠI -->
+<div class="stars" id="fallingStars"></div>
+
+<!-- MÂY -->
+<div class="clouds">
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+</div>
+
+<div class="noise"></div>
+
+<div class="glow one"></div>
+<div class="glow two"></div>
 
 <div class="container">
 
-  <section class="hero">
-    <h1>CAPTAIN BOY</h1>
-    <h2>WISHING WALL ✦ TINH HÀ SAY HI</h2>
-  </section>
+<!-- HERO -->
 
-  <section class="wish-cuucocanh" id="wishCuucocanh"></section>
+<section class="hero">
 
-  <section class="wish-grid" id="wishGrid"></section>
+<div class="hero-inner">
+
+<h1>CAPTAIN BOY</h1>
+
+<div class="section-head">
+
+<h2 style="
+font-size:clamp(42px,6vw,80px);
+font-weight:900;
+color:#f5d0fe;
+text-shadow:0 0 30px rgba(168,85,247,.5);
+margin-bottom:20px;
+text-align:center;
+white-space:nowrap;
+">
+WISHING WALL
+</h2>
+
+<p style="
+font-size:clamp(16px,2vw,26px);
+letter-spacing:1px;
+color:#ffffff;
+text-align:center;
+white-space:nowrap;
+">
+✦ CAPTAIN BOY - TINH HÀ SAY HI ✦
+</p>
 
 </div>
 
-<button class="floating-btn">GỬI LỜI CHÚC</button>
+</div>
+</section>
+
+<!-- CUU CO CANH -->
+
+<section class="cuucocanh-section">
+
+<div class="section-head" style="text-align:center;">
+
+<h2>
+CỪU CÓ CÁNH WITH LOVE CAPTAIN BOY
+</h2>
+
+<p>
+Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
+</p>
+
+</div>
+
+<div class="wish-cuucocanh" id="wishCuucocanh">
+
+<div class="loading">
+Đang tải lời chúc...
+</div>
+
+</div>
+
+</section>
+
+<!-- WALL -->
+
+<section class="wall">
+
+<div class="section-head">
+
+<h2>
+WALL OF LOVE
+</h2>
+
+<p>
+Lời yêu thương từ Cừu Có Cánh dành cho CAPTAIN BOY ✦
+</p>
+
+</div>
+
+<div class="wish-grid" id="wishGrid"></div>
+
+</section>
+
+<div class="footer">
+PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY
+</div>
+
+</div>
+
+<!-- BUTTON -->
+
+<button class="floating-btn" onclick="toggleModal(true)">
+<span>+</span>
+GỬI LỜI CHÚC
+</button>
+
+<!-- MODAL -->
+
+<div class="modal" id="wishModal">
+
+<div class="modal-box">
+
+<button class="close" onclick="toggleModal(false)">
+×
+</button>
+
+<h3>Gửi lời đến CAPTAIN BOY</h3>
+
+<div class="sub">
+Lời nhắn sẽ được hiển thị sau khi admin duyệt
+</div>
+
+<form id="wishForm">
+
+<div class="input-group">
+
+<label>Tên của bạn</label>
+
+<input
+type="text"
+id="userName"
+maxlength="30"
+placeholder="Nhập tên của Cừu..."
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>Lời chúc</label>
+
+<textarea
+id="userMsg"
+rows="5"
+maxlength="180"
+placeholder="Cừu Có Cánh dành lời đến CAPTAIN BOY..."
+required></textarea>
+
+</div>
+
+<button class="submit-btn" id="submitBtn" type="submit">
+GỬI NGAY ✨
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- MUSIC -->
+
+<audio id="bgMusic" loop>
+<source src="./music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn">
+🔊
+</button>
 
 <script>
-/* ===== STAR GENERATION ===== */
-const stars = document.getElementById("stars");
-for(let i=0;i<60;i++){
-  const s=document.createElement("span");
-  s.style.left=Math.random()*100+"%";
-  s.style.animationDuration=(2+Math.random()*5)+"s";
-  s.style.opacity=Math.random();
-  stars.appendChild(s);
+
+/* ================= CONFIG ================= */
+
+const CONFIG = {
+
+releaseDate:"2026-06-01T20:00:00",
+
+googleScriptUrl:
+"https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec"
+
+};
+
+let listApproved = [];
+let flyInterval = null;
+
+/* ================= TINH HÀ ================= */
+
+const starsWrap =
+document.getElementById("stars");
+
+for(let i=0;i<180;i++){
+
+const star =
+document.createElement("div");
+
+star.className = "star";
+
+star.style.left =
+Math.random() * 100 + "%";
+
+star.style.top =
+Math.random() * 100 + "%";
+
+star.style.animationDelay =
+Math.random() * 5 + "s";
+
+star.style.opacity =
+Math.random();
+
+starsWrap.appendChild(star);
+
 }
 
-/* ===== MOCK RENDER (GIỮ LOGIC CŨ) ===== */
-const listApproved=[
-  {name:"Cừu 1",message:"Chúc CAPTAIN BOY luôn tỏa sáng ✨"},
-  {name:"Cừu 2",message:"Luôn hạnh phúc và thành công 💜"}
+/* ================= SAO RƠI ================= */
+
+const fallingWrap =
+document.getElementById("fallingStars");
+
+for(let i=0;i<18;i++){
+
+const fall =
+document.createElement("div");
+
+fall.className = "falling-star";
+
+fall.style.left =
+Math.random() * 100 + "%";
+
+fall.style.animationDelay =
+Math.random() * 12 + "s";
+
+fall.style.animationDuration =
+(7 + Math.random() * 8) + "s";
+
+fallingWrap.appendChild(fall);
+
+}
+
+/* ================= MODAL ================= */
+
+function toggleModal(show){
+
+document
+.getElementById("wishModal")
+.classList.toggle("active", show);
+
+}
+
+window.addEventListener("keydown",(e)=>{
+
+if(e.key === "Escape"){
+toggleModal(false);
+}
+
+});
+
+/* ================= FETCH ================= */
+
+async function fetchWishes(){
+
+try{
+
+const response =
+await fetch(
+CONFIG.googleScriptUrl + "?action=list"
+);
+
+const data =
+await response.json();
+
+if(data.approved){
+
+listApproved =
+data.approved;
+
+renderWall();
+
+startFlying();
+
+}
+
+}catch(error){
+
+console.error(
+"Lỗi tải dữ liệu:",
+error
+);
+
+}
+
+}
+
+/* ================= WALL ================= */
+
+function renderWall(){
+
+const grid =
+document.getElementById("wishGrid");
+
+if(!listApproved.length){
+
+grid.innerHTML = `
+
+<div class="wish-card">
+
+<strong>
+From: CỪU CÓ CÁNH
+</strong>
+
+<p>
+Chưa có lời chúc nào ✨
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+grid.innerHTML =
+listApproved
+.slice()
+.reverse()
+.map(item => `
+
+<div class="wish-card">
+
+<strong>
+From: ${escapeHtml(item.name)}
+</strong>
+
+<p>
+${escapeHtml(item.message)}
+</p>
+
+</div>
+
+`).join("");
+
+}
+
+/* ================= WISH BAY ================= */
+
+function startFlying(){
+
+const area =
+document.getElementById("wishCuucocanh");
+
+area.innerHTML = "";
+
+if(!listApproved.length){
+
+area.innerHTML = `
+<div class="loading">
+Chưa có lời nhắn nào ✨
+</div>
+`;
+
+return;
+}
+
+if(flyInterval){
+clearInterval(flyInterval);
+}
+
+function createWish(){
+
+const wish =
+listApproved[
+Math.floor(
+Math.random() * listApproved.length
+)
 ];
 
-function render(){
-  document.getElementById("wishGrid").innerHTML =
-  listApproved.map(i=>`
-    <div class="wish-card">
-      <strong>From: ${i.name}</strong>
-      <p>${i.message}</p>
-    </div>
-  `).join("");
+const el =
+document.createElement("div");
+
+el.className = "flying-wish";
+
+el.style.left =
+Math.random() * 82 + "%";
+
+el.style.animationDuration =
+(7 + Math.random() * 4) + "s";
+
+el.innerHTML = `
+<strong>${escapeHtml(wish.name)}</strong>
+<span>${escapeHtml(wish.message)}</span>
+`;
+
+area.appendChild(el);
+
+setTimeout(()=>{
+el.remove();
+},12000);
+
 }
-render();
+
+for(let i=0;i<8;i++){
+
+setTimeout(createWish, i * 1200);
+
+}
+
+flyInterval =
+setInterval(createWish,2200);
+
+}
+
+/* ================= SUBMIT ================= */
+
+document
+.getElementById("wishForm")
+.addEventListener("submit", async (e)=>{
+
+e.preventDefault();
+
+const btn =
+document.getElementById("submitBtn");
+
+const name =
+document.getElementById("userName")
+.value.trim();
+
+const message =
+document.getElementById("userMsg")
+.value.trim();
+
+if(!name || !message){
+
+alert(
+"Vui lòng nhập đầy đủ thông tin ✨"
+);
+
+return;
+}
+
+btn.disabled = true;
+btn.innerText = "ĐANG GỬI...";
+
+try{
+
+const response =
+await fetch(
+CONFIG.googleScriptUrl,
+{
+method:"POST",
+
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
+},
+
+body:JSON.stringify({
+
+action:"submit",
+
+id:Date.now(),
+
+name,
+
+message,
+
+createdAt:
+new Date().toISOString()
+
+})
+
+}
+);
+
+const data =
+await response.json();
+
+if(data.ok){
+
+alert(
+"Đã gửi thành công ✨ Lời chúc đang chờ duyệt."
+);
+
+document
+.getElementById("wishForm")
+.reset();
+
+toggleModal(false);
+
+}else{
+
+alert("Gửi thất bại 😭");
+
+}
+
+}catch(err){
+
+console.error(err);
+
+alert("Lỗi kết nối Apps Script");
+
+}finally{
+
+btn.disabled = false;
+
+btn.innerText = "GỬI NGAY ✨";
+
+}
+
+});
+
+/* ================= ESCAPE ================= */
+
+function escapeHtml(text){
+
+const div =
+document.createElement("div");
+
+div.textContent = text;
+
+return div.innerHTML;
+
+}
+
+/* ================= INIT ================= */
+
+fetchWishes();
+
+setInterval(fetchWishes,30000);
+
+/* ================= MUSIC ================= */
+
+const music =
+document.getElementById("bgMusic");
+
+const musicBtn =
+document.getElementById("musicBtn");
+
+music.volume = 0.5;
+
+document.addEventListener("click",()=>{
+
+if(music.paused){
+
+music.play().catch(err=>{
+console.log(err);
+});
+
+}
+
+},{ once:true });
+
+musicBtn.addEventListener("click",(e)=>{
+
+e.stopPropagation();
+
+if(music.paused){
+
+music.play();
+
+musicBtn.innerHTML = "🔊";
+
+}else{
+
+music.pause();
+
+musicBtn.innerHTML = "🔇";
+
+}
+
+});
+
 </script>
 
 </body>
