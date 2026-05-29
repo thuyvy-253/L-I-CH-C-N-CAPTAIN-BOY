@@ -1,25 +1,24 @@
 <!doctype html>
 <html lang="vi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <title>CAPTAIN BOY • TINH HÀ SAY HI</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 
 /* ================= ROOT ================= */
 :root{
-  --primary:#7c3aed;
-  --primary2:#a78bfa;
-  --bg:#060510;
-  --text:#fff;
-  --muted:rgba(255,255,255,.7);
+  --primary:#8b5cf6;
+  --primary2:#c084fc;
+  --bg:#05010f;
 }
 
-/* ================= RESET (FIX MOBILE GỐC LỖI) ================= */
+/* ================= RESET ================= */
 *{
   margin:0;
   padding:0;
@@ -29,146 +28,127 @@
 html,body{
   width:100%;
   max-width:100%;
-  overflow-x:hidden; /* 🔥 FIX CHÍNH */
+  overflow-x:hidden;
   font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.5;
+  background:#05010f;
+  color:#fff;
 }
 
-/* ================= GALAXY BACKGROUND PRO MAX ================= */
+/* ================= BACKGROUND ================= */
 .bg{
   position:fixed;
   inset:0;
-  z-index:-10;
+  z-index:-50;
   background:
-  radial-gradient(circle at top,#7c3aed33,transparent 40%),
-  radial-gradient(circle at bottom,#a78bfa22,transparent 40%);
+    linear-gradient(rgba(5,1,15,.4),rgba(5,1,15,.8)),
+    url("./nền.png");
+  background-size:cover;
+  background-position:center;
 }
 
-/* ================= STAR FIELD ================= */
-.stars{
+/* ================= GALAXY ================= */
+#galaxy{
   position:fixed;
   inset:0;
-  z-index:-9;
-  pointer-events:none;
+  z-index:-40;
 }
 
-.star{
-  position:absolute;
-  width:2px;
-  height:2px;
-  background:#fff;
+/* ================= GLOW ================= */
+.glow{
+  position:fixed;
   border-radius:50%;
-  animation:twinkle 4s infinite ease-in-out;
+  filter:blur(120px);
+  opacity:.22;
+  z-index:-35;
+  animation:glowMove 14s ease-in-out infinite;
 }
 
-@keyframes twinkle{
-  0%,100%{opacity:.2;transform:scale(1)}
-  50%{opacity:1;transform:scale(1.8)}
+.glow.one{
+  width:420px;height:420px;
+  background:#7c3aed;
+  top:-120px;left:-120px;
 }
 
-/* ================= SHOOTING STAR ================= */
-.shooting-star{
-  position:absolute;
-  width:160px;
-  height:2px;
-  background:linear-gradient(90deg,#fff,transparent);
-  transform:rotate(-25deg);
-  animation:shoot 7s linear infinite;
-  opacity:.8;
+.glow.two{
+  width:360px;height:360px;
+  background:#c084fc;
+  bottom:-120px;right:-120px;
+  animation-delay:3s;
 }
 
-@keyframes shoot{
-  0%{transform:translate(-300px,-200px) rotate(-25deg);opacity:0}
-  10%{opacity:1}
-  100%{transform:translate(1400px,800px) rotate(-25deg);opacity:0}
+@keyframes glowMove{
+  0%,100%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(50px) scale(1.15);}
 }
 
-/* ================= CLOUDS FLOAT ================= */
-.clouds{
+/* ================= NOISE ================= */
+.noise{
   position:fixed;
   inset:0;
-  z-index:-8;
-  pointer-events:none;
-  opacity:.12;
+  z-index:-20;
+  opacity:.04;
+  background-image:
+    linear-gradient(rgba(255,255,255,.6)1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.6)1px,transparent 1px);
+  background-size:3px 3px;
 }
 
-.cloud{
-  position:absolute;
-  width:220px;
-  height:60px;
-  background:#fff;
-  border-radius:999px;
-  filter:blur(2px);
-  animation:cloudMove 70s linear infinite;
-}
-
-@keyframes cloudMove{
-  from{transform:translateX(-400px)}
-  to{transform:translateX(1800px)}
-}
-
-/* ================= SAFE CONTAINER ================= */
+/* ================= LAYOUT ================= */
 .container{
-  width:100%;
-  max-width:1180px;
+  width:min(1200px,92%);
   margin:auto;
-  padding:0 14px;
+  padding-bottom:120px;
 }
 
-/* ================= HERO (GIỮ UI GỐC) ================= */
+/* ================= HERO ================= */
 .hero{
-  min-height:100vh;
+  height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:60px 0;
 }
 
 .hero h1{
-  font-size:clamp(42px,9vw,140px);
+  font-size:clamp(50px,10vw,160px);
   font-weight:900;
-  line-height:1;
-  word-break:break-word;
+  line-height:.9;
 }
 
-/* ================= SECTION TITLE FIX ================= */
+.hero h2{
+  font-size:clamp(26px,6vw,80px);
+  color:#f5d0fe;
+}
+
+/* ================= SECTION ================= */
+.section-head{
+  text-align:center;
+  margin-bottom:30px;
+}
+
 .section-head h2{
-  font-size:clamp(22px,5vw,46px);
+  font-size:clamp(24px,5vw,48px);
   font-weight:900;
-  text-align:center;
-  word-break:break-word;
 }
 
-.section-head p{
-  text-align:center;
-  color:var(--muted);
-}
-
-/* ================= CUU CO CANH ================= */
+/* ================= FLY AREA ================= */
 .wish-cuucocanh{
   position:relative;
   width:100%;
   height:420px;
-  border-radius:32px;
+  border-radius:30px;
   overflow:hidden;
-  background:rgba(20,18,40,.7);
+  background:rgba(20,14,45,.7);
 }
 
 /* ================= FLY WISH ================= */
 .flying-wish{
   position:absolute;
   bottom:-120px;
-  left:0;
-
   max-width:260px;
   padding:14px 18px;
-
   border-radius:999px;
   background:#fff;
-
   animation:flyUp linear forwards;
 }
 
@@ -179,65 +159,56 @@ html,body{
 }
 
 .flying-wish strong{
-  font-size:12px;
   color:#7c3aed;
-}
-
-.flying-wish span{
-  font-size:12px;
-  color:#222;
 }
 
 /* ================= WALL ================= */
 .wish-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:18px;
-  margin-top:20px;
+  gap:20px;
 }
 
-/* ================= SHEEP CARD (GIỮ NGUYÊN DESIGN GỐC) ================= */
+/* ================= SHEEP CARD AUTO HEIGHT FIX ================= */
 .wish-card{
-  position:relative;
   width:100%;
   max-width:520px;
-  height:340px;
+
+  /* AUTO HEIGHT */
+  height:auto;
+  min-height:260px;
+
   margin:auto;
 
   background:url("./sheep.png") center/contain no-repeat;
 
   padding:70px 95px 50px 130px;
 
-  overflow:hidden;
-
   display:flex;
   flex-direction:column;
+
+  overflow:hidden;
+
+  transition:.3s;
 }
 
 .wish-card strong{
-  font-size:18px;
-  font-weight:900;
   color:#ff3b3b;
-
+  font-size:16px;
+  font-weight:900;
   text-align:center;
-
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
 }
 
 .wish-card p{
-  font-size:16px;
-  font-weight:700;
-  color:#222;
-
+  color:#2d1b45;
+  font-size:14px;
+  font-weight:800;
   line-height:1.4;
 
-  display:-webkit-box;
-  -webkit-line-clamp:5;
-  -webkit-box-orient:vertical;
+  white-space:pre-wrap;
+  word-break:break-word;
 
-  overflow:hidden;
+  max-width:100%;
 }
 
 /* ================= BUTTON ================= */
@@ -245,18 +216,12 @@ html,body{
   position:fixed;
   right:20px;
   bottom:20px;
-
-  padding:16px 22px;
-
+  padding:14px 20px;
   border:none;
   border-radius:999px;
-
-  background:linear-gradient(135deg,#7c3aed,#a78bfa);
+  background:linear-gradient(135deg,#8b5cf6,#c084fc);
   color:#fff;
-
   font-weight:900;
-  font-size:14px;
-
   z-index:999;
 }
 
@@ -268,46 +233,37 @@ html,body{
   background:rgba(0,0,0,.7);
   justify-content:center;
   align-items:center;
-  padding:16px;
 }
 
 .modal.active{display:flex;}
 
 .modal-box{
-  width:100%;
-  max-width:420px;
-  background:#15122a;
+  width:min(420px,92%);
+  background:#120a25;
   padding:24px;
-  border-radius:22px;
+  border-radius:20px;
 }
 
-/* ================= MOBILE PRO FIX (QUAN TRỌNG NHẤT) ================= */
-@media (max-width:768px){
-
-  html,body{
-    overflow-x:hidden;
-  }
+/* ================= MOBILE FIX ================= */
+@media(max-width:768px){
 
   .hero h1{
-    font-size:36px;
+    font-size:42px;
+  }
+
+  .hero h2{
+    font-size:24px;
   }
 
   .wish-card{
-    height:240px;
-    padding:55px 70px 40px 90px;
-  }
-
-  .wish-card strong{
-    font-size:14px;
+    padding:50px 60px 40px 90px;
+    min-height:200px;
   }
 
   .wish-card p{
-    font-size:13px;
+    font-size:12px;
   }
 
-  .wish-grid{
-    grid-template-columns:1fr;
-  }
 }
 
 </style>
@@ -316,36 +272,29 @@ html,body{
 <body>
 
 <div class="bg"></div>
-
-<!-- GALAXY FX -->
-<div class="stars" id="stars"></div>
-
-<div class="clouds">
-  <div class="cloud"></div>
-</div>
+<canvas id="galaxy"></canvas>
+<div class="glow one"></div>
+<div class="glow two"></div>
+<div class="noise"></div>
 
 <div class="container">
 
   <section class="hero">
     <div>
       <h1>CAPTAIN BOY</h1>
-      <div class="section-head">
-        <h2>WISHING WALL</h2>
-        <p>✦ TINH HÀ SAY HI ✦</p>
-      </div>
+      <h2>TINH HÀ SAY HI</h2>
     </div>
   </section>
 
   <section>
     <div class="section-head">
       <h2>CỪU CÓ CÁNH</h2>
-      <p>Lời chúc bay lên ✨</p>
     </div>
 
     <div class="wish-cuucocanh" id="wishCuucocanh"></div>
   </section>
 
-  <section>
+  <section class="wall">
     <div class="section-head">
       <h2>WALL OF LOVE</h2>
     </div>
@@ -359,20 +308,39 @@ html,body{
 
 <script>
 
-/* ================= STARS INIT PRO ================= */
-const stars = document.getElementById("stars");
+/* ================= SIMPLE GALAXY ================= */
+const canvas = document.getElementById("galaxy");
+const ctx = canvas.getContext("2d");
 
-for(let i=0;i<140;i++){
-  const s=document.createElement("div");
-  s.className="star";
-  s.style.left=Math.random()*100+"%";
-  s.style.top=Math.random()*100+"%";
-  s.style.animationDelay=Math.random()*5+"s";
-  stars.appendChild(s);
+function resize(){
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+}
+resize();
+addEventListener("resize",resize);
+
+let stars=[];
+for(let i=0;i<200;i++){
+  stars.push({
+    x:Math.random()*innerWidth,
+    y:Math.random()*innerHeight,
+    r:Math.random()*2
+  });
 }
 
-/* ================= KEEP YOUR BACKEND LOGIC ================= */
-/* (không đụng code gửi/nhận của bạn để tránh lỗi) */
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let s of stars){
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle="white";
+    ctx.fill();
+    s.y+=0.2;
+    if(s.y>canvas.height)s.y=0;
+  }
+  requestAnimationFrame(draw);
+}
+draw();
 
 </script>
 
