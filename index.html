@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
-    <title>CAPTAIN BOY • CỪU CÓ CÁNH WISHES</title>
+    <title>CAPTAIN BOY • WISHING WALL</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,124 +14,87 @@
             --text: #ffffff; --card-t: #1a1a1a; --red: #ff3b3b;
         }
 
-        /* RESET & BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif !important; }
-        body { background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.4; scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.4; }
 
-        /* VŨ TRỤ BACKGROUND */
-        .universe { position: fixed; inset: 0; z-index: -10; background: #05030d; pointer-events: none; }
+        /* NỀN VŨ TRỤ */
+        .universe { position: fixed; inset: 0; z-index: -1; background: #05030d; pointer-events: none; }
         .nebula {
             position: absolute; inset: 0;
             background: url("./nền.png") center/cover no-repeat;
-            opacity: 0.5; filter: saturate(1.4);
+            opacity: 0.5; filter: saturate(1.4); pointer-events: none;
         }
-        .star {
-            position: absolute; background: #fff; border-radius: 50%;
-            animation: twinkle var(--t) infinite ease-in-out;
-        }
-        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+        .star { position: absolute; background: #fff; border-radius: 50%; animation: twinkle var(--t) infinite ease-in-out; pointer-events: none; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
 
-        /* INTRO HERO */
+        /* HEADER */
         .intro-hero {
             height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center; padding: 20px;
+            justify-content: center; align-items: center; text-align: center;
+            position: relative; z-index: 10;
         }
-        .intro-hero h1 {
-            font-family: 'Montserrat', sans-serif !important;
-            font-size: clamp(40px, 12vw, 110px); font-weight: 900;
-            line-height: 0.9; text-transform: uppercase; margin-bottom: 10px;
-        }
-        .wishing-wall {
-            font-family: 'Montserrat', sans-serif !important;
-            font-size: clamp(26px, 8vw, 75px); font-weight: 900;
-            background: linear-gradient(to bottom, #fff, var(--pl));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px var(--p));
-        }
-        .scroll-hint { margin-top: 30px; font-size: 11px; letter-spacing: 2px; opacity: 0.6; animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} }
+        .intro-hero h1 { font-family: 'Montserrat', sans-serif !important; font-size: clamp(40px, 12vw, 100px); font-weight: 900; text-transform: uppercase; }
+        .wishing-wall { font-family: 'Montserrat', sans-serif !important; font-size: clamp(25px, 8vw, 70px); font-weight: 900; background: linear-gradient(to bottom, #fff, var(--pl)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* CONTAINER & GRID */
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; position: relative; }
+        /* KHU VỰC LỜI CHÚC - QUAN TRỌNG: z-index cao để không bị che */
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; position: relative; z-index: 100; }
         
         .grid-wall {
             display: grid; grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; padding-bottom: 150px; margin-top: 40px;
+            gap: 15px; padding-bottom: 100px;
         }
         @media (min-width: 768px) { .grid-wall { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
 
-        /* SHEEP CARD OPTIMIZED */
+        /* CARD CON CỪU */
         .sheep-card {
             position: relative; width: 100%; aspect-ratio: 1.1/1;
             background: url("./sheep.png") center/contain no-repeat;
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 10;
+            cursor: pointer; transition: 0.3s;
+            /* Đảm bảo toàn bộ card nhận click */
+            pointer-events: auto; 
         }
-        .sheep-card:hover { transform: scale(1.08); }
+        .sheep-card:hover { transform: scale(1.05); }
 
-        /* Lớp phủ hứng click - Fix lỗi chữ dài không ấn được */
-        .click-overlay {
-            position: absolute; inset: 0; z-index: 20; background: transparent;
-        }
-
+        /* Chữ bên trong con cừu - pointer-events: none để không cản trở click vào card */
         .card-inner {
-            position: absolute; width: 70%; height: 55%; top: 25%;
+            position: absolute; width: 70%; height: 50%; top: 25%;
             display: flex; flex-direction: column; text-align: center;
-            padding: 5px; pointer-events: none; overflow: hidden;
+            pointer-events: none; overflow: hidden;
         }
-        .card-inner b { 
-            color: var(--red); font-size: clamp(10px, 2.5vw, 13px); 
-            font-weight: 900; margin-bottom: 2px; 
-        }
+        .card-inner b { color: var(--red); font-size: clamp(10px, 2.5vw, 12px); font-weight: 900; }
         .card-inner span {
-            color: var(--card-t); font-weight: 700; line-height: 1.2;
-            font-size: clamp(8px, 2vw, 10.5px);
+            color: var(--card-t); font-weight: 700; font-size: clamp(8px, 2vw, 10px); line-height: 1.2;
             display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
         }
 
-        /* MODALS */
+        /* MODAL */
         .modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
             display: none; align-items: center; justify-content: center;
             z-index: 9999; padding: 20px; backdrop-filter: blur(10px);
         }
         .modal.active { display: flex; }
-        
         .read-box {
             background: #fff; width: 100%; max-width: 450px; padding: 35px;
-            border-radius: 35px; color: #111; text-align: center; position: relative;
+            border-radius: 30px; color: #111; text-align: center;
         }
-        #readMsg { 
-            font-size: 16px; line-height: 1.6; font-weight: 600; color: #333; 
-            max-height: 300px; overflow-y: auto; margin-top: 15px; padding-right: 5px;
-        }
+        #readMsg { font-size: 16px; font-weight: 600; margin: 20px 0; max-height: 300px; overflow-y: auto; color: #333; }
 
-        /* FORM */
-        .form-box {
-            background: #111026; width: 100%; max-width: 400px; padding: 30px;
-            border-radius: 25px; border: 1px solid var(--pl);
-        }
-        .st-input {
-            width: 100%; padding: 14px; margin: 10px 0; background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; outline: none;
-        }
-
-        /* CONTROLS */
+        /* NÚT BẤM */
         .btn-float {
-            position: fixed; right: 20px; bottom: 30px;
-            padding: 15px 25px; background: linear-gradient(135deg, var(--p), var(--pl));
-            border: none; border-radius: 50px; color: #fff; font-weight: 900; z-index: 5000;
-            cursor: pointer; box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+            position: fixed; right: 20px; bottom: 30px; padding: 15px 25px;
+            background: linear-gradient(135deg, var(--p), var(--pl));
+            border: none; border-radius: 50px; color: #fff; font-weight: 900; z-index: 2000; cursor: pointer;
         }
         #musicBtn {
-            position: fixed; left: 20px; bottom: 30px;
-            width: 50px; height: 50px; border-radius: 50%;
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
-            color: #fff; z-index: 5000; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px;
+            position: fixed; left: 20px; bottom: 30px; width: 50px; height: 50px;
+            border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid #fff;
+            color: #fff; z-index: 2000; cursor: pointer; font-size: 20px;
         }
 
-        footer { text-align: center; padding: 60px; font-size: 10px; opacity: 0.5; letter-spacing: 1px; }
+        .form-box { background: #111026; width: 100%; max-width: 400px; padding: 25px; border-radius: 20px; border: 1px solid var(--p); }
+        .st-input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; background: #fff; border: none; }
     </style>
 </head>
 <body>
@@ -142,43 +105,37 @@
     </div>
 
     <header class="intro-hero">
-        <div style="font-size: 10px; letter-spacing: 8px; opacity: 0.6; margin-bottom: 10px;">THE RETURN OF</div>
+        <div style="letter-spacing: 5px; opacity: 0.6; font-size: 12px;">THE RETURN OF</div>
         <h1>CAPTAIN BOY</h1>
         <div class="wishing-wall">WISHING WALL</div>
-        <div class="scroll-hint">VUỐT XUỐNG ĐỂ XEM LỜI CHÚC ↓</div>
     </header>
 
     <div class="container">
-        <h2 style="text-align: center; font-size: 30px; font-weight: 900; margin-bottom: 10px;">WALL OF LOVE</h2>
-        <p style="text-align: center; opacity: 0.6; font-size: 13px;">Nhấn vào con cừu để đọc trọn lời chúc ✨</p>
-        
-        <div class="grid-wall" id="wishGrid">
-            <!-- Dữ liệu sẽ được load vào đây -->
-        </div>
-
-        <footer>PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY</footer>
+        <h2 style="text-align: center; margin-bottom: 30px; font-weight: 900; font-size: 28px;">WALL OF LOVE ✨</h2>
+        <div class="grid-wall" id="wishGrid"></div>
+        <div style="height: 100px;"></div>
     </div>
 
     <button class="btn-float" onclick="setModal('wishModal', true)">+ GỬI LỜI CHÚC</button>
     <button id="musicBtn">🔇</button>
 
-    <!-- MODAL XEM CHI TIẾT -->
+    <!-- MODAL XEM -->
     <div class="modal" id="readModal" onclick="setModal('readModal', false)">
         <div class="read-box" onclick="event.stopPropagation()">
-            <h2 id="readName" style="color:var(--p); font-weight:900;">From: Cừu</h2>
+            <h2 id="readName" style="color:var(--p)">From: Cừu</h2>
             <div id="readMsg">...</div>
-            <button onclick="setModal('readModal', false)" style="margin-top:25px; padding:12px 35px; border-radius:50px; border:none; background:var(--p); color:#fff; font-weight:900; cursor:pointer">ĐÓNG</button>
+            <button onclick="setModal('readModal', false)" style="padding:10px 30px; border-radius:20px; background:var(--p); color:#fff; border:none; cursor:pointer; font-weight:900">ĐÓNG</button>
         </div>
     </div>
 
-    <!-- MODAL GỬI LỜI CHÚC -->
+    <!-- MODAL GỬI -->
     <div class="modal" id="wishModal">
         <div class="form-box">
-            <h2 style="margin-bottom:15px; font-weight:900; color:#fff">Gửi Tín Hiệu ✨</h2>
-            <input type="text" id="uName" class="st-input" placeholder="Tên của Cừu..." maxlength="25">
-            <textarea id="uMsg" class="st-input" rows="5" placeholder="Gửi lời chúc đến CAPTAIN BOY..."></textarea>
-            <button onclick="submitWish()" id="sendBtn" style="width:100%; padding:16px; background:var(--p); border:none; border-radius:15px; color:#fff; font-weight:900; cursor:pointer; margin-top:10px">GỬI NGAY ✨</button>
-            <button onclick="setModal('wishModal', false)" style="width:100%; background:none; border:none; color:#666; margin-top:15px; cursor:pointer">Hủy bỏ</button>
+            <h2 style="color:#fff; margin-bottom:10px">Gửi Tín Hiệu ✨</h2>
+            <input type="text" id="uName" class="st-input" placeholder="Tên của bạn..." maxlength="25">
+            <textarea id="uMsg" class="st-input" rows="5" placeholder="Lời chúc..."></textarea>
+            <button onclick="submitWish()" id="sendBtn" style="width:100%; padding:15px; background:var(--p); color:#fff; border:none; border-radius:10px; font-weight:900; cursor:pointer">GỬI NGAY</button>
+            <button onclick="setModal('wishModal', false)" style="width:100%; background:none; color:#666; border:none; margin-top:10px; cursor:pointer">Hủy</button>
         </div>
     </div>
 
@@ -187,17 +144,16 @@
     <script>
         const API = "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
 
-        // Tạo sao đêm lung linh
+        // Sao đêm
         const sf = document.getElementById("starField");
-        for(let i=0; i<120; i++){
+        for(let i=0; i<80; i++){
             const s = document.createElement("div"); s.className = "star";
-            s.style.width = s.style.height = (Math.random()*2.5+1) + "px";
+            s.style.width = s.style.height = (Math.random()*2+1) + "px";
             s.style.left = Math.random()*100 + "%"; s.style.top = Math.random()*100 + "%";
             s.style.setProperty('--t', (Math.random()*3+2) + "s");
             sf.appendChild(s);
         }
 
-        // Load dữ liệu từ API
         async function load() {
             try {
                 const r = await fetch(API + "?action=list");
@@ -205,8 +161,7 @@
                 if(d.approved) {
                     const grid = document.getElementById("wishGrid");
                     grid.innerHTML = d.approved.slice().reverse().map(i => `
-                        <div class="sheep-card">
-                            <div class="click-overlay" onclick="openRead('${esc(i.name)}', '${esc(i.message)}')"></div>
+                        <div class="sheep-card" onclick="openRead('${esc(i.name)}', '${esc(i.message)}')">
                             <div class="card-inner">
                                 <b>From: ${esc(i.name)}</b>
                                 <span>${esc(i.message)}</span>
@@ -214,59 +169,43 @@
                         </div>
                     `).join("");
                 }
-            } catch(e) { console.error("Lỗi tải dữ liệu"); }
+            } catch(e) {}
         }
 
-        // Mở xem chi tiết
         function openRead(name, msg) {
             document.getElementById("readName").innerText = "From: " + name;
             document.getElementById("readMsg").innerText = msg;
             setModal('readModal', true);
         }
 
-        // Gửi lời chúc
         async function submitWish() {
             const n = document.getElementById("uName").value.trim();
             const m = document.getElementById("uMsg").value.trim();
-            if(!n || !m) return alert("Cừu ơi hãy điền đủ thông tin nhé!");
+            if(!n || !m) return alert("Nhập đủ tên và lời chúc nhé!");
             const btn = document.getElementById("sendBtn");
             btn.innerText = "ĐANG GỬI..."; btn.disabled = true;
             try {
                 await fetch(API, { method:"POST", body: JSON.stringify({action:"submit", name:n, message:m}) });
-                alert("Gửi thành công! Chờ duyệt để hiển thị nhé ✨");
-                setModal('wishModal', false); 
+                alert("Gửi thành công! Lời chúc sẽ hiện sau khi được duyệt.");
                 location.reload();
-            } catch(e) { alert("Lỗi gửi!"); btn.disabled = false; btn.innerText = "GỬI NGAY ✨"; }
+            } catch(e) { alert("Lỗi!"); btn.disabled = false; btn.innerText = "GỬI NGAY"; }
         }
 
-        // Chế độ Modal
         function setModal(id, s) { document.getElementById(id).classList.toggle("active", s); }
-        
-        // Chống mã độc (XSS)
-        function esc(t) { 
-            const d = document.createElement('div'); 
-            d.textContent = t; 
-            return d.innerHTML; 
-        }
+        function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
-        /* --- XỬ LÝ NHẠC TỰ ĐỘNG --- */
+        // NHẠC TỰ ĐỘNG
         const bgm = document.getElementById("bgm");
         const mBtn = document.getElementById("musicBtn");
-
-        function playMusic() {
-            bgm.play().then(() => {
-                mBtn.innerHTML = "🔊";
-            }).catch(() => {
-                console.log("Cần tương tác để phát nhạc");
-            });
+        
+        function handleMusic() {
+            bgm.play().then(() => { mBtn.innerHTML = "🔊"; }).catch(() => {});
         }
 
-        // Khi click bất cứ đâu lần đầu tiên, nhạc sẽ phát
         document.body.addEventListener('click', () => {
-            if (bgm.paused) playMusic();
+            if(bgm.paused) handleMusic();
         }, { once: true });
 
-        // Nút bật/tắt nhạc chủ động
         mBtn.onclick = (e) => {
             e.stopPropagation();
             if(bgm.paused) { bgm.play(); mBtn.innerHTML = "🔊"; }
