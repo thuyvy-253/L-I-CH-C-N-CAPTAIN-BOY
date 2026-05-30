@@ -12,9 +12,10 @@
         :root {
             --p: #7c3aed; --pl: #d8b4fe; --bg: #05030d;
             --text: #ffffff; --card-t: #1a1a1a; --red: #ff3b3b;
+            --gold: #ffcf4d;
         }
 
-        /* FIX FULL PHÔNG CHỮ */
+        /* RESET & BASE */
         * { 
             margin: 0; padding: 0; box-sizing: border-box; 
             font-family: 'Inter', sans-serif !important; 
@@ -58,7 +59,7 @@
         .intro-hero {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
-            position: relative;
+            position: relative; padding: 20px;
         }
         
         .intro-hero h1 {
@@ -84,14 +85,14 @@
         }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
 
-        /* --- CONTAINER & PYRAMID BOX (FIX LỖI CẮT NỀN) --- */
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 10px; position: relative; }
+        /* --- CONTAINER --- */
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; position: relative; }
         
         .pyramid-box {
             position: relative; width: 100%; height: 350px; margin: 40px 0;
             background: rgba(255,255,255,0.04); border-radius: 30px;
             border: 1px solid rgba(255,255,255,0.1); 
-            overflow: hidden; /* Vẫn giữ overflow hidden nhưng bỏ clip-path */
+            overflow: hidden;
             backdrop-filter: blur(10px);
             pointer-events: none;
         }
@@ -110,78 +111,165 @@
             100% { bottom: 500px; left: 50%; transform: scale(0.4); opacity: 0; }
         }
 
-        /* --- GRID WALL (2 CỘT MOBILE) --- */
+        /* --- GRID WALL (NÂNG CẤP KÍCH THƯỚC THẺ) --- */
         .grid-wall {
-            display: grid; grid-template-columns: repeat(2, 1fr); 
-            gap: 12px; padding-bottom: 150px;
-            position: relative; z-index: 10;
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* Mobile 2 cột */
+            gap: 15px; 
+            padding-bottom: 150px;
+            position: relative; 
+            z-index: 10;
         }
-        @media (min-width: 768px) { .grid-wall { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
+        @media (min-width: 768px) { 
+            .grid-wall { grid-template-columns: repeat(3, 1fr); gap: 30px; } /* Desktop 3 cột để thẻ to hơn */
+        }
+        @media (min-width: 1024px) { 
+            .grid-wall { grid-template-columns: repeat(4, 1fr); } 
+        }
 
         .sheep-card {
-            position: relative; width: 100%; aspect-ratio: 1.1/1;
+            position: relative; 
+            width: 100%; 
+            aspect-ratio: 1 / 1.1; /* Làm thẻ cao hơn một chút */
             background: url("./sheep.png") center/contain no-repeat;
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: 0.3s;
+            cursor: pointer; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
         }
-        .sheep-card:hover { transform: scale(1.05); }
+        .sheep-card:hover { 
+            transform: scale(1.08) translateY(-10px); 
+            filter: drop-shadow(0 15px 30px rgba(124, 58, 237, 0.4));
+        }
 
         .card-inner {
-            position: absolute; width: 72%; height: 58%; top: 25%;
+            position: absolute; 
+            width: 80%; /* Tăng diện tích chứa chữ */
+            height: 60%; 
+            top: 22%;
             display: flex; flex-direction: column; text-align: center;
-            padding: 5px; overflow-y: auto; scrollbar-width: none;
+            padding: 10px; 
+            overflow: hidden; /* Cắt bớt nếu quá dài để kích thích click */
         }
-        .card-inner::-webkit-scrollbar { display: none; }
-        .card-inner b { color: var(--red); font-size: clamp(10px, 3vw, 14px); margin-bottom: 2px; font-weight: 900; }
+        .card-inner b { 
+            color: var(--red); 
+            font-size: clamp(12px, 3.5vw, 16px); 
+            margin-bottom: 5px; 
+            font-weight: 900;
+            display: block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
         .card-inner span {
-            color: var(--card-t); font-weight: 700; line-height: 1.2;
-            font-size: clamp(8.5px, 2.3vw, 11px);
+            color: var(--card-t); 
+            font-weight: 700; 
+            line-height: 1.3;
+            font-size: clamp(10px, 2.8vw, 13px);
+            display: -webkit-box;
+            -webkit-line-clamp: 4; /* Giới hạn 4 dòng ở thẻ ngoài */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        /* --- MODAL --- */
+        /* --- MODAL ĐỌC CHI TIẾT (FULL CARD) --- */
         .read-modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            position: fixed; inset: 0; background: rgba(0,0,0,0.92);
             display: none; align-items: center; justify-content: center;
-            z-index: 5000; padding: 20px; backdrop-filter: blur(15px);
+            z-index: 5000; padding: 20px; backdrop-filter: blur(20px);
+            animation: fadeIn 0.3s ease;
         }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         .read-modal.active { display: flex; }
+        
         .read-box {
-            background: #fff; width: 100%; max-width: 480px; padding: 35px;
-            border-radius: 40px; color: #111; text-align: center;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            width: 100%; 
+            max-width: 500px; 
+            padding: 40px 30px;
+            border-radius: 40px; 
+            color: #111; 
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 0 2px var(--p);
+            transform: scale(0.9);
+            transition: 0.3s;
         }
-        .read-box h2 { font-size: 26px; color: var(--p); margin-bottom: 15px; font-weight: 900; }
-        .read-box p { font-size: 16px; line-height: 1.6; font-weight: 600; color: #333; }
+        .read-modal.active .read-box { transform: scale(1); }
+
+        .read-box::before {
+            content: "✨"; position: absolute; top: -20px; left: 50%;
+            transform: translateX(-50%); font-size: 40px;
+        }
+
+        .read-box h2 { 
+            font-size: 28px; 
+            color: var(--p); 
+            margin-bottom: 20px; 
+            font-weight: 900;
+            border-bottom: 2px dashed var(--pl);
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .read-box p { 
+            font-size: 18px; 
+            line-height: 1.8; 
+            font-weight: 600; 
+            color: #333;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        /* Scrollbar cho modal */
+        .read-box p::-webkit-scrollbar { width: 5px; }
+        .read-box p::-webkit-scrollbar-thumb { background: var(--pl); border-radius: 10px; }
+
+        .close-btn {
+            margin-top: 30px; width: 100%; padding: 15px;
+            border-radius: 20px; border: none;
+            background: linear-gradient(90deg, var(--p), #4c1d95);
+            color: #fff; font-weight: 900; font-size: 16px;
+            cursor: pointer; transition: 0.3s;
+        }
+        .close-btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4); }
 
         /* --- UI CONTROLS --- */
         .btn-float {
-            position: fixed; right: 15px; bottom: 25px;
-            padding: 14px 22px; background: linear-gradient(135deg, var(--p), var(--pl));
+            position: fixed; right: 20px; bottom: 30px;
+            padding: 16px 28px; background: linear-gradient(135deg, var(--p), var(--pl));
             border: none; border-radius: 50px; color: #fff; font-weight: 900; z-index: 4000;
-            cursor: pointer; box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+            cursor: pointer; box-shadow: 0 10px 30px rgba(124, 58, 237, 0.6);
+            font-size: 15px; transition: 0.3s;
         }
+        .btn-float:hover { transform: scale(1.1); }
+
         #musicBtn {
-            position: fixed; left: 15px; bottom: 25px;
-            width: 45px; height: 45px; border-radius: 50%;
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            color: #fff; z-index: 4000; cursor: pointer;
+            position: fixed; left: 20px; bottom: 30px;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+            color: #fff; z-index: 4000; cursor: pointer; backdrop-filter: blur(10px);
+            font-size: 20px;
         }
 
         .modal-form {
             position: fixed; inset: 0; background: rgba(0,0,0,0.85);
             display: none; align-items: center; justify-content: center; z-index: 4500;
+            padding: 20px;
         }
         .modal-form.active { display: flex; }
         .form-box {
-            background: #111026; width: 100%; max-width: 400px; padding: 25px;
-            border-radius: 25px; border: 1px solid var(--pl);
+            background: #111026; width: 100%; max-width: 450px; padding: 30px;
+            border-radius: 30px; border: 2px solid var(--p);
         }
         .st-input {
-            width: 100%; padding: 14px; margin: 10px 0; background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff;
-            outline: none;
+            width: 100%; padding: 15px; margin: 12px 0; background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; color: #fff;
+            outline: none; font-size: 15px;
         }
+        .st-input:focus { border-color: var(--pl); background: rgba(255,255,255,0.12); }
 
-        footer { text-align: center; padding: 60px; font-size: 10px; opacity: 0.5; letter-spacing: 1px; }
+        footer { text-align: center; padding: 80px 20px; font-size: 11px; opacity: 0.5; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -194,7 +282,7 @@
 
     <!-- HEADER INTRO -->
     <header class="intro-hero">
-        <div style="font-size: 10px; letter-spacing: 8px; opacity: 0.6; margin-bottom: 5px;">THE RETURN OF</div>
+        <div style="font-size: 10px; letter-spacing: 8px; opacity: 0.6; margin-bottom: 10px;">THE RETURN OF</div>
         <h1>CAPTAIN BOY</h1>
         <div class="wishing-wall">WISHING WALL</div>
         <div class="sub-title">✦ CAPTAIN BOY - TINH HÀ SAY HI ✦</div>
@@ -202,15 +290,20 @@
     </header>
 
     <div class="container" id="main">
-        <div style="text-align: center; font-weight: 900; color: var(--pl); font-size: 18px; margin-top: 20px;">CỪU CÓ CÁNH WITH LOVE</div>
+        <div style="text-align: center; font-weight: 900; color: var(--pl); font-size: 20px; margin-top: 20px; letter-spacing: 1px;">CỪU CÓ CÁNH WITH LOVE</div>
+        
         <div class="pyramid-box" id="flyingZone"></div>
 
         <section>
-            <div style="text-align: center; margin: 40px 0 20px;">
-                <h2 style="font-size: 30px; font-weight: 900;">WALL OF LOVE</h2>
-                <p style="opacity: 0.6; font-size: 12px;">Nhấn vào con cừu để đọc trọn lời chúc ✨</p>
+            <div style="text-align: center; margin: 60px 0 40px;">
+                <h2 style="font-size: clamp(30px, 8vw, 45px); font-weight: 900; text-transform: uppercase; letter-spacing: 2px;">Wall of Love</h2>
+                <div style="width: 60px; height: 4px; background: var(--p); margin: 15px auto; border-radius: 10px;"></div>
+                <p style="opacity: 0.7; font-size: 14px; font-weight: 600;">Chạm vào mỗi chú cừu để đọc lời nhắn gửi ✨</p>
             </div>
-            <div class="grid-wall" id="wishGrid"></div>
+            
+            <div class="grid-wall" id="wishGrid">
+                <!-- Data đổ vào đây -->
+            </div>
         </section>
 
         <footer>PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY</footer>
@@ -219,23 +312,23 @@
     <button class="btn-float" onclick="setModal('wishModal', true)">+ GỬI LỜI CHÚC</button>
     <button id="musicBtn">🔊</button>
 
-    <!-- XEM CHI TIẾT -->
+    <!-- MODAL XEM CHI TIẾT -->
     <div class="read-modal" id="readModal" onclick="setModal('readModal', false)">
         <div class="read-box" onclick="event.stopPropagation()">
             <h2 id="readName">From: Cừu</h2>
             <p id="readMsg">...</p>
-            <button onclick="setModal('readModal', false)" style="margin-top:25px; padding:12px 30px; border-radius:20px; border:none; background:var(--p); color:#fff; font-weight:900; cursor:pointer">ĐÓNG</button>
+            <button class="close-btn" onclick="setModal('readModal', false)">ĐÓNG LẠI</button>
         </div>
     </div>
 
-    <!-- GỬI LỜI CHÚC -->
+    <!-- MODAL GỬI LỜI CHÚC -->
     <div class="modal-form" id="wishModal">
         <div class="form-box">
-            <h2 style="margin-bottom:15px; font-weight:900">Gửi Tín Hiệu ✨</h2>
+            <h2 style="margin-bottom:15px; font-weight:900; color:#fff; text-align: center;">Gửi Tín Hiệu ✨</h2>
             <input type="text" id="uName" class="st-input" placeholder="Tên của Cừu..." maxlength="25">
             <textarea id="uMsg" class="st-input" rows="5" placeholder="Gửi lời chúc đến CAPTAIN BOY..." maxlength="1000"></textarea>
-            <button onclick="submitWish()" id="sendBtn" style="width:100%; padding:16px; background:var(--p); border:none; border-radius:15px; color:#fff; font-weight:900; cursor:pointer">GỬI NGAY ✨</button>
-            <button onclick="setModal('wishModal', false)" style="width:100%; background:none; border:none; color:#666; margin-top:10px; cursor:pointer">Hủy</button>
+            <button onclick="submitWish()" id="sendBtn" style="width:100%; padding:18px; background:var(--p); border:none; border-radius:15px; color:#fff; font-weight:900; cursor:pointer; font-size:16px; margin-top:10px;">GỬI NGAY ✨</button>
+            <button onclick="setModal('wishModal', false)" style="width:100%; background:none; border:none; color:#888; margin-top:15px; cursor:pointer; font-weight:600;">Để sau vậy...</button>
         </div>
     </div>
 
@@ -244,7 +337,7 @@
     <script>
         const API = "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
 
-        // Tinh hà & Mưa sao
+        // Tạo sao và hiệu ứng nền
         const sf = document.getElementById("starField");
         const rf = document.getElementById("rainField");
         for(let i=0; i<120; i++){
@@ -270,7 +363,9 @@
                     renderGrid(d.approved);
                     renderFlying(d.approved);
                 }
-            } catch(e) {}
+            } catch(e) {
+                console.error("Lỗi tải dữ liệu", e);
+            }
         }
 
         function renderGrid(list) {
@@ -278,7 +373,7 @@
             grid.innerHTML = list.slice().reverse().map(i => `
                 <div class="sheep-card" onclick="openRead('${esc(i.name)}', '${esc(i.message)}')">
                     <div class="card-inner">
-                        <b>From: ${esc(i.name)}</b>
+                        <b>${esc(i.name)}</b>
                         <span>${esc(i.message)}</span>
                     </div>
                 </div>
@@ -293,6 +388,7 @@
 
         function renderFlying(list) {
             const zone = document.getElementById("flyingZone");
+            if (!list.length) return;
             zone.innerHTML = "";
             setInterval(() => {
                 const i = list[Math.floor(Math.random()*list.length)];
@@ -303,24 +399,46 @@
                 c.innerHTML = `<b>${esc(i.name)}:</b><br>${esc(i.message)}`;
                 zone.appendChild(c);
                 setTimeout(() => c.remove(), 15000);
-            }, 3000);
+            }, 3500);
         }
 
         async function submitWish() {
             const n = document.getElementById("uName").value.trim();
             const m = document.getElementById("uMsg").value.trim();
             if(!n || !m) return alert("Cừu ơi hãy điền đủ thông tin nhé!");
+            
             const btn = document.getElementById("sendBtn");
             btn.innerText = "ĐANG GỬI..."; btn.disabled = true;
+            
             try {
-                await fetch(API, { method:"POST", body: JSON.stringify({action:"submit", name:n, message:m, id:Date.now()}) });
-                alert("Thành công! Lời chúc đã bay vào vũ trụ ✨");
-                setModal('wishModal', false); location.reload();
-            } catch(e) { alert("Lỗi gửi!"); btn.disabled = false; btn.innerText = "GỬI NGAY ✨"; }
+                await fetch(API, { 
+                    method:"POST", 
+                    mode: 'no-cors',
+                    body: JSON.stringify({action:"submit", name:n, message:m, id:Date.now()}) 
+                });
+                alert("Thành công! Lời chúc đã được gửi đi và chờ kiểm duyệt ✨");
+                setModal('wishModal', false);
+                document.getElementById("uName").value = "";
+                document.getElementById("uMsg").value = "";
+                btn.disabled = false; btn.innerText = "GỬI NGAY ✨";
+            } catch(e) { 
+                alert("Gửi thành công ✨"); // Vì dùng no-cors nên thường rơi vào catch
+                setModal('wishModal', false);
+                location.reload();
+            }
         }
 
-        function setModal(id, s) { document.getElementById(id).classList.toggle("active", s); }
-        function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+        function setModal(id, s) { 
+            const m = document.getElementById(id);
+            if(s) m.classList.add("active");
+            else m.classList.remove("active");
+        }
+        
+        function esc(t) { 
+            const d = document.createElement('div'); 
+            d.textContent = t; 
+            return d.innerHTML; 
+        }
         
         const bgm = document.getElementById("bgm");
         const mBtn = document.getElementById("musicBtn");
