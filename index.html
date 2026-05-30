@@ -14,153 +14,95 @@
             --text: #ffffff; --card-t: #1a1a1a; --red: #ff3b3b;
         }
 
-        /* FIX FULL PHÔNG CHỮ */
-        * { 
-            margin: 0; padding: 0; box-sizing: border-box; 
-            font-family: 'Inter', sans-serif !important; 
-        }
-        
-        html { scroll-behavior: smooth; }
-        
-        body {
-            background: var(--bg);
-            color: var(--text); 
-            overflow-x: hidden; 
-            line-height: 1.4;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif !important; }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.4; }
 
         /* --- VŨ TRỤ BACKGROUND --- */
-        .universe { 
-            position: fixed; inset: 0; z-index: -10; 
-            background: #05030d; pointer-events: none;
-        }
-        .nebula {
-            position: absolute; inset: 0;
-            background: url("./nền.png") center/cover no-repeat;
-            opacity: 0.5; filter: saturate(1.4); pointer-events: none;
-        }
-        .star {
-            position: absolute; background: #fff; border-radius: 50%;
-            box-shadow: 0 0 8px #fff; animation: twinkle var(--t) infinite ease-in-out;
-            pointer-events: none;
-        }
+        .universe { position: fixed; inset: 0; z-index: -10; pointer-events: none; }
+        .nebula { position: absolute; inset: 0; background: url("./nền.png") center/cover no-repeat; opacity: 0.5; filter: saturate(1.4); }
+        .star { position: absolute; background: #fff; border-radius: 50%; animation: twinkle var(--t) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
-        
-        .galaxy-rain {
-            position: absolute; width: 1.5px; height: 120px;
-            background: linear-gradient(to bottom, #fff, transparent);
-            animation: rain var(--d) linear infinite; opacity: 0.4;
-            pointer-events: none;
-        }
-        @keyframes rain { from { transform: translateY(-150px); } to { transform: translateY(110vh); } }
 
         /* --- INTRO HERO --- */
         .intro-hero {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
-            position: relative;
+            position: relative; z-index: 5;
         }
-        
-        .intro-hero h1 {
-            font-family: 'Montserrat', sans-serif !important;
-            font-size: clamp(40px, 12vw, 110px); font-weight: 900;
-            line-height: 0.9; color: #fff; margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-        .intro-hero .wishing-wall {
-            font-family: 'Montserrat', sans-serif !important;
-            font-size: clamp(26px, 8vw, 75px); font-weight: 900;
-            background: linear-gradient(to bottom, #fff, var(--pl));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px var(--p));
-        }
-        .intro-hero .sub-title {
-            font-size: clamp(10px, 3.2vw, 20px); font-weight: 700;
-            letter-spacing: 2px; margin-top: 25px; opacity: 0.9;
-        }
-        .scroll-hint {
-            position: absolute; bottom: 30px; font-size: 11px;
-            letter-spacing: 2px; opacity: 0.6; animation: bounce 2s infinite;
-        }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+        .intro-hero h1 { font-family: 'Montserrat', sans-serif !important; font-size: clamp(40px, 12vw, 110px); font-weight: 900; text-transform: uppercase; }
+        .wishing-wall { font-family: 'Montserrat', sans-serif !important; font-size: clamp(26px, 8vw, 75px); font-weight: 900; background: linear-gradient(to bottom, #fff, var(--pl)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px var(--p)); }
 
-        /* --- CONTAINER & PYRAMID BOX (FIX LỖI CẮT NỀN) --- */
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 10px; position: relative; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 10px; position: relative; z-index: 20; }
         
         .pyramid-box {
-            position: relative; width: 100%; height: 350px; margin: 40px 0;
+            position: relative; width: 100%; height: 320px; margin: 20px 0;
             background: rgba(255,255,255,0.04); border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.1); 
-            overflow: hidden; /* Vẫn giữ overflow hidden nhưng bỏ clip-path */
-            backdrop-filter: blur(10px);
-            pointer-events: none;
+            border: 1px solid rgba(255,255,255,0.1); overflow: hidden; pointer-events: none;
         }
 
-        .fly-card {
-            position: absolute; background: rgba(255, 255, 255, 0.95);
-            padding: 12px 18px; border-radius: 15px; color: #111;
-            font-size: 11px; font-weight: 700; box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-            animation: pyramidTravel var(--dur) linear infinite;
-            max-width: 280px; white-space: normal;
-            border-left: 4px solid var(--p);
-        }
-        @keyframes pyramidTravel {
-            0% { bottom: -150px; left: var(--x); transform: scale(1); opacity: 0; }
-            15% { opacity: 1; }
-            100% { bottom: 500px; left: 50%; transform: scale(0.4); opacity: 0; }
-        }
-
-        /* --- GRID WALL (2 CỘT MOBILE) --- */
+        /* --- GRID WALL --- */
         .grid-wall {
-            display: grid; grid-template-columns: repeat(2, 1fr); 
-            gap: 12px; padding-bottom: 150px;
-            position: relative; z-index: 10;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;
+            padding-bottom: 150px; position: relative;
         }
         @media (min-width: 768px) { .grid-wall { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
 
+        /* --- SHEEP CARD NÂNG CẤP --- */
         .sheep-card {
-            position: relative; width: 100%; aspect-ratio: 1.1/1;
+            position: relative; width: 100%; aspect-ratio: 1/1.1;
             background: url("./sheep.png") center/contain no-repeat;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: 0.3s;
         }
-        .sheep-card:hover { transform: scale(1.05); }
+        .sheep-card:hover { transform: translateY(-5px) scale(1.03); }
 
         .card-inner {
-            position: absolute; width: 72%; height: 58%; top: 25%;
-            display: flex; flex-direction: column; text-align: center;
-            padding: 5px; overflow-y: auto; scrollbar-width: none;
+            position: absolute; width: 75%; height: 50%; top: 22%;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            overflow: hidden;
         }
-        .card-inner::-webkit-scrollbar { display: none; }
-        .card-inner b { color: var(--red); font-size: clamp(10px, 3vw, 14px); margin-bottom: 2px; font-weight: 900; }
+        .card-inner b { color: var(--red); font-size: clamp(11px, 3.2vw, 14px); margin-bottom: 2px; font-weight: 900; display: block; }
         .card-inner span {
-            color: var(--card-t); font-weight: 700; line-height: 1.2;
-            font-size: clamp(8.5px, 2.3vw, 11px);
+            color: var(--card-t); font-weight: 700; line-height: 1.1;
+            font-size: clamp(9px, 2.5vw, 11px); display: -webkit-box;
+            -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
         }
+
+        /* NÚT XEM CHI TIẾT RIÊNG BIỆT */
+        .read-btn {
+            position: absolute; bottom: 12%; 
+            background: linear-gradient(135deg, var(--p), #4c1d95);
+            color: white; border: none; padding: 6px 15px; border-radius: 20px;
+            font-size: 10px; font-weight: 900; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 30; pointer-events: auto; /* Quan trọng: Đảm bảo nút luôn bấm được */
+            transition: 0.2s;
+        }
+        .read-btn:hover { transform: scale(1.1); background: var(--p); }
 
         /* --- MODAL --- */
         .read-modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
             display: none; align-items: center; justify-content: center;
-            z-index: 5000; padding: 20px; backdrop-filter: blur(15px);
+            z-index: 9999; padding: 20px; backdrop-filter: blur(15px);
         }
         .read-modal.active { display: flex; }
         .read-box {
-            background: #fff; width: 100%; max-width: 480px; padding: 35px;
-            border-radius: 40px; color: #111; text-align: center;
+            background: #fff; width: 100%; max-width: 480px; padding: 40px 30px;
+            border-radius: 40px; color: #111; text-align: center; position: relative;
         }
-        .read-box h2 { font-size: 26px; color: var(--p); margin-bottom: 15px; font-weight: 900; }
-        .read-box p { font-size: 16px; line-height: 1.6; font-weight: 600; color: #333; }
+        .read-box h2 { font-size: 26px; color: var(--p); margin-bottom: 20px; font-weight: 900; text-transform: uppercase; }
+        .read-box p { font-size: 18px; line-height: 1.7; font-weight: 600; color: #333; max-height: 50vh; overflow-y: auto; }
 
         /* --- UI CONTROLS --- */
         .btn-float {
-            position: fixed; right: 15px; bottom: 25px;
-            padding: 14px 22px; background: linear-gradient(135deg, var(--p), var(--pl));
+            position: fixed; right: 20px; bottom: 30px;
+            padding: 16px 25px; background: linear-gradient(135deg, var(--p), var(--pl));
             border: none; border-radius: 50px; color: #fff; font-weight: 900; z-index: 4000;
             cursor: pointer; box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
         }
         #musicBtn {
-            position: fixed; left: 15px; bottom: 25px;
+            position: fixed; left: 20px; bottom: 30px;
             width: 45px; height: 45px; border-radius: 50%;
             background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
             color: #fff; z-index: 4000; cursor: pointer;
@@ -171,15 +113,8 @@
             display: none; align-items: center; justify-content: center; z-index: 4500;
         }
         .modal-form.active { display: flex; }
-        .form-box {
-            background: #111026; width: 100%; max-width: 400px; padding: 25px;
-            border-radius: 25px; border: 1px solid var(--pl);
-        }
-        .st-input {
-            width: 100%; padding: 14px; margin: 10px 0; background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff;
-            outline: none;
-        }
+        .form-box { background: #111026; width: 90%; max-width: 400px; padding: 30px; border-radius: 25px; border: 1px solid var(--pl); }
+        .st-input { width: 100%; padding: 14px; margin: 10px 0; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; outline: none; }
 
         footer { text-align: center; padding: 60px; font-size: 10px; opacity: 0.5; letter-spacing: 1px; }
     </style>
@@ -189,7 +124,6 @@
     <div class="universe">
         <div class="nebula"></div>
         <div id="starField"></div>
-        <div id="rainField"></div>
     </div>
 
     <!-- HEADER INTRO -->
@@ -198,7 +132,6 @@
         <h1>CAPTAIN BOY</h1>
         <div class="wishing-wall">WISHING WALL</div>
         <div class="sub-title">✦ CAPTAIN BOY - TINH HÀ SAY HI ✦</div>
-        <div class="scroll-hint">Vuốt xuống để khám phá ↓</div>
     </header>
 
     <div class="container" id="main">
@@ -206,11 +139,13 @@
         <div class="pyramid-box" id="flyingZone"></div>
 
         <section>
-            <div style="text-align: center; margin: 40px 0 20px;">
+            <div style="text-align: center; margin: 40px 0 30px;">
                 <h2 style="font-size: 30px; font-weight: 900;">WALL OF LOVE</h2>
-                <p style="opacity: 0.6; font-size: 12px;">Nhấn vào con cừu để đọc trọn lời chúc ✨</p>
+                <p style="opacity: 0.7; font-size: 13px; font-weight: 600;">Click vào nút "XEM" trên chú cừu ✨</p>
             </div>
-            <div class="grid-wall" id="wishGrid"></div>
+            <div class="grid-wall" id="wishGrid">
+                <!-- Data đổ ở đây -->
+            </div>
         </section>
 
         <footer>PROJECT BY: TEAM BOT - NHỮNG CON BOT CỦA CAPTAIN BOY</footer>
@@ -224,14 +159,14 @@
         <div class="read-box" onclick="event.stopPropagation()">
             <h2 id="readName">From: Cừu</h2>
             <p id="readMsg">...</p>
-            <button onclick="setModal('readModal', false)" style="margin-top:25px; padding:12px 30px; border-radius:20px; border:none; background:var(--p); color:#fff; font-weight:900; cursor:pointer">ĐÓNG</button>
+            <button onclick="setModal('readModal', false)" style="margin-top:25px; width:100%; padding:15px; border-radius:20px; border:none; background:var(--p); color:#fff; font-weight:900; cursor:pointer">ĐÓNG</button>
         </div>
     </div>
 
     <!-- GỬI LỜI CHÚC -->
     <div class="modal-form" id="wishModal">
         <div class="form-box">
-            <h2 style="margin-bottom:15px; font-weight:900">Gửi Tín Hiệu ✨</h2>
+            <h2 style="margin-bottom:15px; font-weight:900; color: #fff; text-align: center;">Gửi Tín Hiệu ✨</h2>
             <input type="text" id="uName" class="st-input" placeholder="Tên của Cừu..." maxlength="25">
             <textarea id="uMsg" class="st-input" rows="5" placeholder="Gửi lời chúc đến CAPTAIN BOY..." maxlength="1000"></textarea>
             <button onclick="submitWish()" id="sendBtn" style="width:100%; padding:16px; background:var(--p); border:none; border-radius:15px; color:#fff; font-weight:900; cursor:pointer">GỬI NGAY ✨</button>
@@ -244,22 +179,14 @@
     <script>
         const API = "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
 
-        // Tinh hà & Mưa sao
+        // Tinh hà
         const sf = document.getElementById("starField");
-        const rf = document.getElementById("rainField");
-        for(let i=0; i<120; i++){
+        for(let i=0; i<80; i++){
             const s = document.createElement("div"); s.className = "star";
             s.style.width = s.style.height = (Math.random()*2.5+1) + "px";
             s.style.left = Math.random()*100 + "%"; s.style.top = Math.random()*100 + "%";
             s.style.setProperty('--t', (Math.random()*3+2) + "s");
             sf.appendChild(s);
-        }
-        for(let i=0; i<25; i++){
-            const r = document.createElement("div"); r.className = "galaxy-rain";
-            r.style.left = Math.random()*100 + "%";
-            r.style.setProperty('--d', (Math.random()*4+4) + "s");
-            r.style.animationDelay = Math.random()*5 + "s";
-            rf.appendChild(r);
         }
 
         async function load() {
@@ -275,12 +202,14 @@
 
         function renderGrid(list) {
             const grid = document.getElementById("wishGrid");
+            // Slice reverse để cái mới nhất hiện lên đầu
             grid.innerHTML = list.slice().reverse().map(i => `
-                <div class="sheep-card" onclick="openRead('${esc(i.name)}', '${esc(i.message)}')">
+                <div class="sheep-card">
                     <div class="card-inner">
-                        <b>From: ${esc(i.name)}</b>
+                        <b>${esc(i.name)}</b>
                         <span>${esc(i.message)}</span>
                     </div>
+                    <button class="read-btn" onclick="openRead('${esc(i.name)}', '${esc(i.message)}')">XEM ✨</button>
                 </div>
             `).join("");
         }
@@ -293,33 +222,50 @@
 
         function renderFlying(list) {
             const zone = document.getElementById("flyingZone");
-            zone.innerHTML = "";
             setInterval(() => {
                 const i = list[Math.floor(Math.random()*list.length)];
                 const c = document.createElement("div");
                 c.className = "fly-card";
-                c.style.setProperty('--x', (Math.random()*60 + 20) + "%");
-                c.style.setProperty('--dur', (Math.random()*6 + 10) + "s");
-                c.innerHTML = `<b>${esc(i.name)}:</b><br>${esc(i.message)}`;
+                c.style.left = (Math.random()*60 + 20) + "%";
+                c.style.position = "absolute";
+                c.style.bottom = "-100px";
+                c.style.background = "white";
+                c.style.color = "#111";
+                c.style.padding = "8px 12px";
+                c.style.borderRadius = "10px";
+                c.style.fontSize = "10px";
+                c.style.fontWeight = "bold";
+                c.style.transition = "all 10s linear";
+                c.innerHTML = `${esc(i.name)}: ${esc(i.message).substring(0,20)}...`;
                 zone.appendChild(c);
-                setTimeout(() => c.remove(), 15000);
-            }, 3000);
+                
+                setTimeout(() => {
+                    c.style.bottom = "400px";
+                    c.style.opacity = "0";
+                }, 100);
+                setTimeout(() => c.remove(), 10000);
+            }, 4000);
         }
 
         async function submitWish() {
             const n = document.getElementById("uName").value.trim();
             const m = document.getElementById("uMsg").value.trim();
-            if(!n || !m) return alert("Cừu ơi hãy điền đủ thông tin nhé!");
+            if(!n || !m) return alert("Điền đủ thông tin nha Cừu!");
             const btn = document.getElementById("sendBtn");
             btn.innerText = "ĐANG GỬI..."; btn.disabled = true;
             try {
                 await fetch(API, { method:"POST", body: JSON.stringify({action:"submit", name:n, message:m, id:Date.now()}) });
-                alert("Thành công! Lời chúc đã bay vào vũ trụ ✨");
+                alert("Gửi thành công! Đang chờ duyệt nhé ✨");
                 setModal('wishModal', false); location.reload();
             } catch(e) { alert("Lỗi gửi!"); btn.disabled = false; btn.innerText = "GỬI NGAY ✨"; }
         }
 
-        function setModal(id, s) { document.getElementById(id).classList.toggle("active", s); }
+        function setModal(id, s) { 
+            const m = document.getElementById(id);
+            if(s) m.classList.add("active");
+            else m.classList.remove("active");
+        }
+        
         function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
         
         const bgm = document.getElementById("bgm");
@@ -333,4 +279,3 @@
     </script>
 </body>
 </html>
-
