@@ -1,278 +1,178 @@
-<!doctype html>
-<html lang="vi">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>CAPTAIN BOY • WISHING WALL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --p: #7c3aed; --pl: #d8b4fe; --bg: #05030d;
+        --text: #ffffff; --card-t: #1a1a1a; --red: #ff3b3b;
+    }
+
+    /* FIX FULL PHÔNG CHỮ */
+    * { 
+        margin: 0; padding: 0; box-sizing: border-box; 
+        font-family: 'Inter', sans-serif !important; 
+    }
     
-    <!-- Link Font chuẩn -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    html { scroll-behavior: smooth; }
+    
+    body {
+        background: var(--bg);
+        color: var(--text); 
+        overflow-x: hidden; 
+        line-height: 1.4;
+    }
 
-    <style>
-        :root {
-            --p: #7c3aed; --pl: #d8b4fe; --bg: #05030d;
-            --text: #ffffff; --card-t: #1a1a1a; --red: #ff3b3b;
-        }
+    /* --- VŨ TRỤ BACKGROUND --- */
+    .universe { 
+        position: fixed; inset: 0; z-index: -10; 
+        background: #05030d; pointer-events: none;
+    }
+    .nebula {
+        position: absolute; inset: 0;
+        background: url("./nền.png") center/cover no-repeat;
+        opacity: 0.5; filter: saturate(1.4); pointer-events: none;
+    }
+    .star {
+        position: absolute; background: #fff; border-radius: 50%;
+        box-shadow: 0 0 8px #fff; animation: twinkle var(--t) infinite ease-in-out;
+        pointer-events: none;
+    }
+    @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+    
+    .galaxy-rain {
+        position: absolute; width: 1.5px; height: 120px;
+        background: linear-gradient(to bottom, #fff, transparent);
+        animation: rain var(--d) linear infinite; opacity: 0.4;
+        pointer-events: none;
+    }
+    @keyframes rain { from { transform: translateY(-150px); } to { transform: translateY(110vh); } }
 
-        /* --- CẤU TRÚC CHUNG --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
-        body { 
-            background: var(--bg); 
-            color: var(--text); 
-            font-family: 'Inter', sans-serif !important; 
-            overflow-x: hidden; 
-            line-height: 1.4;
-        }
+    /* --- INTRO HERO --- */
+    .intro-hero {
+        height: 100vh; display: flex; flex-direction: column;
+        justify-content: center; align-items: center; text-align: center;
+        position: relative;
+    }
+    
+    .intro-hero h1 {
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: clamp(40px, 12vw, 110px); font-weight: 900;
+        line-height: 0.9; color: #fff; margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+    .intro-hero .wishing-wall {
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: clamp(26px, 8vw, 75px); font-weight: 900;
+        background: linear-gradient(to bottom, #fff, var(--pl));
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 15px var(--p));
+    }
+    .intro-hero .sub-title {
+        font-size: clamp(10px, 3.2vw, 20px); font-weight: 700;
+        letter-spacing: 2px; margin-top: 25px; opacity: 0.9;
+    }
+    .scroll-hint {
+        position: absolute; bottom: 30px; font-size: 11px;
+        letter-spacing: 2px; opacity: 0.6; animation: bounce 2s infinite;
+    }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
 
-        h1, h2, .wishing-wall { font-family: 'Montserrat', sans-serif !important; }
+    /* --- CONTAINER & PYRAMID BOX (FIX LỖI CẮT NỀN) --- */
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 10px; position: relative; }
+    
+    .pyramid-box {
+        position: relative; width: 100%; height: 350px; margin: 40px 0;
+        background: rgba(255,255,255,0.04); border-radius: 30px;
+        border: 1px solid rgba(255,255,255,0.1); 
+        overflow: hidden; /* Vẫn giữ overflow hidden nhưng bỏ clip-path */
+        backdrop-filter: blur(10px);
+        pointer-events: none;
+    }
 
-        /* --- HIỆU ỨNG VŨ TRỤ --- */
-        .universe { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: #05030d; }
-        .nebula {
-            position: absolute; inset: 0;
-            background: url("./nền.png") center/cover no-repeat;
-            opacity: 0.4; filter: saturate(1.4);
-        }
-        .star {
-            position: absolute; background: #fff; border-radius: 50%;
-            animation: twinkle var(--t) infinite ease-in-out;
-        }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+    .fly-card {
+        position: absolute; background: rgba(255, 255, 255, 0.95);
+        padding: 12px 18px; border-radius: 15px; color: #111;
+        font-size: 11px; font-weight: 700; box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        animation: pyramidTravel var(--dur) linear infinite;
+        max-width: 280px; white-space: normal;
+        border-left: 4px solid var(--p);
+    }
+    @keyframes pyramidTravel {
+        0% { bottom: -150px; left: var(--x); transform: scale(1); opacity: 0; }
+        15% { opacity: 1; }
+        100% { bottom: 500px; left: 50%; transform: scale(0.4); opacity: 0; }
+    }
 
-        .meteor {
-            position: absolute; width: 2px; height: 80px;
-            background: linear-gradient(to bottom, #fff, transparent);
-            opacity: 0; animation: meteorRain 3s infinite linear;
-        }
-        @keyframes meteorRain {
-            0% { transform: translateY(-100px) translateX(0) rotate(-20deg); opacity: 0; }
-            10% { opacity: 1; }
-            100% { transform: translateY(100vh) translateX(-200px) rotate(-20deg); opacity: 0; }
-        }
+    /* --- GRID WALL (2 CỘT MOBILE) --- */
+    .grid-wall {
+        display: grid; grid-template-columns: repeat(2, 1fr); 
+        gap: 12px; padding-bottom: 150px;
+        position: relative; z-index: 10;
+    }
+    @media (min-width: 768px) { .grid-wall { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
 
-        /* --- NỘI DUNG CHÍNH --- */
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; position: relative; z-index: 10; }
+    .sheep-card {
+        position: relative; width: 100%; aspect-ratio: 1.1/1;
+        background: url("./sheep.png") center/contain no-repeat;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; transition: 0.3s;
+    }
+    .sheep-card:hover { transform: scale(1.05); }
 
-        .hero {
-            height: 80vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-        }
-        .hero h1 { font-size: clamp(40px, 12vw, 100px); text-transform: uppercase; line-height: 0.9; }
-        .wishing-wall {
-            font-size: clamp(25px, 8vw, 70px);
-            background: linear-gradient(to bottom, #fff, var(--pl));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px var(--p));
-        }
+    .card-inner {
+        position: absolute; width: 72%; height: 58%; top: 25%;
+        display: flex; flex-direction: column; text-align: center;
+        padding: 5px; overflow-y: auto; scrollbar-width: none;
+    }
+    .card-inner::-webkit-scrollbar { display: none; }
+    .card-inner b { color: var(--red); font-size: clamp(10px, 3vw, 14px); margin-bottom: 2px; font-weight: 900; }
+    .card-inner span {
+        color: var(--card-t); font-weight: 700; line-height: 1.2;
+        font-size: clamp(8.5px, 2.3vw, 11px);
+    }
 
-        /* --- GRID LỜI CHÚC (SỬA LỖI CLICK) --- */
-        .grid-wall {
-            display: grid; grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; padding-bottom: 150px;
-        }
-        @media (min-width: 768px) { .grid-wall { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
+    /* --- MODAL --- */
+    .read-modal {
+        position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+        display: none; align-items: center; justify-content: center;
+        z-index: 5000; padding: 20px; backdrop-filter: blur(15px);
+    }
+    .read-modal.active { display: flex; }
+    .read-box {
+        background: #fff; width: 100%; max-width: 480px; padding: 35px;
+        border-radius: 40px; color: #111; text-align: center;
+    }
+    .read-box h2 { font-size: 26px; color: var(--p); margin-bottom: 15px; font-weight: 900; }
+    .read-box p { font-size: 16px; line-height: 1.6; font-weight: 600; color: #333; }
 
-        .sheep-card {
-            position: relative; width: 100%; aspect-ratio: 1.1/1;
-            background: url("./sheep.png") center/contain no-repeat;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 10;
-        }
-        .sheep-card:hover { transform: scale(1.08); }
+    /* --- UI CONTROLS --- */
+    .btn-float {
+        position: fixed; right: 15px; bottom: 25px;
+        padding: 14px 22px; background: linear-gradient(135deg, var(--p), var(--pl));
+        border: none; border-radius: 50px; color: #fff; font-weight: 900; z-index: 4000;
+        cursor: pointer; box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+    }
+    #musicBtn {
+        position: fixed; left: 15px; bottom: 25px;
+        width: 45px; height: 45px; border-radius: 50%;
+        background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+        color: #fff; z-index: 4000; cursor: pointer;
+    }
 
-        /* PHẦN CHỮ BÊN TRONG CON CỪU */
-        .card-inner {
-            position: absolute; width: 70%; height: 55%; top: 25%;
-            display: flex; flex-direction: column; text-align: center;
-            padding: 5px;
-            /* ĐÂY LÀ PHẦN QUAN TRỌNG NHẤT: VÔ HIỆU HÓA CLICK VÀO CHỮ */
-            pointer-events: none; 
-            overflow: hidden;
-        }
-        .card-inner b { color: var(--red); font-size: clamp(10px, 2.5vw, 13px); font-weight: 800; margin-bottom: 2px; }
-        .card-inner p {
-            color: var(--card-t); font-weight: 700; line-height: 1.2;
-            font-size: clamp(8.5px, 2.3vw, 10.5px);
-            /* Giới hạn hiển thị bên ngoài 4 dòng */
-            display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
-        }
+    .modal-form {
+        position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+        display: none; align-items: center; justify-content: center; z-index: 4500;
+    }
+    .modal-form.active { display: flex; }
+    .form-box {
+        background: #111026; width: 100%; max-width: 400px; padding: 25px;
+        border-radius: 25px; border: 1px solid var(--pl);
+    }
+    .st-input {
+        width: 100%; padding: 14px; margin: 10px 0; background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff;
+        outline: none;
+    }
 
-        /* --- MODAL XEM CHI TIẾT --- */
-        .modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
-            display: none; align-items: center; justify-content: center;
-            z-index: 9999; padding: 20px; backdrop-filter: blur(10px);
-        }
-        .modal.active { display: flex; }
-        .modal-box {
-            background: #fff; width: 100%; max-width: 450px; padding: 35px;
-            border-radius: 35px; color: #111; text-align: center;
-        }
-        .modal-msg {
-            font-size: 16px; font-weight: 600; line-height: 1.6; color: #333;
-            max-height: 350px; overflow-y: auto; margin: 20px 0; padding-right: 5px;
-        }
-
-        /* --- NÚT BẤM --- */
-        .btn-float {
-            position: fixed; right: 20px; bottom: 30px;
-            padding: 15px 25px; background: linear-gradient(135deg, var(--p), var(--pl));
-            border: none; border-radius: 50px; color: #fff; font-weight: 900; z-index: 5000;
-            cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        #musicBtn {
-            position: fixed; left: 20px; bottom: 30px;
-            width: 50px; height: 50px; border-radius: 50%;
-            background: rgba(255,255,255,0.1); border: 2px solid #fff;
-            color: #fff; z-index: 5000; cursor: pointer; font-size: 20px;
-        }
-
-        .form-box { background: #111026; width: 100%; max-width: 400px; padding: 25px; border-radius: 20px; border: 1px solid var(--p); }
-        .st-input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: none; outline: none; }
-
-        footer { text-align: center; padding: 50px; opacity: 0.4; font-size: 10px; letter-spacing: 2px; }
-    </style>
-</head>
-<body>
-
-    <div class="universe">
-        <div class="nebula"></div>
-        <div id="starField"></div>
-        <div id="meteorField"></div>
-    </div>
-
-    <div class="container">
-        <header class="hero">
-            <div style="letter-spacing: 8px; opacity: 0.5; font-size: 12px; margin-bottom: 10px;">THE RETURN OF</div>
-            <h1>CAPTAIN BOY</h1>
-            <div class="wishing-wall">WISHING WALL</div>
-        </header>
-
-        <section>
-            <h2 style="text-align: center; margin-bottom: 40px; font-weight: 900; font-size: 28px;">WALL OF LOVE ✨</h2>
-            <div class="grid-wall" id="wishGrid"></div>
-        </section>
-
-        <footer>PROJECT BY TEAM BOT • NHỮNG CON BOT CỦA CAPTAIN BOY</footer>
-    </div>
-
-    <button id="musicBtn">🔇</button>
-    <button class="btn-float" onclick="setModal('wishModal', true)">+ GỬI LỜI CHÚC</button>
-
-    <!-- XEM CHI TIẾT -->
-    <div class="modal" id="readModal" onclick="setModal('readModal', false)">
-        <div class="modal-box" onclick="event.stopPropagation()">
-            <h2 id="readName" style="color:var(--p); font-weight:900;">From: Cừu</h2>
-            <div class="modal-msg" id="readMsg">...</div>
-            <button onclick="setModal('readModal', false)" style="width:100%; padding:14px; border-radius:20px; background:var(--p); color:#fff; border:none; cursor:pointer; font-weight:900">ĐÓNG LẠI</button>
-        </div>
-    </div>
-
-    <!-- GỬI LỜI CHÚC -->
-    <div class="modal" id="wishModal">
-        <div class="form-box" onclick="event.stopPropagation()">
-            <h2 style="color:#fff; margin-bottom:15px; font-weight:900;">Gửi Tín Hiệu ✨</h2>
-            <input type="text" id="uName" class="st-input" placeholder="Tên của Cừu..." maxlength="25">
-            <textarea id="uMsg" class="st-input" rows="5" placeholder="Gửi lời nhắn yêu thương..."></textarea>
-            <button onclick="submitWish()" id="sendBtn" style="width:100%; padding:15px; background:var(--p); color:#fff; border:none; border-radius:12px; font-weight:900; cursor:pointer;">GỬI NGAY ✨</button>
-            <button onclick="setModal('wishModal', false)" style="width:100%; background:none; color:#666; border:none; margin-top:10px; cursor:pointer">Hủy bỏ</button>
-        </div>
-    </div>
-
-    <audio id="bgm" loop src="./music.mp3"></audio>
-
-    <script>
-        const API = "https://script.google.com/macros/s/AKfycbzOb_fBFiq6VR_n2dN9QsNDUM2pMoSb2dSfw2Nz0dKLHBeberjyc49GJ_gk70kng2R2/exec";
-
-        // TẠO SAO LẤP LÁNH & SAO BĂNG
-        function initCosmos() {
-            const stars = document.getElementById("starField");
-            const meteors = document.getElementById("meteorField");
-
-            for(let i=0; i<100; i++){
-                const s = document.createElement("div"); s.className = "star";
-                const size = Math.random()*2 + 1;
-                Object.assign(s.style, {
-                    width: size + "px", height: size + "px",
-                    left: Math.random()*100 + "%", top: Math.random()*100 + "%",
-                    '--t': (Math.random()*3 + 2) + "s"
-                });
-                stars.appendChild(s);
-            }
-
-            setInterval(() => {
-                const m = document.createElement("div"); m.className = "meteor";
-                m.style.left = Math.random()*100 + "%";
-                m.style.top = Math.random()*20 + "%";
-                meteors.appendChild(m);
-                setTimeout(() => m.remove(), 3000);
-            }, 1000);
-        }
-
-        async function load() {
-            try {
-                const r = await fetch(API + "?action=list");
-                const d = await r.json();
-                if(d.approved) {
-                    const grid = document.getElementById("wishGrid");
-                    grid.innerHTML = d.approved.slice().reverse().map(i => `
-                        <div class="sheep-card" onclick="openRead('${esc(i.name)}', '${esc(i.message)}')">
-                            <div class="card-inner">
-                                <b>From: ${esc(i.name)}</b>
-                                <p>${esc(i.message)}</p>
-                            </div>
-                        </div>
-                    `).join("");
-                }
-            } catch(e) {}
-        }
-
-        function openRead(name, msg) {
-            document.getElementById("readName").innerText = "From: " + name;
-            document.getElementById("readMsg").innerText = msg;
-            setModal('readModal', true);
-        }
-
-        async function submitWish() {
-            const n = document.getElementById("uName").value.trim();
-            const m = document.getElementById("uMsg").value.trim();
-            if(!n || !m) return alert("Cừu ơi hãy nhập đủ thông tin nhé!");
-            const btn = document.getElementById("sendBtn");
-            btn.innerText = "ĐANG GỬI..."; btn.disabled = true;
-            try {
-                await fetch(API, { method:"POST", body: JSON.stringify({action:"submit", name:n, message:m}) });
-                alert("Thành công! Lời chúc đang bay tới vì sao Duy Captain ✨");
-                location.reload();
-            } catch(e) { alert("Lỗi!"); btn.disabled = false; btn.innerText = "GỬI NGAY ✨"; }
-        }
-
-        function setModal(id, s) { document.getElementById(id).classList.toggle("active", s); }
-        function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-
-        // XỬ LÝ NHẠC: Tự động phát khi người dùng tương tác lần đầu
-        const bgm = document.getElementById("bgm");
-        const mBtn = document.getElementById("musicBtn");
-
-        function startMusic() {
-            bgm.play().then(() => { mBtn.innerHTML = "🔊"; }).catch(() => {});
-        }
-
-        document.body.addEventListener('click', () => {
-            if(bgm.paused) startMusic();
-        }, { once: true });
-
-        mBtn.onclick = (e) => {
-            e.stopPropagation();
-            if(bgm.paused) { bgm.play(); mBtn.innerHTML = "🔊"; }
-            else { bgm.pause(); mBtn.innerHTML = "🔇"; }
-        }
-
-        initCosmos();
-        load();
-    </script>
-</body>
-</html>
+    footer { text-align: center; padding: 60px; font-size: 10px; opacity: 0.5; letter-spacing: 1px; }
+</style>
